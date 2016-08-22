@@ -1,0 +1,15 @@
+{
+  "exclude": [
+  ],
+  "compilerOptions": {
+    "module" : "amd",
+    "outDir": "./js",
+    "target": "es5",
+    "watch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false
+  }
+}

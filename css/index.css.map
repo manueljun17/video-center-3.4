@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,SAAU;EACR,gBAAgB,EAAE,IAAI;EACtB,KAAK,EAAE,KAAK",
+"sources": ["scss/entrance.scss"],
+"names": [],
+"file": "index.css"
+}
