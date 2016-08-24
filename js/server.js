@@ -19,6 +19,10 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
                 callback(re);
             });
         };
+        Server.updateUsername = function (username, callback) {
+            var _this = new this;
+            _this.socket.emit('update-username', username, callback);
+        };
         return Server;
     }(videocenter_1.VideoCenter));
     exports.Server = Server;

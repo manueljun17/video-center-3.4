@@ -8,7 +8,8 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
     var Lobby = (function (_super) {
         __extends(Lobby, _super);
         function Lobby() {
-            _super.apply(this, arguments);
+            _super.call(this);
+            console.log("Lobby::constructor()");
         }
         Lobby.prototype.show = function () {
             console.log("Lobby::show()");

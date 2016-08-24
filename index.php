@@ -66,7 +66,7 @@ $socket_server_url = 'http://localhost:9001/';
 </header>
 
 <section id="content">
-
+    <?php include "template/entrance.php"; ?>
 </section>
 
 <footer>
@@ -75,10 +75,19 @@ $socket_server_url = 'http://localhost:9001/';
 
 
 
+<script>
 
-<?php
-include "template/entrance.php";
-?>
+window.addEventListener('load', function() {
+    // @todo Make Sure That This Is Not Going To Be A Problem.
+    // DOME 'load' & 'ready' first, before 'require.js' since it uses jQuery inside.
+    // if DOM is 'loaded' later than 'requirjs', jQuery inside 'those script' will cause problem
+    // becase they work with DOM which is not loaded and ready yet.
+    console.log('window.addEventListener( "load", ... ) begins ');
+});
+
+</script>
+
+
 
 
 </body>

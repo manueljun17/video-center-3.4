@@ -3,19 +3,27 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './videocenter'], function (require, exports, videocenter_1) {
+define(["require", "exports", './videocenter', './element', './server'], function (require, exports, videocenter_1, element_1, server_1) {
     "use strict";
     var Entrance = (function (_super) {
         __extends(Entrance, _super);
         function Entrance() {
             _super.call(this);
             console.log("Entrance::constructor()");
+            this.initHandlers();
         }
         Entrance.prototype.show = function () {
             console.log("Entrance::show()");
-            var m = $('#entrance-template').html();
-            console.log(m);
-            $('#content').html(m);
+        };
+        Entrance.prototype.initHandlers = function () {
+            element_1.Element.entrance.submit(this.submit);
+        };
+        Entrance.prototype.submit = function (event) {
+            event.preventDefault();
+            console.log('entrance submit username: ', element_1.Element.entranceUsernameValue);
+            server_1.Server.updateUsername(element_1.Element.entranceUsernameValue, function (re) {
+                console.log("server.updateUsername => callback => re: ", re);
+            });
         };
         return Entrance;
     }(videocenter_1.VideoCenter));

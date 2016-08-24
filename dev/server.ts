@@ -17,4 +17,9 @@ export class Server extends vc {
             callback( re );
         });
     }
+
+    static updateUsername( username: string, callback: any ) : void {
+        let _this = new this;
+        _this.socket.emit( 'update-username', username, callback );
+    }
 }
