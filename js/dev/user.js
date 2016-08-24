@@ -5,16 +5,20 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 define(["require", "exports", './videocenter'], function (require, exports, videocenter_1) {
     "use strict";
-    var Lobby = (function (_super) {
-        __extends(Lobby, _super);
-        function Lobby() {
-            _super.apply(this, arguments);
+    var User = (function (_super) {
+        __extends(User, _super);
+        function User() {
+            _super.call(this);
+            console.log("User::constructor()");
         }
-        Lobby.prototype.show = function () {
-            console.log("Lobby::show()");
+        User.prototype.hasUsername = function () {
+            return false;
         };
-        return Lobby;
+        User.prototype.getUsername = function () {
+            return '';
+        };
+        return User;
     }(videocenter_1.VideoCenter));
-    exports.Lobby = Lobby;
+    exports.User = User;
 });
-//# sourceMappingURL=lobby.js.map
+//# sourceMappingURL=user.js.map

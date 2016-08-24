@@ -1,5 +1,7 @@
 {
   "exclude": [
+    "RTCMultiConnection",
+    "node_modules"
   ],
   "compilerOptions": {
     "module" : "amd",

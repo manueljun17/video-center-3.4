@@ -25,7 +25,7 @@ $socket_server_url = 'http://localhost:9001/';
     <script src="js/ext/underscore-min.js"></script>
     <script src="js/ext/underscore.string.min.js"></script>
 
-    <!--script src="<?php echo $socket_server_url?>socket.io/socket.io.js"></script-->
+    <script src="<?php echo $socket_server_url?>socket.io/socket.io.js"></script>
 
 
     <script>
@@ -54,6 +54,7 @@ $socket_server_url = 'http://localhost:9001/';
 */
 ?>
 
+    <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
     <script data-main="js/index.js" src="js/ext/require.js"></script>
 </head>
 <body>
