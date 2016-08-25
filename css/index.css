@@ -1,5 +1,14 @@
-#entrance {
-  background-color: blue;
+.navbar {
+  background-color: #19b5fe;
   color: white; }
+
+.display {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100px;
+  background-color: #efefef; }
+
+#entrance {
+  color: black; }
 
 /*# sourceMappingURL=index.css.map */

@@ -61,15 +61,16 @@ $socket_server_url = 'http://localhost:9001/';
 
 
 
-<header>
+<header class="navbar">
     <span class="logo">Video English</span>
 </header>
 
 <section id="content">
     <?php include "template/entrance.php"; ?>
+    <?php include "template/lobby.php"; ?>
 </section>
 
-<footer>
+<footer class="navbar">
     <h4>Copyright</h4>
 </footer>
 
