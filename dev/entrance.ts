@@ -1,13 +1,13 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element as e } from './element';
 import { Server as server } from './server';
-
 export class Entrance extends vc {
 
     constructor() {
         super();
         console.log("Entrance::constructor()");
         this.initHandlers();
+        Lockr.set('username', 'Coyote'); // Saved as string
     }
 
     show() {

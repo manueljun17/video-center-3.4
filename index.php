@@ -33,10 +33,11 @@ $socket_server_url = 'http://localhost:9001/';
     </script>
 
 
+    <script src="js/ext/lockr.js"></script>
+
 <?php
 /*
     <script src="js/function.js"></script>
-    <script src="js/ext/lockr.js"></script>
     <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
 
 

@@ -11,6 +11,7 @@ define(["require", "exports", './videocenter', './element', './server'], functio
             _super.call(this);
             console.log("Entrance::constructor()");
             this.initHandlers();
+            Lockr.set('username', 'Coyote');
         }
         Entrance.prototype.show = function () {
             console.log("Entrance::show()");
