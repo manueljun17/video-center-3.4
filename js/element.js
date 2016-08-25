@@ -27,9 +27,33 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Element, "lobbyUsernameValue", {
+            get: function () {
+                return Element.lobby.find('[name="username"]').val();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Element.lobbyUsernameEmpty = function () {
+            Element.lobby.find('[name="username"]').val("");
+        };
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };
+        Object.defineProperty(Element, "lobby_form_username", {
+            get: function () {
+                return $('#lobby_form_username');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Element, "lobby_form_roomname", {
+            get: function () {
+                return $('#lobby_form_roomname');
+            },
+            enumerable: true,
+            configurable: true
+        });
         return Element;
     }());
     exports.Element = Element;

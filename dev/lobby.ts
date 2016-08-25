@@ -15,8 +15,19 @@ export class Lobby extends vc {
     }
 
     private initHandlers() : void {
-
+        e.lobby_form_username.submit( this.submit_user_name );
         // e.entrance.submit( this.submit );
         
     }
+    private submit_user_name( event ) {
+        event.preventDefault();
+        console.log('lobby submit username: ',  e.lobbyUsernameValue );
+        server.updateUsername( e.lobbyUsernameValue, function(re) { 
+            console.log("server.updateUsername => username => re: ", re);
+            e.lobbyDisplayUsername( re );
+            e.lobbyUsernameEmpty();
+         } );
+
+    }
+       
 }
