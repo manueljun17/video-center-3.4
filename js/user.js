@@ -14,7 +14,7 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         User.prototype.hasUsername = function () {
             return false;
         };
-        User.prototype.getUsername = function () {
+        User.getUsername = function () {
             return '';
         };
         return User;

@@ -16,7 +16,7 @@ define(["require", "exports", './user', './entrance', './server', './videocenter
             console.log("chat constructor()");
         }
         Chat.prototype.start = function () {
-            console.log('Chat::start() begins ...');
+            console.log('Chat::start() Begins ...');
             this._server.ping(function (re) { return console.log(re); });
             if (this._user.hasUsername())
                 this._lobby.show();

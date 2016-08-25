@@ -18,7 +18,7 @@ export class Chat extends vc {
         console.log("chat constructor()");
     }
     start() : void {
-        console.log('Chat::start() begins ...');
+        console.log('Chat::start() Begins ...');
         this._server.ping( (re) => console.log( re ) );
         if ( this._user.hasUsername() ) this._lobby.show();
         else this._entrance.show();

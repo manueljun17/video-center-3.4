@@ -10,9 +10,12 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         function Lobby() {
             _super.call(this);
             console.log("Lobby::constructor()");
+            this.initHandlers();
         }
         Lobby.prototype.show = function () {
             console.log("Lobby::show()");
+        };
+        Lobby.prototype.initHandlers = function () {
         };
         return Lobby;
     }(videocenter_1.VideoCenter));

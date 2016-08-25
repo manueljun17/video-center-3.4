@@ -17,6 +17,9 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Element.entranceUsernameEmpty = function () {
+            Element.entrance.find('[name="username"]').val("");
+        };
         Object.defineProperty(Element, "lobby", {
             get: function () {
                 return $('#lobby');
@@ -24,6 +27,9 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Element.lobbyDisplayUsername = function (username) {
+            return Element.lobby.find('.username').text(username);
+        };
         return Element;
     }());
     exports.Element = Element;

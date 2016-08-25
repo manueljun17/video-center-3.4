@@ -23,6 +23,8 @@ define(["require", "exports", './videocenter', './element', './server'], functio
             console.log('entrance submit username: ', element_1.Element.entranceUsernameValue);
             server_1.Server.updateUsername(element_1.Element.entranceUsernameValue, function (re) {
                 console.log("server.updateUsername => callback => re: ", re);
+                element_1.Element.lobbyDisplayUsername(re);
+                element_1.Element.entranceUsernameEmpty();
             });
         };
         return Entrance;

@@ -1,8 +1,8 @@
-import { VideoCenter } from './videocenter';
+import { VideoCenter as vc } from './videocenter';
 import { Element as e } from './element';
 import { Server as server } from './server';
 
-export class Entrance extends VideoCenter {
+export class Entrance extends vc {
 
     constructor() {
         super();
@@ -26,7 +26,10 @@ export class Entrance extends VideoCenter {
         console.log('entrance submit username: ',  e.entranceUsernameValue );
         server.updateUsername( e.entranceUsernameValue, function(re) { 
             console.log("server.updateUsername => callback => re: ", re);
+            e.lobbyDisplayUsername( re );
+            e.entranceUsernameEmpty();
          } );
     }
+    
 
 }
