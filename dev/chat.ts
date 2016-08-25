@@ -15,6 +15,7 @@ export class Chat extends vc {
         this._user = new User();
         this._entrance = new Entrance();
         this._server = new Server();
+        this._lobby = new Lobby();
         console.log("chat constructor()");
     }
     start() : void {

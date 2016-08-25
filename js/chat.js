@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './user', './entrance', './server', './videocenter'], function (require, exports, user_1, entrance_1, server_1, videocenter_1) {
+define(["require", "exports", './user', './lobby', './entrance', './server', './videocenter'], function (require, exports, user_1, lobby_1, entrance_1, server_1, videocenter_1) {
     "use strict";
     var Chat = (function (_super) {
         __extends(Chat, _super);
@@ -13,6 +13,7 @@ define(["require", "exports", './user', './entrance', './server', './videocenter
             this._user = new user_1.User();
             this._entrance = new entrance_1.Entrance();
             this._server = new server_1.Server();
+            this._lobby = new lobby_1.Lobby();
             console.log("chat constructor()");
         }
         Chat.prototype.start = function () {
