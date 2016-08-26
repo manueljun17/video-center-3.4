@@ -21,6 +21,7 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         };
         User.save_username = function (username) {
             Lockr.set(const_username, username);
+            console.log("User update it's name to:", username);
             return username;
         };
         return User;

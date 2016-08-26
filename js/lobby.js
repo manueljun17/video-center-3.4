@@ -27,6 +27,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
             server_1.Server.updateUsername(element_1.Element.lobbyUsernameValue, function (re) {
                 console.log("server.updateUsername => username => re: ", re);
                 element_1.Element.lobbyDisplayUsername(re);
+                user_1.User.save_username(re);
                 element_1.Element.lobbyUsernameEmpty();
             });
         };
