@@ -22,4 +22,8 @@ export class Server extends vc {
         let _this = new this;
         _this.socket.emit( 'update-username', username, callback );
     }
+    static logout(callback : any ) : void {
+        let _this = new this;
+        _this.socket.emit('log-out', callback );
+    }
 }

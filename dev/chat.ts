@@ -22,8 +22,16 @@ export class Chat extends vc {
         console.log('Chat::start() Begins ...');
         this._server.ping( (re) => console.log( re ) );
         let checkUser : boolean = this._user.hasUsername();        
-        if ( checkUser === true ) Lobby.show();
-        else this._entrance.show();
+        if ( checkUser === true ) {
+            let username : any = User.getUsername;
+            Server.updateUsername( username, function(re) { 
+            console.log("User change it's name to " + re);
+         } );
+            Lobby.show();
+        }
+        else {
+            Entrance.show();
+        }
     }
 }
 

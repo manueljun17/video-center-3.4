@@ -27,11 +27,14 @@ export class Element {
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
-    static get lobby_click_form_username() : JQuery {
-        return $('#lobby').find('.update-username');
+    static get lobby_onclick_form_username() : JQuery {
+        return Element.lobby.find('.update-username');
     }
-    static get lobby_click_form_roomname() : JQuery {
-        return $("#lobby").find('.create-room');
+    static get lobby_onclick_form_roomname() : JQuery {
+        return Element.lobby.find('.create-room');
+    }
+    static get lobby_onclick_logout() : JQuery {
+        return Element.lobby.find('.logout');
     }
     static get lobby_form_username () : JQuery {
         return $('#lobby_form_username');

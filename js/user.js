@@ -14,11 +14,13 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         }
         User.prototype.hasUsername = function () {
             var username = Lockr.get(const_username);
-            if (typeof username !== "undefined") {
-                return true;
+            if (typeof username === undefined || username === "" || typeof username === "null" || username.length == 0) {
+                console.log(username.length);
+                return false;
             }
             else {
-                return false;
+                console.log(username.length);
+                return true;
             }
         };
         Object.defineProperty(User, "getUsername", {
@@ -33,6 +35,9 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
             Lockr.set(const_username, username);
             console.log("User update it's name to:", username);
             return username;
+        };
+        User.delete_username = function () {
+            Lockr.set(const_username, '');
         };
         return User;
     }(videocenter_1.VideoCenter));

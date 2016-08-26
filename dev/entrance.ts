@@ -14,8 +14,10 @@ export class Entrance extends vc {
         e.entrance.submit( this.submit );        
     } 
 
-    show() : void {
-        console.log("Entrance::show()");
+    static show() : void {
+        console.log("Entrance::show()");          
+        e.lobby.hide();
+        e.entrance.show();
     }
    
     submit( event ) : void {
@@ -33,8 +35,6 @@ export class Entrance extends vc {
             Lobby.show();            
         });
         }
-
     }
     
-
 }

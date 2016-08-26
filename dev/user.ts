@@ -8,11 +8,13 @@ export class User extends vc {
     }
     hasUsername() : boolean {
         let username = Lockr.get( const_username );
-        if ( typeof username !== "undefined" ) {           
-            return true;
+        if ( typeof username === undefined || username === "" || typeof username === "null" || username.length == 0 ) {         
+            console.log(username.length);  
+            return false;
         }
         else {            
-            return false;
+            console.log(username.length);
+            return true;
         }    
     }
     static get getUsername() : string {     
@@ -23,5 +25,8 @@ export class User extends vc {
         Lockr.set(const_username, username);
         console.log("User update it's name to:", username);
         return  username;
+    }
+    static delete_username() : void {
+        Lockr.set(const_username, '');
     }
 }
