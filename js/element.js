@@ -40,6 +40,20 @@ define(["require", "exports"], function (require, exports) {
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };
+        Object.defineProperty(Element, "lobby_click_form_username", {
+            get: function () {
+                return $('#lobby').find('.update-username');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Element, "lobby_click_form_roomname", {
+            get: function () {
+                return $("#lobby").find('.create-room');
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Element, "lobby_form_username", {
             get: function () {
                 return $('#lobby_form_username');

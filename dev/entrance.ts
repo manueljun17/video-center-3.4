@@ -10,17 +10,15 @@ export class Entrance extends vc {
         this.initHandlers();   
     }
 
-    show() {
+    private initHandlers() : void {
+        e.entrance.submit( this.submit );        
+    } 
+
+    show() : void {
         console.log("Entrance::show()");
     }
-
-
-    private initHandlers() : void {
-
-        e.entrance.submit( this.submit );
-        
-    }  
-    submit( event ) {
+   
+    submit( event ) : void {
         event.preventDefault();
         let username = e.entranceUsernameValue;
         if ( username == "" ) {
@@ -30,7 +28,8 @@ export class Entrance extends vc {
         server.updateUsername( username , re => {      
             console.log("server.updateUsername => callback => re: ", re);
             user.save_username( username );    
-            e.entranceUsernameEmpty();        
+            e.entranceUsernameEmpty();
+            e.entrance.hide();        
             Lobby.show();            
         });
         }

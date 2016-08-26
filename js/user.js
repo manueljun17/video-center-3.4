@@ -15,10 +15,14 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         User.prototype.hasUsername = function () {
             return false;
         };
-        User.getUsername = function () {
-            var username = Lockr.get(const_username);
-            return username;
-        };
+        Object.defineProperty(User, "getUsername", {
+            get: function () {
+                var username = Lockr.get(const_username);
+                return username;
+            },
+            enumerable: true,
+            configurable: true
+        });
         User.save_username = function (username) {
             Lockr.set(const_username, username);
             console.log("User update it's name to:", username);

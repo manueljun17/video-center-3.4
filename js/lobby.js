@@ -15,11 +15,21 @@ define(["require", "exports", './videocenter', './element', './server', './user'
         Lobby.show = function () {
             console.log("Lobby::show()");
             element_1.Element.lobby.show();
+            element_1.Element.lobby_form_username.hide();
+            element_1.Element.lobby_form_roomname.hide();
             var username = user_1.User.getUsername;
             element_1.Element.lobbyDisplayUsername(username);
         };
         Lobby.prototype.initHandlers = function () {
             element_1.Element.lobby_form_username.submit(this.submit_user_name);
+            element_1.Element.lobby_click_form_username.click(function () {
+                element_1.Element.lobby_form_roomname.hide();
+                element_1.Element.lobby_form_username.show();
+            });
+            element_1.Element.lobby_click_form_roomname.click(function () {
+                element_1.Element.lobby_form_username.hide();
+                element_1.Element.lobby_form_roomname.show();
+            });
         };
         Lobby.prototype.submit_user_name = function (event) {
             event.preventDefault();
@@ -29,6 +39,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
                 element_1.Element.lobbyDisplayUsername(re);
                 user_1.User.save_username(re);
                 element_1.Element.lobbyUsernameEmpty();
+                element_1.Element.lobby_form_username.hide();
             });
         };
         return Lobby;

@@ -9,7 +9,7 @@ export class User extends vc {
     hasUsername() : boolean {
         return false;
     }
-    static getUsername() : string {     
+    static get getUsername() : string {     
         let username = Lockr.get( const_username );
         return username;
     }

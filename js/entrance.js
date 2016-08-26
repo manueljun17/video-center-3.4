@@ -12,11 +12,11 @@ define(["require", "exports", './videocenter', './element', './server', './user'
             console.log("Entrance::constructor()");
             this.initHandlers();
         }
-        Entrance.prototype.show = function () {
-            console.log("Entrance::show()");
-        };
         Entrance.prototype.initHandlers = function () {
             element_1.Element.entrance.submit(this.submit);
+        };
+        Entrance.prototype.show = function () {
+            console.log("Entrance::show()");
         };
         Entrance.prototype.submit = function (event) {
             event.preventDefault();
@@ -29,6 +29,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
                     console.log("server.updateUsername => callback => re: ", re);
                     user_1.User.save_username(username);
                     element_1.Element.entranceUsernameEmpty();
+                    element_1.Element.entrance.hide();
                     lobby_1.Lobby.show();
                 });
             }

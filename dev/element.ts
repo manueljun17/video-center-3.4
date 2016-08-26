@@ -27,6 +27,12 @@ export class Element {
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
+    static get lobby_click_form_username() : JQuery {
+        return $('#lobby').find('.update-username');
+    }
+    static get lobby_click_form_roomname() : JQuery {
+        return $("#lobby").find('.create-room');
+    }
     static get lobby_form_username () : JQuery {
         return $('#lobby_form_username');
     }

@@ -9,20 +9,30 @@ export class Lobby extends vc {
         this.initHandlers();
     }
 
-    static show() {
+    static show() :void {
         console.log("Lobby::show()");
         e.lobby.show();
-        let username : string = User.getUsername;
+        e.lobby_form_username.hide();
+        e.lobby_form_roomname.hide();
+        let username : any = User.getUsername;
         e.lobbyDisplayUsername( username );
     }
  
 
     private initHandlers() : void {
-        e.lobby_form_username.submit( this.submit_user_name );
+        e.lobby_form_username.submit( this.submit_user_name );      
+        e.lobby_click_form_username.click( ()=>{
+            e.lobby_form_roomname.hide();
+            e.lobby_form_username.show();
+        } );
+        e.lobby_click_form_roomname.click( ()=>{
+            e.lobby_form_username.hide();
+            e.lobby_form_roomname.show();
+        } );
         // e.entrance.submit( this.submit );
         
     }
-    private submit_user_name( event ) {
+    private submit_user_name( event ) :void {
         event.preventDefault();
         console.log('lobby submit username: ',  e.lobbyUsernameValue );
         server.updateUsername( e.lobbyUsernameValue, function(re) { 
@@ -30,6 +40,7 @@ export class Lobby extends vc {
             e.lobbyDisplayUsername( re );
             User.save_username( re );    
             e.lobbyUsernameEmpty();
+            e.lobby_form_username.hide();
          } );
 
     }
