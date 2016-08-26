@@ -1,7 +1,9 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element as e } from './element';
 import { Server as server } from './server';
+import { Entrance } from './entrance';
 import { User } from './user';
+
 export class Lobby extends vc {    
     constructor() {
         super();
@@ -11,6 +13,7 @@ export class Lobby extends vc {
 
     static show() :void {
         console.log("Lobby::show()");
+        e.entrance.hide();
         e.lobby.show();
         e.lobby_form_username.hide();
         e.lobby_form_roomname.hide();
@@ -21,16 +24,15 @@ export class Lobby extends vc {
 
     private initHandlers() : void {
         e.lobby_form_username.submit( this.submit_user_name );      
-        e.lobby_click_form_username.click( ()=>{
+        e.lobby_onclick_form_username.click( ()=>{
             e.lobby_form_roomname.hide();
             e.lobby_form_username.show();
         } );
-        e.lobby_click_form_roomname.click( ()=>{
+        e.lobby_onclick_form_roomname.click( ()=>{
             e.lobby_form_username.hide();
             e.lobby_form_roomname.show();
         } );
-        // e.entrance.submit( this.submit );
-        
+        e.lobby_onclick_logout.click( this.on_logout );        
     }
     private submit_user_name( event ) :void {
         event.preventDefault();
@@ -42,7 +44,14 @@ export class Lobby extends vc {
             e.lobbyUsernameEmpty();
             e.lobby_form_username.hide();
          } );
-
+    }
+    private on_logout( event ) :void {
+        event.preventDefault();
+        console.log("on_logout()");
+        server.logout( () => {            
+            User.delete_username();   
+            Entrance.show();
+        });    
     }
        
 }

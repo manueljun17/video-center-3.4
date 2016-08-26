@@ -19,10 +19,17 @@ define(["require", "exports", './user', './lobby', './entrance', './server', './
         Chat.prototype.start = function () {
             console.log('Chat::start() Begins ...');
             this._server.ping(function (re) { return console.log(re); });
-            if (this._user.hasUsername())
+            var checkUser = this._user.hasUsername();
+            if (checkUser === true) {
+                var username = user_1.User.getUsername;
+                server_1.Server.updateUsername(username, function (re) {
+                    console.log("User change it's name to " + re);
+                });
                 lobby_1.Lobby.show();
-            else
-                this._entrance.show();
+            }
+            else {
+                entrance_1.Entrance.show();
+            }
         };
         return Chat;
     }(videocenter_1.VideoCenter));

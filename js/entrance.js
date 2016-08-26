@@ -15,8 +15,10 @@ define(["require", "exports", './videocenter', './element', './server', './user'
         Entrance.prototype.initHandlers = function () {
             element_1.Element.entrance.submit(this.submit);
         };
-        Entrance.prototype.show = function () {
+        Entrance.show = function () {
             console.log("Entrance::show()");
+            element_1.Element.lobby.hide();
+            element_1.Element.entrance.show();
         };
         Entrance.prototype.submit = function (event) {
             event.preventDefault();
