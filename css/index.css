@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; }
+
 .navbar {
   background-color: #19b5fe;
   color: white; }
@@ -7,6 +12,13 @@
   overflow-y: scroll;
   height: 100px;
   background-color: #efefef; }
+
+.footer {
+  background-color: #19b5fe;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white; }
 
 #entrance {
   color: black; }
