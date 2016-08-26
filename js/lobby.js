@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './videocenter', './element', './server'], function (require, exports, videocenter_1, element_1, server_1) {
+define(["require", "exports", './videocenter', './element', './server', './user'], function (require, exports, videocenter_1, element_1, server_1, user_1) {
     "use strict";
     var Lobby = (function (_super) {
         __extends(Lobby, _super);
@@ -12,11 +12,24 @@ define(["require", "exports", './videocenter', './element', './server'], functio
             console.log("Lobby::constructor()");
             this.initHandlers();
         }
-        Lobby.prototype.show = function () {
+        Lobby.show = function () {
             console.log("Lobby::show()");
+            element_1.Element.lobby.show();
+            element_1.Element.lobby_form_username.hide();
+            element_1.Element.lobby_form_roomname.hide();
+            var username = user_1.User.getUsername;
+            element_1.Element.lobbyDisplayUsername(username);
         };
         Lobby.prototype.initHandlers = function () {
             element_1.Element.lobby_form_username.submit(this.submit_user_name);
+            element_1.Element.lobby_click_form_username.click(function () {
+                element_1.Element.lobby_form_roomname.hide();
+                element_1.Element.lobby_form_username.show();
+            });
+            element_1.Element.lobby_click_form_roomname.click(function () {
+                element_1.Element.lobby_form_username.hide();
+                element_1.Element.lobby_form_roomname.show();
+            });
         };
         Lobby.prototype.submit_user_name = function (event) {
             event.preventDefault();
@@ -24,7 +37,9 @@ define(["require", "exports", './videocenter', './element', './server'], functio
             server_1.Server.updateUsername(element_1.Element.lobbyUsernameValue, function (re) {
                 console.log("server.updateUsername => username => re: ", re);
                 element_1.Element.lobbyDisplayUsername(re);
+                user_1.User.save_username(re);
                 element_1.Element.lobbyUsernameEmpty();
+                element_1.Element.lobby_form_username.hide();
             });
         };
         return Lobby;

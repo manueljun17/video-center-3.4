@@ -21,7 +21,7 @@ export class Chat extends vc {
     start() : void {
         console.log('Chat::start() Begins ...');
         this._server.ping( (re) => console.log( re ) );
-        if ( this._user.hasUsername() ) this._lobby.show();
+        if ( this._user.hasUsername() ) Lobby.show();
         else this._entrance.show();
     }
 }

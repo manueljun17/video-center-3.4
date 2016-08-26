@@ -71,7 +71,7 @@ $socket_server_url = 'http://localhost:9001/';
     <?php include "template/lobby.php"; ?>
 </section>
 
-<footer class="navbar">
+<footer class="footer">
     <h4>Copyright</h4>
 </footer>
 
