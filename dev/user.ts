@@ -7,7 +7,13 @@ export class User extends vc {
 
     }
     hasUsername() : boolean {
-        return false;
+        let username = Lockr.get( const_username );
+        if ( typeof username !== "undefined" ) {           
+            return true;
+        }
+        else {            
+            return false;
+        }    
     }
     static get getUsername() : string {     
         let username = Lockr.get( const_username );

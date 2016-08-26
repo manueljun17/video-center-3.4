@@ -14,6 +14,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
         }
         Lobby.show = function () {
             console.log("Lobby::show()");
+            element_1.Element.entrance.hide();
             element_1.Element.lobby.show();
             element_1.Element.lobby_form_username.hide();
             element_1.Element.lobby_form_roomname.hide();

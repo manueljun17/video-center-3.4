@@ -19,7 +19,8 @@ define(["require", "exports", './user', './lobby', './entrance', './server', './
         Chat.prototype.start = function () {
             console.log('Chat::start() Begins ...');
             this._server.ping(function (re) { return console.log(re); });
-            if (this._user.hasUsername())
+            var checkUser = this._user.hasUsername();
+            if (checkUser === true)
                 lobby_1.Lobby.show();
             else
                 this._entrance.show();

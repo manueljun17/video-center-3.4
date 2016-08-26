@@ -11,6 +11,7 @@ export class Lobby extends vc {
 
     static show() :void {
         console.log("Lobby::show()");
+        e.entrance.hide();
         e.lobby.show();
         e.lobby_form_username.hide();
         e.lobby_form_roomname.hide();

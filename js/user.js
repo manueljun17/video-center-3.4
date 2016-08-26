@@ -13,7 +13,13 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
             console.log("User::constructor()");
         }
         User.prototype.hasUsername = function () {
-            return false;
+            var username = Lockr.get(const_username);
+            if (typeof username !== "undefined") {
+                return true;
+            }
+            else {
+                return false;
+            }
         };
         Object.defineProperty(User, "getUsername", {
             get: function () {
