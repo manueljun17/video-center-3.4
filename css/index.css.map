@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,OAAO;EACH,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,KAAK;;AAEhB,QAAS;EACD,QAAQ,EAAE,MAAM;EAChB,UAAU,EAAE,MAAM;EAClB,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,OAAO;;ACRjC,SAAU;EACR,KAAK,EAAC,KAAK",
-"sources": ["scss/layout.scss","scss/entrance.scss"],
+"mappings": "AAAA,OAAO;EACH,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,KAAK;;AAEhB,QAAS;EACD,QAAQ,EAAE,MAAM;EAChB,UAAU,EAAE,MAAM;EAClB,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,OAAO;;ACRjC,SAAU;EACR,KAAK,EAAC,KAAK;;ACDb,MAAO;EACL,OAAO,EAAC,IAAI",
+"sources": ["scss/layout.scss","scss/entrance.scss","scss/lobby.scss"],
 "names": [],
 "file": "index.css"
 }
