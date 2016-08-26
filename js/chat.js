@@ -20,7 +20,7 @@ define(["require", "exports", './user', './lobby', './entrance', './server', './
             console.log('Chat::start() Begins ...');
             this._server.ping(function (re) { return console.log(re); });
             if (this._user.hasUsername())
-                this._lobby.show();
+                lobby_1.Lobby.show();
             else
                 this._entrance.show();
         };

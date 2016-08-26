@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './videocenter', './element', './server'], function (require, exports, videocenter_1, element_1, server_1) {
+define(["require", "exports", './videocenter', './element', './server', './user', './lobby'], function (require, exports, videocenter_1, element_1, server_1, user_1, lobby_1) {
     "use strict";
     var Entrance = (function (_super) {
         __extends(Entrance, _super);
@@ -11,7 +11,6 @@ define(["require", "exports", './videocenter', './element', './server'], functio
             _super.call(this);
             console.log("Entrance::constructor()");
             this.initHandlers();
-            Lockr.set('username', 'Coyote');
         }
         Entrance.prototype.show = function () {
             console.log("Entrance::show()");
@@ -21,12 +20,18 @@ define(["require", "exports", './videocenter', './element', './server'], functio
         };
         Entrance.prototype.submit = function (event) {
             event.preventDefault();
-            console.log('entrance submit username: ', element_1.Element.entranceUsernameValue);
-            server_1.Server.updateUsername(element_1.Element.entranceUsernameValue, function (re) {
-                console.log("server.updateUsername => callback => re: ", re);
-                element_1.Element.lobbyDisplayUsername(re);
-                element_1.Element.entranceUsernameEmpty();
-            });
+            var username = element_1.Element.entranceUsernameValue;
+            if (username == "") {
+                alert('Username is empty.');
+            }
+            else {
+                server_1.Server.updateUsername(username, function (re) {
+                    console.log("server.updateUsername => callback => re: ", re);
+                    user_1.User.save_username(username);
+                    element_1.Element.entranceUsernameEmpty();
+                    lobby_1.Lobby.show();
+                });
+            }
         };
         return Entrance;
     }(videocenter_1.VideoCenter));

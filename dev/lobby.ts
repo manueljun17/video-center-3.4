@@ -1,18 +1,21 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element as e } from './element';
 import { Server as server } from './server';
-
-export class Lobby extends vc {
-    
+import { User } from './user';
+export class Lobby extends vc {    
     constructor() {
         super();
-        console.log("Lobby::constructor()");
+        console.log("Lobby::constructor()");     
         this.initHandlers();
     }
 
-    show() : void {
+    static show() {
         console.log("Lobby::show()");
+        e.lobby.show();
+        let username : string = User.getUsername;
+        e.lobbyDisplayUsername( username );
     }
+ 
 
     private initHandlers() : void {
         e.lobby_form_username.submit( this.submit_user_name );
