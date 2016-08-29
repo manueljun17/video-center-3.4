@@ -2,7 +2,6 @@ define(["require", "exports"], function (require, exports) {
     "use strict";
     var VideoCenter = (function () {
         function VideoCenter() {
-            console.log("VideoCenter constructor()");
             VideoCenter.connection = new RTCMultiConnection();
         }
         VideoCenter.version = function () {

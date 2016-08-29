@@ -10,8 +10,7 @@ export class VideoCenter {
     private static socket: any = false;
     private static socketUrl: string;
     static _this: VideoCenter;
-    constructor() {
-        console.log("VideoCenter constructor()");
+    constructor() {        
         VideoCenter.connection = new RTCMultiConnection();
     }
 

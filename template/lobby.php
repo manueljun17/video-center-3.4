@@ -23,7 +23,7 @@
 
     <div class="chat">
         <h4>Lobby</h4>
-        <div class="display" id='lobbyDisplay'></div>
+        <div class="display"></div>
         <form>
             <input name="message">
         </form>

@@ -7,13 +7,13 @@ export class User extends vc {
 
     }
     hasUsername() : boolean {
-        let username = Lockr.get( const_username );
-        if ( typeof username === undefined || username === "" || typeof username === "null" || username.length == 0 ) {         
-            console.log(username.length);  
+        let username = Lockr.get( const_username );      
+        if ( username == undefined || username == "" || username == null ) {         
+      
             return false;
         }
         else {            
-            console.log(username.length);
+    
             return true;
         }    
     }

@@ -22,7 +22,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
         };
         Entrance.prototype.submit = function (event) {
             event.preventDefault();
-            var username = element_1.Element.entranceUsernameValue;
+            var username = element_1.Element.entranceUsername.val();
             if (username == "") {
                 alert('Username is empty.');
             }
@@ -30,7 +30,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
                 server_1.Server.updateUsername(username, function (re) {
                     console.log("server.updateUsername => callback => re: ", re);
                     user_1.User.save_username(username);
-                    element_1.Element.entranceUsernameEmpty();
+                    element_1.Element.entranceUsername.val("");
                     element_1.Element.entrance.hide();
                     lobby_1.Lobby.show();
                 });

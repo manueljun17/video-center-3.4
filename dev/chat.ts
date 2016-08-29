@@ -20,6 +20,7 @@ export class Chat extends vc {
     }
     start() : void {
         console.log('Chat::start() Begins ...');
+        this._server.listen();
         this._server.ping( (re) => console.log( re ) );
         let checkUser : boolean = this._user.hasUsername();        
         if ( checkUser === true ) {

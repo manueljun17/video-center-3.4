@@ -14,12 +14,10 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         }
         User.prototype.hasUsername = function () {
             var username = Lockr.get(const_username);
-            if (typeof username === undefined || username === "" || typeof username === "null" || username.length == 0) {
-                console.log(username.length);
+            if (username == undefined || username == "" || username == null) {
                 return false;
             }
             else {
-                console.log(username.length);
                 return true;
             }
         };

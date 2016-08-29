@@ -22,7 +22,7 @@ export class Entrance extends vc {
    
     submit( event ) : void {
         event.preventDefault();
-        let username = e.entranceUsernameValue;
+        let username = e.entranceUsername.val();
         if ( username == "" ) {
         alert('Username is empty.');
         }
@@ -30,7 +30,7 @@ export class Entrance extends vc {
         server.updateUsername( username , re => {      
             console.log("server.updateUsername => callback => re: ", re);
             user.save_username( username );    
-            e.entranceUsernameEmpty();
+            e.entranceUsername.val("");
             e.entrance.hide();        
             Lobby.show();            
         });

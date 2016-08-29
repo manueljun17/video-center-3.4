@@ -10,16 +10,13 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Element, "entranceUsernameValue", {
+        Object.defineProperty(Element, "entranceUsername", {
             get: function () {
-                return Element.entrance.find('[name="username"]').val();
+                return Element.entrance.find('[name="username"]');
             },
             enumerable: true,
             configurable: true
         });
-        Element.entranceUsernameEmpty = function () {
-            Element.entrance.find('[name="username"]').val("");
-        };
         Object.defineProperty(Element, "lobby", {
             get: function () {
                 return $('#lobby');
@@ -27,19 +24,34 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Element, "lobbyUsernameValue", {
+        Object.defineProperty(Element, "lobby_display", {
             get: function () {
-                return Element.lobby.find('[name="username"]').val();
+                return Element.lobby.find('.display');
             },
             enumerable: true,
             configurable: true
         });
-        Element.lobbyUsernameEmpty = function () {
-            Element.lobby.find('[name="username"]').val("");
-        };
-        Element.lobbyDisplayUsername = function (username) {
-            return Element.lobby.find('.username').text(username);
-        };
+        Object.defineProperty(Element, "lobbyUsername", {
+            get: function () {
+                return Element.lobby.find('[name="username"]');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Element, "lobby_send_message", {
+            get: function () {
+                return Element.lobby.find('.chat form');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Element, "lobby_message", {
+            get: function () {
+                return Element.lobby.find('[name="message"]');
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Element, "lobby_onclick_form_username", {
             get: function () {
                 return Element.lobby.find('.update-username');
@@ -75,6 +87,12 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Element.lobbyDisplayUsername = function (username) {
+            return Element.lobby.find('.username').text(username);
+        };
+        Element.chat_message = function (data) {
+            return '<div><strong>' + data.name + ': </strong>' + data.message + '</div>';
+        };
         return Element;
     }());
     exports.Element = Element;
