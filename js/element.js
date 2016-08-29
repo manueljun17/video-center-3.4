@@ -107,9 +107,20 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
-        Element.roomDisplayRoomname = function (roomname) {
-            return Element.room.find('.roomname').text(roomname);
-        };
+        Object.defineProperty(Element, "room_send_message", {
+            get: function () {
+                return Element.room.find('.chat form');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Element, "room_message", {
+            get: function () {
+                return Element.room.find('[name="message"]');
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Element, "room_onclick_leave", {
             get: function () {
                 return Element.room.find('.room-leave');
@@ -124,6 +135,9 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Element.roomDisplayRoomname = function (roomname) {
+            return Element.room.find('.roomname').text(roomname);
+        };
         return Element;
     }());
     exports.Element = Element;

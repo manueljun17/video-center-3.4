@@ -13,14 +13,32 @@ define(["require", "exports", './videocenter', './element', './server', './user'
             this.initHandlers();
         }
         Room.prototype.initHandlers = function () {
+            element_1.Element.room_send_message.submit(this.send_message);
             element_1.Element.room_onclick_leave.click(this.on_leave);
         };
         Room.show = function () {
-            console.log("Entrance::show()");
-            element_1.Element.lobby.hide();
-            element_1.Element.room.show();
             var roomname = user_1.User.getRoomname;
-            element_1.Element.roomDisplayRoomname(roomname);
+            server_1.Server.joinRoom(roomname, function () {
+                console.log("Room::show()");
+                element_1.Element.lobby.hide();
+                element_1.Element.room.show();
+                var roomname = user_1.User.getRoomname;
+                element_1.Element.roomDisplayRoomname(roomname);
+            });
+        };
+        Room.showMessage = function (data) {
+            var roomname = user_1.User.getRoomname;
+            if (roomname == data.room) {
+                element_1.Element.room_display.append(element_1.Element.markup_chat_message(data));
+                element_1.Element.room_display.animate({ scrollTop: element_1.Element.room_display.prop('scrollHeight') });
+            }
+        };
+        Room.prototype.send_message = function (event) {
+            event.preventDefault();
+            server_1.Server.sendMessage(element_1.Element.room_message.val(), function (re) {
+                console.log("server.sendMessage => message => re: ", re);
+                element_1.Element.room_message.val("");
+            });
         };
         Room.prototype.on_leave = function (event) {
             event.preventDefault();

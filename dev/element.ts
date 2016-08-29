@@ -56,15 +56,21 @@ export class Element {
      /*------Room-----*/
     static get room() : JQuery {
         return $('#room');
+    }     
+    static get room_send_message () : JQuery {
+        return Element.room.find('.chat form');
     }  
-    static roomDisplayRoomname( roomname :string ) : JQuery {
-        return Element.room.find('.roomname').text( roomname );
-    }
+    static get room_message () : JQuery {
+        return Element.room.find('[name="message"]');
+    }  
     static get room_onclick_leave() : JQuery {
         return Element.room.find('.room-leave');
     }
     static get room_display() : JQuery {
         return Element.room.find('.display');
     }  
+    static roomDisplayRoomname( roomname :string ) : JQuery {
+        return Element.room.find('.roomname').text( roomname );
+    }
 
 }

@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './videocenter', './lobby'], function (require, exports, videocenter_1, lobby_1) {
+define(["require", "exports", './videocenter', './lobby', './room'], function (require, exports, videocenter_1, lobby_1, room_1) {
     "use strict";
     var Server = (function (_super) {
         __extends(Server, _super);
@@ -27,15 +27,21 @@ define(["require", "exports", './videocenter', './lobby'], function (require, ex
         };
         Server.prototype.getMessage = function (data) {
             if (data.room == "Lobby") {
+                console.log("Go to Lobby chat.");
                 lobby_1.Lobby.showMessage(data);
             }
             else {
                 console.log("Go to Room chat.");
+                room_1.Room.showMessage(data);
             }
         };
         Server.joinLobby = function (callback) {
             var _this = new this;
             _this.socket.emit("join-lobby", callback);
+        };
+        Server.joinRoom = function (roomname, callback) {
+            var _this = new this;
+            _this.socket.emit("join-room", roomname, callback);
         };
         Server.updateUsername = function (username, callback) {
             var _this = new this;
