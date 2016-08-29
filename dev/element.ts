@@ -22,6 +22,9 @@ export class Element {
     static get lobbyUsername () : JQuery {
         return Element.lobby.find('[name="username"]');
     }
+    static get lobbyRoomname () : JQuery {
+        return Element.lobby.find('[name="roomname"]');
+    }
     static get lobby_send_message () : JQuery {
         return Element.lobby.find('.chat form');
     }   
@@ -46,8 +49,16 @@ export class Element {
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
-    static chat_message( data :any ) : string {
+    static markup_chat_message( data :any ) : string {
         return '<div><strong>'+data.name+': </strong>'+data.message+'</div>';
+    }
+
+     /*------Room-----*/
+    static get room() : JQuery {
+        return $('#room');
+    }  
+    static roomDisplayRoomname( roomname :string ) : JQuery {
+        return Element.room.find('.roomname').text( roomname );
     }
 
 }

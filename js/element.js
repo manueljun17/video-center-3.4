@@ -38,6 +38,13 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Element, "lobbyRoomname", {
+            get: function () {
+                return Element.lobby.find('[name="roomname"]');
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Element, "lobby_send_message", {
             get: function () {
                 return Element.lobby.find('.chat form');
@@ -90,8 +97,18 @@ define(["require", "exports"], function (require, exports) {
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };
-        Element.chat_message = function (data) {
+        Element.markup_chat_message = function (data) {
             return '<div><strong>' + data.name + ': </strong>' + data.message + '</div>';
+        };
+        Object.defineProperty(Element, "room", {
+            get: function () {
+                return $('#room');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Element.roomDisplayRoomname = function (roomname) {
+            return Element.room.find('.roomname').text(roomname);
         };
         return Element;
     }());

@@ -64,6 +64,7 @@ $socket_server_url = 'http://localhost:9001/';
 <section id="content">
     <?php include "template/entrance.php"; ?>
     <?php include "template/lobby.php"; ?>
+    <?php include "template/room.php"; ?>
 </section>
 
 <footer class="footer">

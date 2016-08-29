@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './videocenter', './element', './server', './entrance', './user'], function (require, exports, videocenter_1, element_1, server_1, entrance_1, user_1) {
+define(["require", "exports", './videocenter', './element', './server', './room', './entrance', './user'], function (require, exports, videocenter_1, element_1, server_1, room_1, entrance_1, user_1) {
     "use strict";
     var Lobby = (function (_super) {
         __extends(Lobby, _super);
@@ -24,11 +24,12 @@ define(["require", "exports", './videocenter', './element', './server', './entra
             });
         };
         Lobby.showMessage = function (data) {
-            element_1.Element.lobby_display.append(element_1.Element.chat_message(data));
+            element_1.Element.lobby_display.append(element_1.Element.markup_chat_message(data));
             element_1.Element.lobby_display.animate({ scrollTop: element_1.Element.lobby_display.prop('scrollHeight') });
         };
         Lobby.prototype.initHandlers = function () {
             element_1.Element.lobby_form_username.submit(this.submit_user_name);
+            element_1.Element.lobby_form_roomname.submit(this.submit_room_name);
             element_1.Element.lobby_send_message.submit(this.send_message);
             element_1.Element.lobby_onclick_form_username.click(function () {
                 element_1.Element.lobby_form_roomname.hide();
@@ -49,6 +50,17 @@ define(["require", "exports", './videocenter', './element', './server', './entra
                 user_1.User.save_username(re);
                 element_1.Element.lobbyUsername.val("");
                 element_1.Element.lobby_form_username.hide();
+            });
+        };
+        Lobby.prototype.submit_room_name = function (event) {
+            event.preventDefault();
+            console.log('lobby submit roomname: ', element_1.Element.lobbyRoomname.val());
+            server_1.Server.createRoom(element_1.Element.lobbyRoomname.val(), function (re) {
+                console.log("server.createRoom => roomname => re: ", re);
+                user_1.User.save_roomname(re);
+                element_1.Element.lobbyRoomname.val("");
+                element_1.Element.lobby_form_roomname.hide();
+                room_1.Room.show();
             });
         };
         Lobby.prototype.send_message = function (event) {

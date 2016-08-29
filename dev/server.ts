@@ -39,6 +39,10 @@ export class Server extends vc {
         let _this = new this;
         _this.socket.emit( 'update-username', username, callback );
     }
+    static createRoom( roomname: string, callback: any ) : void {
+        let _this = new this;
+        _this.socket.emit( 'create-room', roomname, callback );
+    }
     static sendMessage( message: string, callback: any ) : void {
         let _this = new this;
         _this.socket.emit( 'send-message', message, callback );

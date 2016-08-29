@@ -41,6 +41,10 @@ define(["require", "exports", './videocenter', './lobby'], function (require, ex
             var _this = new this;
             _this.socket.emit('update-username', username, callback);
         };
+        Server.createRoom = function (roomname, callback) {
+            var _this = new this;
+            _this.socket.emit('create-room', roomname, callback);
+        };
         Server.sendMessage = function (message, callback) {
             var _this = new this;
             _this.socket.emit('send-message', message, callback);
