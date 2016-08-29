@@ -20,7 +20,7 @@ export class Entrance extends vc {
         e.entrance.show();
     }
    
-    submit( event ) : void {
+    private submit( event ) : void {
         event.preventDefault();
         let username = e.entranceUsername.val();
         if ( username == "" ) {

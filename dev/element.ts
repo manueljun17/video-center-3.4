@@ -60,5 +60,11 @@ export class Element {
     static roomDisplayRoomname( roomname :string ) : JQuery {
         return Element.room.find('.roomname').text( roomname );
     }
+    static get room_onclick_leave() : JQuery {
+        return Element.room.find('.room-leave');
+    }
+    static get room_display() : JQuery {
+        return Element.room.find('.display');
+    }  
 
 }

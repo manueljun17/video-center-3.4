@@ -49,6 +49,10 @@ define(["require", "exports", './videocenter', './lobby'], function (require, ex
             var _this = new this;
             _this.socket.emit('send-message', message, callback);
         };
+        Server.leaveRoom = function (callback) {
+            var _this = new this;
+            _this.socket.emit('leave-room', callback);
+        };
         Server.logout = function (callback) {
             var _this = new this;
             _this.socket.emit('log-out', callback);

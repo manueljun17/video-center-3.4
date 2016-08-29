@@ -13,6 +13,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
             this.initHandlers();
         }
         Room.prototype.initHandlers = function () {
+            element_1.Element.room_onclick_leave.click(this.on_leave);
         };
         Room.show = function () {
             console.log("Entrance::show()");
@@ -21,21 +22,15 @@ define(["require", "exports", './videocenter', './element', './server', './user'
             var roomname = user_1.User.getRoomname;
             element_1.Element.roomDisplayRoomname(roomname);
         };
-        Room.prototype.submit = function (event) {
+        Room.prototype.on_leave = function (event) {
             event.preventDefault();
-            var username = element_1.Element.entranceUsername.val();
-            if (username == "") {
-                alert('Username is empty.');
-            }
-            else {
-                server_1.Server.updateUsername(username, function (re) {
-                    console.log("server.updateUsername => callback => re: ", re);
-                    user_1.User.save_username(username);
-                    element_1.Element.entranceUsername.val("");
-                    element_1.Element.entrance.hide();
-                    lobby_1.Lobby.show();
-                });
-            }
+            console.log("on_leave()");
+            server_1.Server.leaveRoom(function () {
+                element_1.Element.room_display.empty();
+                user_1.User.save_roomname("Lobby");
+                element_1.Element.room.hide();
+                lobby_1.Lobby.show();
+            });
         };
         return Room;
     }(videocenter_1.VideoCenter));

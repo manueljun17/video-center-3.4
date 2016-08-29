@@ -47,8 +47,13 @@ export class Server extends vc {
         let _this = new this;
         _this.socket.emit( 'send-message', message, callback );
     }   
+    static leaveRoom(callback : any ) : void {
+        let _this = new this;
+        _this.socket.emit('leave-room', callback );
+    }
     static logout(callback : any ) : void {
         let _this = new this;
         _this.socket.emit('log-out', callback );
     }
+   
 }

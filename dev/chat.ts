@@ -1,12 +1,14 @@
 import { User } from './user';
 import { Lobby } from './lobby';
 import { Entrance } from './entrance';
+import { Room } from './room';
 import { Server } from './server';
 import { VideoCenter as vc } from './videocenter';
 export class Chat extends vc {
     private _entrance: Entrance;
     private _user: User;
     private _lobby: Lobby;
+    private _room: Room;
     private _vc: vc;
     private _server: Server;
     constructor( url: string ) {
@@ -14,6 +16,7 @@ export class Chat extends vc {
         super.setSocketUrl( 'http://localhost:9001/' );
         this._user = new User();
         this._entrance = new Entrance();
+        this._room = new Room();
         this._server = new Server();
         this._lobby = new Lobby();
         console.log("chat constructor()");

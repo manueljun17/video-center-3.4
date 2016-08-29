@@ -110,6 +110,20 @@ define(["require", "exports"], function (require, exports) {
         Element.roomDisplayRoomname = function (roomname) {
             return Element.room.find('.roomname').text(roomname);
         };
+        Object.defineProperty(Element, "room_onclick_leave", {
+            get: function () {
+                return Element.room.find('.room-leave');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Element, "room_display", {
+            get: function () {
+                return Element.room.find('.display');
+            },
+            enumerable: true,
+            configurable: true
+        });
         return Element;
     }());
     exports.Element = Element;
