@@ -35,7 +35,7 @@ define(["require", "exports", './videocenter', './element', './server', './user'
         };
         Room.prototype.send_message = function (event) {
             event.preventDefault();
-            server_1.Server.sendMessage(element_1.Element.room_message.val(), function (re) {
+            server_1.Server.chatMessage(element_1.Element.room_message.val(), function (re) {
                 console.log("server.sendMessage => message => re: ", re);
                 element_1.Element.room_message.val("");
             });

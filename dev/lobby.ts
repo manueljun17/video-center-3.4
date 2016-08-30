@@ -44,25 +44,37 @@ export class Lobby extends vc {
     }
     private submit_user_name( event ) :void {
         event.preventDefault();
-        console.log('lobby submit username: ',  e.lobbyUsername.val() );
-        server.updateUsername( e.lobbyUsername.val(), function(re) { 
-            console.log("server.updateUsername => username => re: ", re);
-            e.lobbyDisplayUsername( re );
-            User.save_username( re );    
-            e.lobbyUsername.val("");
-            e.lobby_form_username.hide();
-         } );
+        let username = e.lobbyUsername.val();
+        if ( username == "" ) {
+            alert('Username is empty.');
+        }
+        else {
+            console.log('lobby submit username: ',  username );
+            server.updateUsername( username, function(re) { 
+                console.log("server.updateUsername => username => re: ", re);
+                e.lobbyDisplayUsername( re );
+                User.save_username( re );    
+                e.lobbyUsername.val("");
+                e.lobby_form_username.hide();
+            } );
+        }
     }
     private submit_room_name( event ) :void {
         event.preventDefault();
-        console.log('lobby submit roomname: ',  e.lobbyRoomname.val() );
-        server.createRoom( e.lobbyRoomname.val(), function(re) { 
+        let roomname = e.lobbyRoomname.val();
+        if ( roomname == "" ) {
+            alert('Roomname is empty.');
+        }
+        else {
+        console.log('lobby submit roomname: ',  roomname );
+        server.createRoom( roomname, function(re) { 
             console.log("server.createRoom => roomname => re: ", re);          
             User.save_roomname( re );    
             e.lobbyRoomname.val("");
             e.lobby_form_roomname.hide();
             room.show()
          } );
+        }
     }
     private send_message( event ) :void {
         event.preventDefault();       

@@ -34,7 +34,7 @@ export class Room extends vc {
     }
     private send_message( event ) :void {
         event.preventDefault();       
-        server.sendMessage( e.room_message.val(), (re)=> { 
+        server.chatMessage( e.room_message.val(), (re)=> { 
             console.log("server.sendMessage => message => re: ", re);              
             e.room_message.val("");       
          } );

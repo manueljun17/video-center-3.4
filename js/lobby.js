@@ -42,25 +42,37 @@ define(["require", "exports", './videocenter', './element', './server', './room'
         };
         Lobby.prototype.submit_user_name = function (event) {
             event.preventDefault();
-            console.log('lobby submit username: ', element_1.Element.lobbyUsername.val());
-            server_1.Server.updateUsername(element_1.Element.lobbyUsername.val(), function (re) {
-                console.log("server.updateUsername => username => re: ", re);
-                element_1.Element.lobbyDisplayUsername(re);
-                user_1.User.save_username(re);
-                element_1.Element.lobbyUsername.val("");
-                element_1.Element.lobby_form_username.hide();
-            });
+            var username = element_1.Element.lobbyUsername.val();
+            if (username == "") {
+                alert('Username is empty.');
+            }
+            else {
+                console.log('lobby submit username: ', username);
+                server_1.Server.updateUsername(username, function (re) {
+                    console.log("server.updateUsername => username => re: ", re);
+                    element_1.Element.lobbyDisplayUsername(re);
+                    user_1.User.save_username(re);
+                    element_1.Element.lobbyUsername.val("");
+                    element_1.Element.lobby_form_username.hide();
+                });
+            }
         };
         Lobby.prototype.submit_room_name = function (event) {
             event.preventDefault();
-            console.log('lobby submit roomname: ', element_1.Element.lobbyRoomname.val());
-            server_1.Server.createRoom(element_1.Element.lobbyRoomname.val(), function (re) {
-                console.log("server.createRoom => roomname => re: ", re);
-                user_1.User.save_roomname(re);
-                element_1.Element.lobbyRoomname.val("");
-                element_1.Element.lobby_form_roomname.hide();
-                room_1.Room.show();
-            });
+            var roomname = element_1.Element.lobbyRoomname.val();
+            if (roomname == "") {
+                alert('Roomname is empty.');
+            }
+            else {
+                console.log('lobby submit roomname: ', roomname);
+                server_1.Server.createRoom(roomname, function (re) {
+                    console.log("server.createRoom => roomname => re: ", re);
+                    user_1.User.save_roomname(re);
+                    element_1.Element.lobbyRoomname.val("");
+                    element_1.Element.lobby_form_roomname.hide();
+                    room_1.Room.show();
+                });
+            }
         };
         Lobby.prototype.send_message = function (event) {
             event.preventDefault();
