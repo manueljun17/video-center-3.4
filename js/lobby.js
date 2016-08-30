@@ -20,6 +20,9 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 element_1.Element.lobby_form_username.hide();
                 element_1.Element.lobby_form_roomname.hide();
                 element_1.Element.lobbyDisplayUsername(user_1.User.getUsername);
+                server_1.Server.userList(function (users) {
+                    console.log(users);
+                });
             });
         };
         Lobby.showMessage = function (data) {

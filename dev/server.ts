@@ -23,11 +23,12 @@ export class Server extends vc {
 
     }
     static emit( protocol: string, data?: any, callback = false) {
-        console.log('Server.emit() protocol: ' + protocol + ', data: ' + data );
         if ( callback ) {
+            console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
             Server.socket.emit( protocol, data, callback );
         }
         else {
+            console.log('Server.emit() protocol: ' + protocol + ', data:  ', data);
             Server.socket.emit( protocol, data );
         }
     }
@@ -58,6 +59,9 @@ export class Server extends vc {
     }
     static logout(callback : any ) : void {
         Server.emit('log-out', callback );
+    }
+    static userList( callback : any ) : void {
+        Server.emit('user-list', callback);
     }
    
 }

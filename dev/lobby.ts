@@ -20,6 +20,9 @@ export class Lobby extends vc {
             e.lobby_form_username.hide();
             e.lobby_form_roomname.hide();
             e.lobbyDisplayUsername( User.getUsername );
+            server.userList( (users : any ) => {
+                console.log(users);
+            } );
         });
     }
     static showMessage( data : any ) : void {

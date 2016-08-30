@@ -25,11 +25,12 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         };
         Server.emit = function (protocol, data, callback) {
             if (callback === void 0) { callback = false; }
-            console.log('Server.emit() protocol: ' + protocol + ', data: ' + data);
             if (callback) {
+                console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
                 Server.socket.emit(protocol, data, callback);
             }
             else {
+                console.log('Server.emit() protocol: ' + protocol + ', data:  ', data);
                 Server.socket.emit(protocol, data);
             }
         };
@@ -58,6 +59,9 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         };
         Server.logout = function (callback) {
             Server.emit('log-out', callback);
+        };
+        Server.userList = function (callback) {
+            Server.emit('user-list', callback);
         };
         Server.socket = false;
         return Server;
