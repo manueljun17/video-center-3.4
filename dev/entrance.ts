@@ -1,35 +1,40 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element as e } from './element';
 import { Server as server } from './server';
-export class Entrance extends vc {
-
+import { User as user } from './user';
+import { Lobby } from './lobby';
+export class Entrance extends vc {    
     constructor() {
         super();
         console.log("Entrance::constructor()");
-        this.initHandlers();
-        Lockr.set('username', 'Coyote'); // Saved as string
+        this.initHandlers();   
     }
-
-    show() {
-        console.log("Entrance::show()");
-    }
-
 
     private initHandlers() : void {
+        e.entrance.submit( this.submit );        
+    } 
 
-        e.entrance.submit( this.submit );
-        
+    static show() : void {
+        console.log("Entrance::show()");          
+        e.lobby.hide();
+        e.entrance.show();
     }
-
-    submit( event ) {
+   
+    private submit( event ) : void {
         event.preventDefault();
-        console.log('entrance submit username: ',  e.entranceUsernameValue );
-        server.updateUsername( e.entranceUsernameValue, function(re) { 
+        let username = e.entranceUsername.val();
+        if ( username == "" ) {
+        alert('Username is empty.');
+        }
+        else {
+        server.updateUsername( username , re => {      
             console.log("server.updateUsername => callback => re: ", re);
-            e.lobbyDisplayUsername( re );
-            e.entranceUsernameEmpty();
-         } );
+            user.save_username( username );    
+            e.entranceUsername.val("");
+            e.entrance.hide();        
+            Lobby.show();            
+        });
+        }
     }
     
-
 }

@@ -8,30 +8,69 @@ export class Element {
     static get entrance() : JQuery {
         return $('#entrance');
     }
-    static get entranceUsernameValue () : string {
-        return Element.entrance.find('[name="username"]').val();
+    static get entranceUsername () : JQuery {
+        return Element.entrance.find('[name="username"]');
     }
-    static entranceUsernameEmpty () : void {
-        Element.entrance.find('[name="username"]').val("");
-    }
+    
     /*------Lobby-----*/
     static get lobby() : JQuery {
         return $('#lobby');
-    }
-    static get lobbyUsernameValue () : string {
-        return Element.lobby.find('[name="username"]').val();
-    }
-    static lobbyUsernameEmpty () : void {
-        Element.lobby.find('[name="username"]').val("");
+    }    
+    static get lobby_display() : JQuery {
+        return Element.lobby.find('.display');
     }   
-    static lobbyDisplayUsername( username :string ) : JQuery {
-        return Element.lobby.find('.username').text( username );
+    static get lobbyUsername () : JQuery {
+        return Element.lobby.find('[name="username"]');
+    }
+    static get lobbyRoomname () : JQuery {
+        return Element.lobby.find('[name="roomname"]');
+    }
+    static get lobby_send_message () : JQuery {
+        return Element.lobby.find('.chat form');
+    }   
+    static get lobby_message () : JQuery {
+        return Element.lobby.find('[name="message"]');
+    }          
+    static get lobby_onclick_form_username() : JQuery {
+        return Element.lobby.find('.update-username');
+    }
+    static get lobby_onclick_form_roomname() : JQuery {
+        return Element.lobby.find('.create-room');
+    }
+    static get lobby_onclick_logout() : JQuery {
+        return Element.lobby.find('.logout');
     }
     static get lobby_form_username () : JQuery {
         return $('#lobby_form_username');
     }
     static get lobby_form_roomname () : JQuery {
         return $('#lobby_form_roomname');
+    }
+    static lobbyDisplayUsername( username :string ) : JQuery {
+        return Element.lobby.find('.username').text( username );
+    }
+    static markup_chat_message( data :any ) : string {
+        return '<div><strong>'+data.name+': </strong>'+data.message+'</div>';
+    }
+
+     /*------Room-----*/
+    static get room() : JQuery {
+        return $('#room');
+    }     
+    static get room_send_message () : JQuery {
+        return Element.room.find('.chat form');
+    }  
+    static get room_message () : JQuery {
+        return Element.room.find('[name="message"]');
+    }  
+    static get room_onclick_leave() : JQuery {
+        return Element.room.find('.room-leave');
+    }
+    static get room_display() : JQuery {
+        return Element.room.find('.display');
+    }  
+    static roomDisplayRoomname( roomname :string ) : JQuery {
+        return Element.room.find('.roomname').text( roomname );
     }
 
 }

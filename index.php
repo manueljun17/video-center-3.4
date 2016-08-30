@@ -2,12 +2,10 @@
 /**
  * @file index.php
  */
-
 /**
  * Configuration
  */
 $socket_server_url = 'http://localhost:9001/';
-
 ?>
 <!doctype html>
 <html>
@@ -39,9 +37,6 @@ $socket_server_url = 'http://localhost:9001/';
 /*
     <script src="js/function.js"></script>
     <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
-
-
-
     <script src="js/init.js"></script>
     <script src="js/dom-handler.js"></script>
     <script src="js/event-handler.js"></script>
@@ -69,16 +64,16 @@ $socket_server_url = 'http://localhost:9001/';
 <section id="content">
     <?php include "template/entrance.php"; ?>
     <?php include "template/lobby.php"; ?>
+    <?php include "template/room.php"; ?>
 </section>
 
-<footer class="navbar">
+<footer class="footer">
     <h4>Copyright</h4>
 </footer>
 
 
 
 <script>
-
 window.addEventListener('load', function() {
     // @todo Make Sure That This Is Not Going To Be A Problem.
     // DOME 'load' & 'ready' first, before 'require.js' since it uses jQuery inside.
@@ -86,7 +81,6 @@ window.addEventListener('load', function() {
     // becase they work with DOM which is not loaded and ready yet.
     console.log('window.addEventListener( "load", ... ) begins ');
 });
-
 </script>
 
 
