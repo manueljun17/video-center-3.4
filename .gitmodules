@@ -1,3 +1,4 @@
 [submodule "RTCMultiConnection"]
 	path = RTCMultiConnection
-	url = git://github.com/thruthesky/RTCMultiConnection
+	url = https://github.com/thruthesky/RTCMultiConnection.git
+
