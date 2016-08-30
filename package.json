@@ -1,0 +1,24 @@
+{
+  "name": "video-center-3.4",
+  "version": "1.0.0",
+  "description": "Video Center version 3.4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thruthesky/video-center-3.4.git"
+  },
+  "keywords": [
+    "Video",
+    "Center"
+  ],
+  "author": "Withcenter Dev Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thruthesky/video-center-3.4/issues"
+  },
+  "homepage": "https://github.com/thruthesky/video-center-3.4#readme",
+  "dependencies": {}
+}
