@@ -26,10 +26,12 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         Server.emit = function (protocol, data, callback) {
             if (callback === void 0) { callback = false; }
             console.log('Server.emit() protocol: ' + protocol + ', data: ' + data);
-            if (callback)
+            if (callback) {
                 Server.socket.emit(protocol, data, callback);
-            else
+            }
+            else {
                 Server.socket.emit(protocol, data);
+            }
         };
         Server.prototype.ping = function (callback) {
             Server.emit('ping', function (re) {

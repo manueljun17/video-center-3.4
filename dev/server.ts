@@ -24,8 +24,12 @@ export class Server extends vc {
     }
     static emit( protocol: string, data?: any, callback = false) {
         console.log('Server.emit() protocol: ' + protocol + ', data: ' + data );
-        if ( callback ) Server.socket.emit( protocol, data, callback );
-        else Server.socket.emit( protocol, data );
+        if ( callback ) {
+            Server.socket.emit( protocol, data, callback );
+        }
+        else {
+            Server.socket.emit( protocol, data );
+        }
     }
     
     public ping(callback) : void {
