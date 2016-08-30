@@ -6,10 +6,9 @@
  *      since the important part of 'socket' is only created once time even if multiple instantiation.
  */
 export class VideoCenter {
+    static socket: any = false;
     private static connection: any;
-    private static socket: any = false;
     private static socketUrl: string;
-    static _this: VideoCenter;
     constructor() {        
         VideoCenter.connection = new RTCMultiConnection();
     }
@@ -31,5 +30,11 @@ export class VideoCenter {
             VideoCenter.socket = VideoCenter.connection.getSocket();
         }
         return VideoCenter.socket;
+    }
+    static get( key: string ) : any {
+        return Lockr.get( key );
+    }
+    static set( key: string, value: any ) : void {
+        Lockr.set( key, value );
     }
 }

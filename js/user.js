@@ -14,45 +14,39 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
             console.log("User::constructor()");
         }
         User.prototype.hasUsername = function () {
-            var username = Lockr.get(const_username);
-            if (username == undefined || username == "" || username == null) {
-                return false;
-            }
-            else {
-                return true;
-            }
+            return !!videocenter_1.VideoCenter.get(const_username);
         };
         Object.defineProperty(User, "getUsername", {
             get: function () {
-                var username = Lockr.get(const_username);
+                var username = videocenter_1.VideoCenter.get(const_username);
                 return username;
             },
             enumerable: true,
             configurable: true
         });
         User.save_username = function (username) {
-            Lockr.set(const_username, username);
+            videocenter_1.VideoCenter.set(const_username, username);
             console.log("User update it's name to:", username);
             return username;
         };
         User.delete_username = function () {
-            Lockr.set(const_username, '');
+            videocenter_1.VideoCenter.set(const_username, '');
         };
         Object.defineProperty(User, "getRoomname", {
             get: function () {
-                var roomname = Lockr.get(const_roomname);
+                var roomname = videocenter_1.VideoCenter.get(const_roomname);
                 return roomname;
             },
             enumerable: true,
             configurable: true
         });
         User.save_roomname = function (roomname) {
-            Lockr.set(const_roomname, roomname);
+            videocenter_1.VideoCenter.set(const_roomname, roomname);
             console.log("User update it's roomname to:", roomname);
             return roomname;
         };
         User.delete_roomname = function () {
-            Lockr.set(const_roomname, '');
+            videocenter_1.VideoCenter.set(const_roomname, '');
         };
         return User;
     }(videocenter_1.VideoCenter));

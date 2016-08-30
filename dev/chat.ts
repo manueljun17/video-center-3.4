@@ -5,33 +5,33 @@ import { Room } from './room';
 import { Server } from './server';
 import { VideoCenter as vc } from './videocenter';
 export class Chat extends vc {
-    private _entrance: Entrance;
-    private _user: User;
-    private _lobby: Lobby;
-    private _room: Room;
-    private _vc: vc;
-    private _server: Server;
+    private entrance: Entrance;
+    private user: User;
+    private lobby: Lobby;
+    private room: Room;
+    private vc: vc;
+    private server: Server;
     constructor( url: string ) {
         super();
+        console.log("Chat::constructor()");
         super.setSocketUrl( 'http://localhost:9001/' );
-        this._user = new User();
-        this._entrance = new Entrance();
-        this._room = new Room();
-        this._server = new Server();
-        this._lobby = new Lobby();
-        console.log("chat constructor()");
+        this.user = new User();
+        this.entrance = new Entrance();
+        this.room = new Room();
+        this.server = new Server();
+        this.lobby = new Lobby();
     }
     start() : void {
         console.log('Chat::start() Begins ...');
-        this._server.listen();
-        this._server.ping( (re) => console.log( re ) );
-        let checkUser : boolean = this._user.hasUsername();        
-        if ( checkUser === true ) {
+        this.server.listen();
+        this.server.ping( (re) => console.log( 'Got: ' + re ) );
+        
+        if ( this.user.hasUsername() ) {
             let username : any = User.getUsername;
             Server.updateUsername( username, function(re) { 
-            console.log("User change it's name to " + re);
-         } );
-            Lobby.show();
+                console.log("User has name already : " + re);
+                Lobby.show();
+            } );
         }
         else {
             Entrance.show();

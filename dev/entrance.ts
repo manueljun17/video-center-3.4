@@ -27,7 +27,7 @@ export class Entrance extends vc {
         alert('Username is empty.');
         }
         else {
-        server.updateUsername( username , re => {      
+        server.updateUsername( username , re => {
             console.log("server.updateUsername => callback => re: ", re);
             user.save_username( username );    
             e.entranceUsername.val("");

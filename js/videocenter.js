@@ -17,6 +17,12 @@ define(["require", "exports"], function (require, exports) {
             }
             return VideoCenter.socket;
         };
+        VideoCenter.get = function (key) {
+            return Lockr.get(key);
+        };
+        VideoCenter.set = function (key, value) {
+            Lockr.set(key, value);
+        };
         VideoCenter.socket = false;
         return VideoCenter;
     }());

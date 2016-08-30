@@ -19,8 +19,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 element_1.Element.lobby.show();
                 element_1.Element.lobby_form_username.hide();
                 element_1.Element.lobby_form_roomname.hide();
-                var username = user_1.User.getUsername;
-                element_1.Element.lobbyDisplayUsername(username);
+                element_1.Element.lobbyDisplayUsername(user_1.User.getUsername);
             });
         };
         Lobby.showMessage = function (data) {
@@ -65,7 +64,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
         };
         Lobby.prototype.send_message = function (event) {
             event.preventDefault();
-            server_1.Server.sendMessage(element_1.Element.lobby_message.val(), function (re) {
+            server_1.Server.chatMessage(element_1.Element.lobby_message.val(), function (re) {
                 console.log("server.sendMessage => message => re: ", re);
                 element_1.Element.lobby_message.val("");
             });

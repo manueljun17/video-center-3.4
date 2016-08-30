@@ -9,25 +9,24 @@ define(["require", "exports", './user', './lobby', './entrance', './room', './se
         __extends(Chat, _super);
         function Chat(url) {
             _super.call(this);
+            console.log("Chat::constructor()");
             _super.prototype.setSocketUrl.call(this, 'http://localhost:9001/');
-            this._user = new user_1.User();
-            this._entrance = new entrance_1.Entrance();
-            this._room = new room_1.Room();
-            this._server = new server_1.Server();
-            this._lobby = new lobby_1.Lobby();
-            console.log("chat constructor()");
+            this.user = new user_1.User();
+            this.entrance = new entrance_1.Entrance();
+            this.room = new room_1.Room();
+            this.server = new server_1.Server();
+            this.lobby = new lobby_1.Lobby();
         }
         Chat.prototype.start = function () {
             console.log('Chat::start() Begins ...');
-            this._server.listen();
-            this._server.ping(function (re) { return console.log(re); });
-            var checkUser = this._user.hasUsername();
-            if (checkUser === true) {
+            this.server.listen();
+            this.server.ping(function (re) { return console.log('Got: ' + re); });
+            if (this.user.hasUsername()) {
                 var username = user_1.User.getUsername;
                 server_1.Server.updateUsername(username, function (re) {
-                    console.log("User change it's name to " + re);
+                    console.log("User has name already : " + re);
+                    lobby_1.Lobby.show();
                 });
-                lobby_1.Lobby.show();
             }
             else {
                 entrance_1.Entrance.show();

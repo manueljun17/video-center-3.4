@@ -9,60 +9,55 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         __extends(Server, _super);
         function Server() {
             _super.call(this);
-            this.socket = _super.prototype.getSocket.call(this);
+            Server.socket = _super.prototype.getSocket.call(this);
         }
         Server.prototype.listen = function () {
-            var _this = this;
-            this.socket.on('get-message', function (data) {
-                _this.getMessage(data);
+            Server.socket.on('chat-message', function (data) {
+                if (data.room == "Lobby") {
+                    console.log("Go to Lobby chat.");
+                    lobby_1.Lobby.showMessage(data);
+                }
+                else {
+                    console.log("Go to Room chat.");
+                    room_1.Room.showMessage(data);
+                }
             });
         };
-        Server.prototype.emit = function (protocol, data) {
-            this.socket.emit(protocol, data);
+        Server.emit = function (protocol, data, callback) {
+            if (callback === void 0) { callback = false; }
+            console.log('Server.emit() protocol: ' + protocol + ', data: ' + data);
+            if (callback)
+                Server.socket.emit(protocol, data, callback);
+            else
+                Server.socket.emit(protocol, data);
         };
         Server.prototype.ping = function (callback) {
-            this.emit('ping', function (re) {
+            Server.emit('ping', function (re) {
                 callback(re);
             });
         };
-        Server.prototype.getMessage = function (data) {
-            if (data.room == "Lobby") {
-                console.log("Go to Lobby chat.");
-                lobby_1.Lobby.showMessage(data);
-            }
-            else {
-                console.log("Go to Room chat.");
-                room_1.Room.showMessage(data);
-            }
-        };
         Server.joinLobby = function (callback) {
-            var _this = new this;
-            _this.socket.emit("join-lobby", callback);
+            Server.emit("join-lobby", callback);
         };
         Server.joinRoom = function (roomname, callback) {
-            var _this = new this;
-            _this.socket.emit("join-room", roomname, callback);
+            Server.emit("join-room", roomname, callback);
         };
         Server.updateUsername = function (username, callback) {
-            var _this = new this;
-            _this.socket.emit('update-username', username, callback);
+            Server.emit('update-username', username, callback);
         };
         Server.createRoom = function (roomname, callback) {
-            var _this = new this;
-            _this.socket.emit('create-room', roomname, callback);
+            Server.emit('create-room', roomname, callback);
         };
-        Server.sendMessage = function (message, callback) {
-            var _this = new this;
-            _this.socket.emit('send-message', message, callback);
+        Server.chatMessage = function (message, callback) {
+            Server.emit('chat-message', message, callback);
         };
         Server.leaveRoom = function (callback) {
-            var _this = new this;
-            _this.socket.emit('leave-room', callback);
+            Server.emit('leave-room', callback);
         };
         Server.logout = function (callback) {
-            var _this = new this;
-            _this.socket.emit('log-out', callback);
+            Server.emit('log-out', callback);
         };
+        Server.socket = false;
         return Server;
     }(videocenter_1.VideoCenter));
     exports.Server = Server;

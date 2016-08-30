@@ -19,9 +19,8 @@ export class Lobby extends vc {
             e.lobby.show();
             e.lobby_form_username.hide();
             e.lobby_form_roomname.hide();
-            let username : any = User.getUsername;
-            e.lobbyDisplayUsername( username );
-        });        
+            e.lobbyDisplayUsername( User.getUsername );
+        });
     }
     static showMessage( data : any ) : void {
         e.lobby_display.append(e.markup_chat_message( data ));
@@ -67,7 +66,7 @@ export class Lobby extends vc {
     }
     private send_message( event ) :void {
         event.preventDefault();       
-        server.sendMessage( e.lobby_message.val(), (re)=> { 
+        server.chatMessage( e.lobby_message.val(), (re)=> { 
             console.log("server.sendMessage => message => re: ", re);              
             e.lobby_message.val("");       
          } );
