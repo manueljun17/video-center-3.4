@@ -119,13 +119,6 @@ export class Lobby extends vc {
     static remove_user_list( socket : any ) :void {
         e.lobby_user_list.find('[socket="'+socket+'"]').remove();     
     }   
-      static update_room_list( room : any ) :void {         
-       if ( e.lobby_room_list.length ) {        
-            var $room = e.lobby_room_list.find('[id="'+room.room+'"]');
-            if ( $room.length ) $room.text(room.room);
-            else e.appendRoom( room.room );
-        }
-    }
     static show_room_list( rooms : any ) :void {
         for( let i in rooms ) {        
             if ( ! rooms.hasOwnProperty(i) ) continue;
@@ -135,5 +128,15 @@ export class Lobby extends vc {
             else e.appendRoom( room );
         }         
     } 
+    static update_room_list( room : any ) :void {         
+       if ( e.lobby_room_list.length ) {        
+            var $room = e.lobby_room_list.find('[id="'+room.room+'"]');
+            if ( $room.length ) $room.text(room.room);
+            else e.appendRoom( room.room );
+        }
+    }  
+    static remove_room_list( room : any ) :void {
+        e.lobby_room_list.find('[id="'+room+'"]').remove();     
+    }  
        
 }

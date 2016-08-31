@@ -86,12 +86,12 @@ export class Element {
 
     /*------Markup------*/
     static markup_username( user:any ) : any {
-      return '<div socket="'+user.socket+'">' + user.name + '</div>';       
+      return '<div class="userlistname" socket="'+user.socket+'">' + user.name + '</div>';       
     }
     static markup_room( room:any ) : any {
       return '' +
         '<div class="room">' +
-        '   <div class="roomname" id="'+room+'">'+room+'</div>' +
+        '   <div class="roomlistname" id="'+room+'">'+room+'</div>' +
         '   <div class="users"></div>' +
         '</div>';      
     }

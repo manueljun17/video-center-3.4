@@ -34,6 +34,17 @@ body {
 #lobby {
   display: none; }
 
+.userlistname {
+  cursor: pointer;
+  cursor: hand; }
+
+.roomlistname {
+  cursor: pointer;
+  cursor: hand; }
+
+.roomlistname:hover {
+  background-color: #efefef; }
+
 #room {
   display: none; }
 
