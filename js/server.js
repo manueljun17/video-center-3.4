@@ -26,11 +26,9 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         Server.emit = function (protocol, data, callback) {
             if (callback === void 0) { callback = false; }
             if (callback) {
-                console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
                 Server.socket.emit(protocol, data, callback);
             }
             else {
-                console.log('Server.emit() protocol: ' + protocol + ', data:  ', data);
                 Server.socket.emit(protocol, data);
             }
         };

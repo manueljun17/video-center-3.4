@@ -24,11 +24,11 @@ export class Server extends vc {
     }
     static emit( protocol: string, data?: any, callback = false) {
         if ( callback ) {
-            console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
+            // console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
             Server.socket.emit( protocol, data, callback );
         }
         else {
-            console.log('Server.emit() protocol: ' + protocol + ', data:  ', data);
+            // console.log('Server.emit() protocol: ' + protocol + ', data:  ', data);
             Server.socket.emit( protocol, data );
         }
     }
