@@ -49,6 +49,9 @@ export class Element {
     static get lobby_user_list( ) : JQuery {       
         return Element.lobby.find(".user-list");     
     }
+    static get lobby_room_list( ) : JQuery {       
+        return Element.lobby.find(".room-list");     
+    }
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
@@ -74,15 +77,23 @@ export class Element {
         return Element.room.find('.roomname').text( roomname );
     }
     /*------Dom Handlers------*/
-    static appendUser( user:any ) : JQuery {
-       
+    static appendUser( user:any ) : JQuery {       
         return Element.lobby_user_list.append( Element.markup_username( user ) );       
+    }
+    static appendRoom( room:any ) : JQuery {       
+        return Element.lobby_room_list.append( Element.markup_room( room ) );       
     }
 
     /*------Markup------*/
     static markup_username( user:any ) : any {
-      return '<div socket="'+user.socket+'">' + user.name + '</div>';
-       
+      return '<div socket="'+user.socket+'">' + user.name + '</div>';       
+    }
+    static markup_room( room:any ) : any {
+      return '' +
+        '<div class="room">' +
+        '   <div class="roomname" id="'+room.room+'">'+room.room+'</div>' +
+        '   <div class="users"></div>' +
+        '</div>';      
     }
     static markup_chat_message( data :any ) : string {
         return '<div><strong>'+data.name+': </strong>'+data.message+'</div>';

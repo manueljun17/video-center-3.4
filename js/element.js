@@ -101,6 +101,13 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Element, "lobby_room_list", {
+            get: function () {
+                return Element.lobby.find(".room-list");
+            },
+            enumerable: true,
+            configurable: true
+        });
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };
@@ -145,8 +152,18 @@ define(["require", "exports"], function (require, exports) {
         Element.appendUser = function (user) {
             return Element.lobby_user_list.append(Element.markup_username(user));
         };
+        Element.appendRoom = function (room) {
+            return Element.lobby_room_list.append(Element.markup_room(room));
+        };
         Element.markup_username = function (user) {
             return '<div socket="' + user.socket + '">' + user.name + '</div>';
+        };
+        Element.markup_room = function (room) {
+            return '' +
+                '<div class="room">' +
+                '   <div class="roomname" id="' + room.room + '">' + room.room + '</div>' +
+                '   <div class="users"></div>' +
+                '</div>';
         };
         Element.markup_chat_message = function (data) {
             return '<div><strong>' + data.name + ': </strong>' + data.message + '</div>';

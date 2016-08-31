@@ -115,6 +115,15 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                     element_1.Element.appendUser(user);
             }
         };
+        Lobby.update_room_list = function (room) {
+            if (element_1.Element.lobby_room_list.length) {
+                var $room = element_1.Element.lobby_room_list.find('[id="' + room.room + '"]');
+                if ($room.length)
+                    $room.text(room.room);
+                else
+                    element_1.Element.appendRoom(room);
+            }
+        };
         Lobby.remove_user_list = function (socket) {
             element_1.Element.lobby_user_list.find('[socket="' + socket + '"]').remove();
         };

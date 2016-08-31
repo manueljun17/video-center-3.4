@@ -23,6 +23,9 @@ export class Server extends vc {
         Server.socket.on('update-username', ( user )=>{
            lobby.update_user_list( user );
         });
+        Server.socket.on('create-room', ( room )=>{
+           lobby.update_room_list( room );
+        });
         Server.socket.on('log-out', ( socket )=>{
            console.log("socket:"+socket)
            lobby.remove_user_list( socket );
