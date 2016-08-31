@@ -94,6 +94,13 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Element, "lobby_user_list", {
+            get: function () {
+                return Element.lobby.find(".user-list");
+            },
+            enumerable: true,
+            configurable: true
+        });
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };
@@ -136,8 +143,7 @@ define(["require", "exports"], function (require, exports) {
             return Element.room.find('.roomname').text(roomname);
         };
         Element.appendUser = function (user) {
-            var user_list = Element.lobby.find(".user-list");
-            return user_list.append(Element.markup_username(user));
+            return Element.lobby_user_list.append(Element.markup_username(user));
         };
         Element.markup_username = function (user) {
             return '<div socket="' + user.socket + '">' + user.name + '</div>';

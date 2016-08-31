@@ -46,9 +46,13 @@ export class Element {
     static get lobby_form_roomname () : JQuery {
         return $('#lobby_form_roomname');
     }
+    static get lobby_user_list( ) : JQuery {       
+        return Element.lobby.find(".user-list");     
+    }
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
+    
   
      /*------Room-----*/
     static get room() : JQuery {
@@ -71,8 +75,8 @@ export class Element {
     }
     /*------Dom Handlers------*/
     static appendUser( user:any ) : JQuery {
-        let user_list: JQuery = Element.lobby.find(".user-list");
-        return user_list.append( Element.markup_username( user ) );       
+       
+        return Element.lobby_user_list.append( Element.markup_username( user ) );       
     }
 
     /*------Markup------*/

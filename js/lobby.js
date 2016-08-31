@@ -99,9 +99,24 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 if (!users.hasOwnProperty(i))
                     continue;
                 var user = users[i];
-                console.log(user.name);
-                element_1.Element.appendUser(user);
+                var $user = element_1.Element.lobby_user_list.find('[socket="' + user.socket + '"]');
+                if ($user.length)
+                    $user.text(user.name);
+                else
+                    element_1.Element.appendUser(user);
             }
+        };
+        Lobby.update_user_list = function (user) {
+            if (element_1.Element.lobby_user_list.length) {
+                var $user = element_1.Element.lobby_user_list.find('[socket="' + user.socket + '"]');
+                if ($user.length)
+                    $user.text(user.name);
+                else
+                    element_1.Element.appendUser(user);
+            }
+        };
+        Lobby.remove_user_list = function (socket) {
+            element_1.Element.lobby_user_list.find('[socket="' + socket + '"]').remove();
         };
         return Lobby;
     }(videocenter_1.VideoCenter));

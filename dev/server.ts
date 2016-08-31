@@ -20,6 +20,17 @@ export class Server extends vc {
                 room.showMessage( data );
             }
         });
+        Server.socket.on('update-username', ( user )=>{
+           lobby.update_user_list( user );
+        });
+        Server.socket.on('log-out', ( socket )=>{
+           console.log("socket:"+socket)
+           lobby.remove_user_list( socket );
+        });
+        Server.socket.on('disconnect', ( socket )=>{
+           console.log("socket:"+socket)
+           lobby.remove_user_list( socket );
+        });
 
     }
     static emit( protocol: string, data?: any, callback = false) {

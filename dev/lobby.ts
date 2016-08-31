@@ -97,12 +97,23 @@ export class Lobby extends vc {
         });    
     }
     static show_user_list( users : any ) :void {
-        for( var i in users ) {        
+        for( let i in users ) {        
             if ( ! users.hasOwnProperty(i) ) continue;
-            var user = users[i];
-            console.log(user.name);
-            e.appendUser( user );
+            let user = users[i];
+            let $user = e.lobby_user_list.find('[socket="'+user.socket+'"]');
+            if ( $user.length ) $user.text(user.name);
+            else e.appendUser( user );
         }
     }
+     static update_user_list( user : any ) :void {         
+       if ( e.lobby_user_list.length ) {        
+            var $user = e.lobby_user_list.find('[socket="'+user.socket+'"]');
+            if ( $user.length ) $user.text(user.name);
+            else e.appendUser( user );
+        }
+    }
+    static remove_user_list( socket : any ) :void {
+        e.lobby_user_list.find('[socket="'+socket+'"]').remove();     
+    }    
        
 }

@@ -22,6 +22,17 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
                     room_1.Room.showMessage(data);
                 }
             });
+            Server.socket.on('update-username', function (user) {
+                lobby_1.Lobby.update_user_list(user);
+            });
+            Server.socket.on('log-out', function (socket) {
+                console.log("socket:" + socket);
+                lobby_1.Lobby.remove_user_list(socket);
+            });
+            Server.socket.on('disconnect', function (socket) {
+                console.log("socket:" + socket);
+                lobby_1.Lobby.remove_user_list(socket);
+            });
         };
         Server.emit = function (protocol, data, callback) {
             if (callback === void 0) { callback = false; }
