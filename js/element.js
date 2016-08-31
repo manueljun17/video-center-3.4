@@ -161,7 +161,7 @@ define(["require", "exports"], function (require, exports) {
         Element.markup_room = function (room) {
             return '' +
                 '<div class="room">' +
-                '   <div class="roomname" id="' + room.room + '">' + room.room + '</div>' +
+                '   <div class="roomname" id="' + room + '">' + room + '</div>' +
                 '   <div class="users"></div>' +
                 '</div>';
         };

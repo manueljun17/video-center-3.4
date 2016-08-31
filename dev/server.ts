@@ -77,5 +77,7 @@ export class Server extends vc {
     static userList( callback : any ) : void {
         Server.emit('user-list', callback);
     }
-   
+    static roomList( callback : any ) : void {
+        Server.emit('room-list', callback);
+    }   
 }

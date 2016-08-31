@@ -91,7 +91,7 @@ export class Element {
     static markup_room( room:any ) : any {
       return '' +
         '<div class="room">' +
-        '   <div class="roomname" id="'+room.room+'">'+room.room+'</div>' +
+        '   <div class="roomname" id="'+room+'">'+room+'</div>' +
         '   <div class="users"></div>' +
         '</div>';      
     }

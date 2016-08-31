@@ -24,6 +24,10 @@ export class Lobby extends vc {
                 console.log(users);
                 Lobby.show_user_list( users );
             } );
+            server.roomList( function( rooms:any ) { 
+                console.log(rooms);
+                Lobby.show_room_list( rooms );
+            } );
         });
     }
     static showMessage( data : any ) : void {
@@ -111,16 +115,25 @@ export class Lobby extends vc {
             if ( $user.length ) $user.text(user.name);
             else e.appendUser( user );
         }
-    }
-    static update_room_list( room : any ) :void {         
+    }  
+    static remove_user_list( socket : any ) :void {
+        e.lobby_user_list.find('[socket="'+socket+'"]').remove();     
+    }   
+      static update_room_list( room : any ) :void {         
        if ( e.lobby_room_list.length ) {        
             var $room = e.lobby_room_list.find('[id="'+room.room+'"]');
             if ( $room.length ) $room.text(room.room);
-            else e.appendRoom( room );
+            else e.appendRoom( room.room );
         }
     }
-    static remove_user_list( socket : any ) :void {
-        e.lobby_user_list.find('[socket="'+socket+'"]').remove();     
-    }    
+    static show_room_list( rooms : any ) :void {
+        for( let i in rooms ) {        
+            if ( ! rooms.hasOwnProperty(i) ) continue;
+            let room:any = rooms[i];
+            let $rooms:any = e.lobby_room_list.find('[id="'+room+'"]');
+            if ( $rooms.length ) $rooms.text(room);
+            else e.appendRoom( room );
+        }         
+    } 
        
 }

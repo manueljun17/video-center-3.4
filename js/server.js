@@ -75,6 +75,9 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         Server.userList = function (callback) {
             Server.emit('user-list', callback);
         };
+        Server.roomList = function (callback) {
+            Server.emit('room-list', callback);
+        };
         Server.socket = false;
         return Server;
     }(videocenter_1.VideoCenter));
