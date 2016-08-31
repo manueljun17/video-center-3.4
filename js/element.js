@@ -97,9 +97,6 @@ define(["require", "exports"], function (require, exports) {
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };
-        Element.markup_chat_message = function (data) {
-            return '<div><strong>' + data.name + ': </strong>' + data.message + '</div>';
-        };
         Object.defineProperty(Element, "room", {
             get: function () {
                 return $('#room');
@@ -137,6 +134,16 @@ define(["require", "exports"], function (require, exports) {
         });
         Element.roomDisplayRoomname = function (roomname) {
             return Element.room.find('.roomname').text(roomname);
+        };
+        Element.appendUser = function (user) {
+            var user_list = Element.lobby.find(".user-list");
+            return user_list.append(Element.markup_username(user));
+        };
+        Element.markup_username = function (user) {
+            return '<div socket="' + user.socket + '">' + user.name + '</div>';
+        };
+        Element.markup_chat_message = function (data) {
+            return '<div><strong>' + data.name + ': </strong>' + data.message + '</div>';
         };
         return Element;
     }());

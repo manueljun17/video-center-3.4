@@ -22,6 +22,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 element_1.Element.lobbyDisplayUsername(user_1.User.getUsername);
                 server_1.Server.userList(function (users) {
                     console.log(users);
+                    Lobby.show_user_list(users);
                 });
             });
         };
@@ -92,6 +93,15 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 element_1.Element.lobby_display.empty();
                 entrance_1.Entrance.show();
             });
+        };
+        Lobby.show_user_list = function (users) {
+            for (var i in users) {
+                if (!users.hasOwnProperty(i))
+                    continue;
+                var user = users[i];
+                console.log(user.name);
+                element_1.Element.appendUser(user);
+            }
         };
         return Lobby;
     }(videocenter_1.VideoCenter));

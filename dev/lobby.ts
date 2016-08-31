@@ -22,6 +22,7 @@ export class Lobby extends vc {
             e.lobbyDisplayUsername( User.getUsername );
             server.userList( function( users:any ) { 
                 console.log(users);
+                Lobby.show_user_list( users );
             } );
         });
     }
@@ -94,6 +95,14 @@ export class Lobby extends vc {
             e.lobby_display.empty();
             Entrance.show();
         });    
+    }
+    static show_user_list( users : any ) :void {
+        for( var i in users ) {        
+            if ( ! users.hasOwnProperty(i) ) continue;
+            var user = users[i];
+            console.log(user.name);
+            e.appendUser( user );
+        }
     }
        
 }

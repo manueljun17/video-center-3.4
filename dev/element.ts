@@ -49,10 +49,7 @@ export class Element {
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
-    static markup_chat_message( data :any ) : string {
-        return '<div><strong>'+data.name+': </strong>'+data.message+'</div>';
-    }
-
+  
      /*------Room-----*/
     static get room() : JQuery {
         return $('#room');
@@ -71,6 +68,20 @@ export class Element {
     }  
     static roomDisplayRoomname( roomname :string ) : JQuery {
         return Element.room.find('.roomname').text( roomname );
+    }
+    /*------Dom Handlers------*/
+    static appendUser( user:any ) : JQuery {
+        let user_list: JQuery = Element.lobby.find(".user-list");
+        return user_list.append( Element.markup_username( user ) );       
+    }
+
+    /*------Markup------*/
+    static markup_username( user:any ) : any {
+      return '<div socket="'+user.socket+'">' + user.name + '</div>';
+       
+    }
+    static markup_chat_message( data :any ) : string {
+        return '<div><strong>'+data.name+': </strong>'+data.message+'</div>';
     }
 
 }
