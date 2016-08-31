@@ -35,6 +35,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
             element_1.Element.lobby_display.animate({ scrollTop: element_1.Element.lobby_display.prop('scrollHeight') });
         };
         Lobby.prototype.initHandlers = function () {
+            element_1.Element.body.on('click', '.roomlistname', this.on_join_room);
             element_1.Element.lobby_form_username.submit(this.submit_user_name);
             element_1.Element.lobby_form_roomname.submit(this.submit_room_name);
             element_1.Element.lobby_send_message.submit(this.send_message);
@@ -97,6 +98,20 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 element_1.Element.lobby_display.empty();
                 entrance_1.Entrance.show();
             });
+        };
+        Lobby.prototype.on_join_room = function (event) {
+            event.preventDefault();
+            var room_id = $(this).attr('id');
+            console.log(room_id);
+            if (room_id == "Lobby") {
+                alert('You cannot join Lobby.');
+            }
+            else {
+                server_1.Server.joinRoom(room_id, function (data) {
+                    user_1.User.save_roomname(data);
+                    room_1.Room.show();
+                });
+            }
         };
         Lobby.show_user_list = function (users) {
             for (var i in users) {

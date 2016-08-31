@@ -36,6 +36,7 @@ export class Lobby extends vc {
     }
 
     private initHandlers() : void {
+        e.body.on('click', '.roomlistname', this.on_join_room );
         e.lobby_form_username.submit( this.submit_user_name ); 
         e.lobby_form_roomname.submit( this.submit_room_name );   
         e.lobby_send_message.submit( this.send_message );      
@@ -46,9 +47,9 @@ export class Lobby extends vc {
         e.lobby_onclick_form_roomname.click( ()=>{
             e.lobby_form_username.hide();
             e.lobby_form_roomname.show();
-        } );
+        } );               
         e.lobby_onclick_logout.click( this.on_logout );   
-             
+       
     }
     private submit_user_name( event ) :void {
         event.preventDefault();
@@ -99,6 +100,21 @@ export class Lobby extends vc {
             e.lobby_display.empty();
             Entrance.show();
         });    
+    }
+    private on_join_room( event ) :void {
+        event.preventDefault();      
+        var room_id = $(this).attr('id');
+        console.log(room_id);
+        if(room_id=="Lobby") {
+            alert('You cannot join Lobby.')
+        }
+        else {
+            server.joinRoom( room_id, (data)=>{
+                User.save_roomname( data );                
+                room.show()
+           
+            } );
+        }        
     }
     static show_user_list( users : any ) :void {
         for( let i in users ) {        

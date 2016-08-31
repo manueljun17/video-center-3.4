@@ -108,6 +108,13 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Element, "body", {
+            get: function () {
+                return $("body");
+            },
+            enumerable: true,
+            configurable: true
+        });
         Element.lobbyDisplayUsername = function (username) {
             return Element.lobby.find('.username').text(username);
         };

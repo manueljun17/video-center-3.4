@@ -39,7 +39,7 @@ export class Element {
     }
     static get lobby_onclick_logout() : JQuery {
         return Element.lobby.find('.logout');
-    }
+    }     
     static get lobby_form_username () : JQuery {
         return $('#lobby_form_username');
     }
@@ -52,11 +52,14 @@ export class Element {
     static get lobby_room_list( ) : JQuery {       
         return Element.lobby.find(".room-list");     
     }
+    static get body() : JQuery {
+        return $("body");
+    }
     static lobbyDisplayUsername( username :string ) : JQuery {
         return Element.lobby.find('.username').text( username );
     }
     
-  
+       
      /*------Room-----*/
     static get room() : JQuery {
         return $('#room');
