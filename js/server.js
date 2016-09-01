@@ -54,8 +54,8 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
                 callback(re);
             });
         };
-        Server.joinLobby = function (callback) {
-            Server.emit("join-lobby", callback);
+        Server.joinLobby = function (roomname, callback) {
+            Server.emit("join-room", roomname, callback);
         };
         Server.joinRoom = function (roomname, callback) {
             Server.emit("join-room", roomname, callback);

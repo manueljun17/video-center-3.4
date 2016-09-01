@@ -13,8 +13,8 @@ export class Lobby extends vc {
     }
 
     static show() :void {        
-        server.joinLobby(()=>{
-            console.log("Lobby::show()");
+        server.joinLobby(lobbyRoomName, (re)=>{
+            console.log("Lobby::show()=>re",re );
             e.entrance.hide();
             e.lobby.show();
             e.lobby_form_username.hide();
