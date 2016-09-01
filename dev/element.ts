@@ -45,10 +45,7 @@ export class Element {
     }
     static get lobby_form_roomname () : JQuery {
         return $('#lobby_form_roomname');
-    }
-    static get lobby_user_list( ) : JQuery {       
-        return Element.lobby.find(".user-list");     
-    }
+    }   
     static get lobby_room_list( ) : JQuery {       
         return Element.lobby.find(".room-list");     
     }
@@ -102,7 +99,7 @@ export class Element {
     static markup_room( roomname:string, room_id: string ) : string {
       return '' +
         '<div class="room" id="'+room_id+'">' +
-        '   <span class="roomname">'+roomname+'</span>' +
+        '   <span class="roomnames">'+roomname+'</span>' +
         '   <span class="users"></span>' +
         '</div>';      
     }

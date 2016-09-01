@@ -28,7 +28,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
             element_1.Element.lobby_display.animate({ scrollTop: element_1.Element.lobby_display.prop('scrollHeight') });
         };
         Lobby.prototype.initHandlers = function () {
-            element_1.Element.body.on('click', '.roomlistname', this.on_join_room);
+            element_1.Element.body.on('click', '.roomnames', this.on_join_room);
             element_1.Element.lobby_form_username.submit(this.submit_user_name);
             element_1.Element.lobby_form_roomname.submit(this.submit_room_name);
             element_1.Element.lobby_send_message.submit(this.send_message);
@@ -106,27 +106,6 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 });
             }
         };
-        Lobby.show_user_list = function (users) {
-            for (var i in users) {
-                if (!users.hasOwnProperty(i))
-                    continue;
-                var user = users[i];
-                var $user = element_1.Element.lobby_user_list.find('[socket="' + user.socket + '"]');
-                if ($user.length)
-                    $user.text(user.name);
-                else
-                    element_1.Element.appendUser(user);
-            }
-        };
-        Lobby.update_user_list = function (user) {
-            if (element_1.Element.lobby_user_list.length) {
-                var $user = element_1.Element.lobby_user_list.find('[socket="' + user.socket + '"]');
-                if ($user.length)
-                    $user.text(user.name);
-                else
-                    element_1.Element.appendUser(user);
-            }
-        };
         Lobby.remove_user_list = function (socket) {
             element_1.Element.lobby_user_list.find('[socket="' + socket + '"]').remove();
         };
@@ -150,7 +129,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 if ($room.length)
                     $room.text(room.room);
                 else
-                    element_1.Element.appendRoom(room.room);
+                    element_1.Element.appendRoom(room.room, room.room);
             }
         };
         Lobby.remove_room_list = function (room) {

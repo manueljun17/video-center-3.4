@@ -24,7 +24,7 @@ body {
   width: 100%;
   color: white; }
 
-.user-list, .room-list {
+.room-list {
   padding: 1rem;
   background-color: #dfdfdf; }
 
@@ -38,11 +38,11 @@ body {
   cursor: pointer;
   cursor: hand; }
 
-.roomlistname {
+.roomnames {
   cursor: pointer;
   cursor: hand; }
 
-.roomlistname:hover {
+.roomnames:hover {
   background-color: #efefef; }
 
 #room {

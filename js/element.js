@@ -94,13 +94,6 @@ define(["require", "exports"], function (require, exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Element, "lobby_user_list", {
-            get: function () {
-                return Element.lobby.find(".user-list");
-            },
-            enumerable: true,
-            configurable: true
-        });
         Object.defineProperty(Element, "lobby_room_list", {
             get: function () {
                 return Element.lobby.find(".room-list");
@@ -169,7 +162,7 @@ define(["require", "exports"], function (require, exports) {
         Element.markup_room = function (roomname, room_id) {
             return '' +
                 '<div class="room" id="' + room_id + '">' +
-                '   <span class="roomname">' + roomname + '</span>' +
+                '   <span class="roomnames">' + roomname + '</span>' +
                 '   <span class="users"></span>' +
                 '</div>';
         };

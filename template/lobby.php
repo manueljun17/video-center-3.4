@@ -27,9 +27,7 @@
         <form>
             <input name="message">
         </form>
-    </div>
-    <h4>User List</h4>
-    <div class="user-list"></div>
+    </div> 
     <h4>Room List</h4>
     <div class="room-list"></div>
 
