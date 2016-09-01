@@ -77,7 +77,7 @@ export class Server extends vc {
     static logout(callback : any ) : void {
         Server.emit('log-out', callback );
     }
-    static userList( callback : any ) : void {
+    static userList( roomName: string, callback : any ) : void {
         Server.emit('user-list', callback);
     }
     static roomList( callback : any ) : void {

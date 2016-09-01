@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", './videocenter', './element', './server', './room', './entrance', './user'], function (require, exports, videocenter_1, element_1, server_1, room_1, entrance_1, user_1) {
+define(["require", "exports", './videocenter', './element', './server', './room', './entrance', './user', './default'], function (require, exports, videocenter_1, element_1, server_1, room_1, entrance_1, user_1) {
     "use strict";
     var Lobby = (function (_super) {
         __extends(Lobby, _super);
@@ -20,7 +20,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 element_1.Element.lobby_form_username.hide();
                 element_1.Element.lobby_form_roomname.hide();
                 element_1.Element.lobbyDisplayUsername(user_1.User.getUsername);
-                server_1.Server.userList(function (users) {
+                server_1.Server.userList(lobbyRoomName, function (users) {
                     console.log(users);
                     Lobby.show_user_list(users);
                 });
@@ -73,9 +73,9 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 alert('Roomname is empty.');
             }
             else {
-                console.log('lobby submit roomname: ', roomname);
+                console.log('Lobby create room. roomname: ' + roomname);
                 server_1.Server.createRoom(roomname, function (re) {
-                    console.log("server.createRoom => roomname => re: ", re);
+                    console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);
                     user_1.User.save_roomname(re);
                     element_1.Element.lobbyRoomname.val("");
                     element_1.Element.lobby_form_roomname.hide();

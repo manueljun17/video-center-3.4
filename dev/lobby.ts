@@ -4,6 +4,7 @@ import { Server as server } from './server';
 import { Room as room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
+import './default';
 
 export class Lobby extends vc {    
     constructor() {
@@ -20,7 +21,7 @@ export class Lobby extends vc {
             e.lobby_form_username.hide();
             e.lobby_form_roomname.hide();
             e.lobbyDisplayUsername( User.getUsername );
-            server.userList( function( users:any ) { 
+            server.userList( lobbyRoomName, function( users:any ) { 
                 console.log(users);
                 Lobby.show_user_list( users );
             } );
@@ -30,6 +31,7 @@ export class Lobby extends vc {
             } );
         });
     }
+    
     static showMessage( data : any ) : void {
         e.lobby_display.append(e.markup_chat_message( data ));
         e.lobby_display.animate({scrollTop: e.lobby_display.prop('scrollHeight')});     
@@ -75,10 +77,10 @@ export class Lobby extends vc {
             alert('Roomname is empty.');
         }
         else {
-        console.log('lobby submit roomname: ',  roomname );
+        console.log('Lobby create room. roomname: ' +  roomname );
         server.createRoom( roomname, function(re) { 
-            console.log("server.createRoom => roomname => re: ", re);          
-            User.save_roomname( re );    
+            console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);          
+            User.save_roomname( re );
             e.lobbyRoomname.val("");
             e.lobby_form_roomname.hide();
             room.show()
