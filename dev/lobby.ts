@@ -97,7 +97,7 @@ export class Lobby extends vc {
     }
     private on_join_room( event ) :void {
         event.preventDefault();      
-        var room_id = $(this).attr('id');
+        var room_id = $(this).text();      
         console.log(room_id);
         if(room_id=="Lobby") {
             alert('You cannot join Lobby.')
@@ -111,12 +111,7 @@ export class Lobby extends vc {
         }        
     }
  
-  
-    static remove_user_list( socket : any ) :void {
-        e.lobby_user_list.find('[socket="'+socket+'"]').remove();     
-    }
-
-    
+      
     static show_room_list( users ) :void {
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;

@@ -31,11 +31,11 @@ export class Server extends vc {
         });       
         Server.socket.on('log-out', ( socket )=>{
            console.log("socket:"+socket)
-           lobby.remove_user_list( socket );
+        //    lobby.remove_user_list( socket );
         });
         Server.socket.on('disconnect', ( socket )=>{
            console.log("socket:"+socket)
-           lobby.remove_user_list( socket );
+        //    lobby.remove_user_list( socket );
         });
 
     }

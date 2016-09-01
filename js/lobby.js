@@ -94,7 +94,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
         };
         Lobby.prototype.on_join_room = function (event) {
             event.preventDefault();
-            var room_id = $(this).attr('id');
+            var room_id = $(this).text();
             console.log(room_id);
             if (room_id == "Lobby") {
                 alert('You cannot join Lobby.');
@@ -105,9 +105,6 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                     room_1.Room.show();
                 });
             }
-        };
-        Lobby.remove_user_list = function (socket) {
-            element_1.Element.lobby_user_list.find('[socket="' + socket + '"]').remove();
         };
         Lobby.show_room_list = function (users) {
             for (var i in users) {
