@@ -78,7 +78,7 @@ export class Lobby extends vc {
         else {
         console.log('Lobby create room. roomname: ' +  roomname );
         server.createRoom( roomname, function(re) { 
-            console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);          
+            console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);
             User.save_roomname( re );
             e.lobbyRoomname.val("");
             e.lobby_form_roomname.hide();
