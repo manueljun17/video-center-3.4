@@ -149,15 +149,15 @@ define(["require", "exports"], function (require, exports) {
         Element.roomDisplayRoomname = function (roomname) {
             return Element.room.find('.roomname').text(roomname);
         };
-        Element.appendUser = function (room_id, username) {
+        Element.appendUser = function (room_id, username, socket) {
             var $room = Element.lobby_room_list.find('[id="' + room_id + '"]');
-            $room.find('.users').append(',' + username);
+            $room.find('.users').append(Element.markup_username(username, socket));
         };
         Element.appendRoom = function (roomname, room_id) {
             return Element.lobby_room_list.append(Element.markup_room(roomname, room_id));
         };
-        Element.markup_username = function (user) {
-            return '<div class="userlistname" socket="' + user.socket + '">' + user.name + '</div>';
+        Element.markup_username = function (username, socket) {
+            return ', <span class="userlistname" socket="' + socket + '">' + username + '</span>';
         };
         Element.markup_room = function (roomname, room_id) {
             return '' +

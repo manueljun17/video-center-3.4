@@ -121,7 +121,7 @@ export class Lobby extends vc {
             console.log("room id:" + room_id);
             let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
             if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            e.appendUser( room_id, user.name );
+            e.appendUser( room_id, user.name ,user.socket);
         }         
     }
     /*------fix this one---------*/
@@ -135,5 +135,18 @@ export class Lobby extends vc {
     static remove_room_list( room ) :void {
         e.lobby_room_list.find('[id="'+room+'"]').remove();     
     }  
+     static update_user_list( users : any ) :void {
+         console.log( users);     
+            let userobj = users;
+            if(userobj.room){
+                let room_id = MD5(userobj.room);
+                console.log("room id:" + room_id);
+                let $user =  e.lobby_room_list.find('[socket="'+userobj.socket+'"]');
+                console.log("Useruser"+$user);           
+                if ( $user.length ) $user.text(userobj.name);
+                else e.appendUser( room_id ,userobj.name,userobj.socket );
+            }
+        }        
+    }
        
 }

@@ -22,6 +22,10 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
                     room_1.Room.showMessage(data);
                 }
             });
+            Server.socket.on('update-username', function (user) {
+                console.log("user:", user);
+                lobby_1.Lobby.update_user_list(user);
+            });
             Server.socket.on('create-room', function (room) {
                 lobby_1.Lobby.update_room_list(room);
             });

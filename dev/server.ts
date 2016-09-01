@@ -20,9 +20,10 @@ export class Server extends vc {
                 room.showMessage( data );
             }
         });
-        // Server.socket.on('update-username', ( user )=>{
-        //    lobby.update_user_list( user );
-        // });
+        Server.socket.on('update-username', ( user )=>{
+            console.log("user:",user);
+            lobby.update_user_list( user );
+        });
         Server.socket.on('create-room', ( room )=>{
            lobby.update_room_list( room );
         });

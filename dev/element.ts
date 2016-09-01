@@ -81,10 +81,12 @@ export class Element {
     //     return Element.lobby_user_list.append( Element.markup_username( user ) );       
     // }
     
-    static appendUser( room_id: string, username:string ) : void {       
+    static appendUser( room_id: string, username:string, socket:string ) : void {       
         // return Element.lobby_user_list.append( Element.markup_username( user ) );
         let $room = Element.lobby_room_list.find('[id="'+room_id+'"]');
-        $room.find('.users').append(',' + username);
+        // $room.find('.users').append(',' + username);
+        $room.find('.users').append( Element.markup_username( username, socket));
+
 
     }
 
@@ -93,8 +95,8 @@ export class Element {
     }
 
     /*------Markup------*/
-    static markup_username( user:any ) : any {
-      return '<div class="userlistname" socket="'+user.socket+'">' + user.name + '</div>';       
+    static markup_username(  username:string, socket:string ) : any {
+      return ', <span class="userlistname" socket="'+socket+'">' + username + '</span>';       
     }
     static markup_room( roomname:string, room_id: string ) : string {
       return '' +

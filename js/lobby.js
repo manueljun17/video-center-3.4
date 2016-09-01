@@ -117,7 +117,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 var $room = element_1.Element.lobby_room_list.find('[id="' + room_id + '"]');
                 if ($room.length == 0)
                     element_1.Element.appendRoom(user.room, room_id);
-                element_1.Element.appendUser(room_id, user.name);
+                element_1.Element.appendUser(room_id, user.name, user.socket);
             }
         };
         Lobby.update_room_list = function (room) {
@@ -131,6 +131,20 @@ define(["require", "exports", './videocenter', './element', './server', './room'
         };
         Lobby.remove_room_list = function (room) {
             element_1.Element.lobby_room_list.find('[id="' + room + '"]').remove();
+        };
+        Lobby.update_user_list = function (users) {
+            console.log(users);
+            var userobj = users;
+            if (userobj.room) {
+                var room_id = MD5(userobj.room);
+                console.log("room id:" + room_id);
+                var $user = element_1.Element.lobby_room_list.find('[socket="' + userobj.socket + '"]');
+                console.log("Useruser" + $user);
+                if ($user.length)
+                    $user.text(userobj.name);
+                else
+                    element_1.Element.appendUser(room_id, userobj.name, userobj.socket);
+            }
         };
         return Lobby;
     }(videocenter_1.VideoCenter));
