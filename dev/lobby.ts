@@ -4,8 +4,7 @@ import { Server as server } from './server';
 import { Room as room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
-import './default';
-
+import { Default as defaults } from './default';
 export class Lobby extends vc {    
     constructor() {
         super();
@@ -21,7 +20,7 @@ export class Lobby extends vc {
             e.lobby_form_username.hide();
             e.lobby_form_roomname.hide();
             e.lobbyDisplayUsername( User.getUsername );
-            server.userList( lobbyRoomName, function( users:any ) { 
+            server.userList( defaults.lobbyRoomName, function( users:any ) { 
                 console.log(users);
                 Lobby.show_user_list( users );
             } );
