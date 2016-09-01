@@ -80,22 +80,30 @@ export class Element {
         return Element.room.find('.roomname').text( roomname );
     }
     /*------Dom Handlers------*/
-    static appendUser( user:any ) : JQuery {       
-        return Element.lobby_user_list.append( Element.markup_username( user ) );       
+    // static appendUser( user:any ) : JQuery {       
+    //     return Element.lobby_user_list.append( Element.markup_username( user ) );       
+    // }
+    
+    static appendUser( room_id: string, username:string ) : void {       
+        // return Element.lobby_user_list.append( Element.markup_username( user ) );
+        let $room = Element.lobby_room_list.find('[id="'+room_id+'"]');
+        $room.find('.users').append(',' + username);
+
     }
-    static appendRoom( room:any ) : JQuery {       
-        return Element.lobby_room_list.append( Element.markup_room( room ) );       
+
+    static appendRoom( roomname:string, room_id: string ) : JQuery {       
+        return Element.lobby_room_list.append( Element.markup_room( roomname, room_id ) );       
     }
 
     /*------Markup------*/
     static markup_username( user:any ) : any {
       return '<div class="userlistname" socket="'+user.socket+'">' + user.name + '</div>';       
     }
-    static markup_room( room:any ) : any {
+    static markup_room( roomname:string, room_id: string ) : string {
       return '' +
-        '<div class="room">' +
-        '   <div class="roomlistname" id="'+room+'">'+room+'</div>' +
-        '   <div class="users"></div>' +
+        '<div class="room" id="'+room_id+'">' +
+        '   <span class="roomname">'+roomname+'</span>' +
+        '   <span class="users"></span>' +
         '</div>';      
     }
     static markup_chat_message( data :any ) : string {

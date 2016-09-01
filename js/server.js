@@ -54,9 +54,6 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
                 callback(re);
             });
         };
-        Server.joinLobby = function (roomname, callback) {
-            Server.emit("join-room", roomname, callback);
-        };
         Server.joinRoom = function (roomname, callback) {
             Server.emit("join-room", roomname, callback);
         };
@@ -75,8 +72,8 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
         Server.logout = function (callback) {
             Server.emit('log-out', callback);
         };
-        Server.userList = function (roomName, callback) {
-            Server.emit('user-list', callback);
+        Server.userList = function (roomname, callback) {
+            Server.emit('user-list', roomname, callback);
         };
         Server.roomList = function (callback) {
             Server.emit('room-list', callback);

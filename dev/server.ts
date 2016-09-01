@@ -56,9 +56,12 @@ export class Server extends vc {
             callback( re );
         });
     }
+
+    /**
     static joinLobby( roomname:string, callback : any ) {
         Server.emit("join-room", roomname, callback );
     }
+    */
     static joinRoom( roomname:string, callback : any ) {
         Server.emit("join-room", roomname, callback );
     }
@@ -77,8 +80,8 @@ export class Server extends vc {
     static logout(callback : any ) : void {
         Server.emit('log-out', callback );
     }
-    static userList( roomName: string, callback : any ) : void {
-        Server.emit('user-list', callback);
+    static userList( roomname: string, callback : any ) : void {
+        Server.emit('user-list', roomname, callback);
     }
     static roomList( callback : any ) : void {
         Server.emit('room-list', callback);

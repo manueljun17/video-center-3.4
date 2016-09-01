@@ -4,7 +4,7 @@ import { Server as server } from './server';
 import { Room as room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
-import './default';
+
 export class Lobby extends vc {    
     constructor() {
         super();
@@ -13,21 +13,28 @@ export class Lobby extends vc {
     }
 
     static show() :void {        
-        server.joinLobby(lobbyRoomName, (re)=>{
+        server.joinRoom(lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
             e.entrance.hide();
             e.lobby.show();
             e.lobby_form_username.hide();
             e.lobby_form_roomname.hide();
             e.lobbyDisplayUsername( User.getUsername );
-            server.userList( lobbyRoomName, function( users:any ) { 
-                console.log(users);
-                Lobby.show_user_list( users );
-            } );
-            server.roomList( function( rooms:any ) { 
-                console.log(rooms);
-                Lobby.show_room_list( rooms );
-            } );
+
+
+
+            server.userList( '', Lobby.show_room_list );
+
+
+            // server.userList( lobbyRoomName, function( users:any ) { 
+            //     console.log(users);
+            //     Lobby.show_user_list( users );
+            // } );
+            // server.roomList( function( rooms:any ) { 
+            //     console.log(rooms);
+            //     Lobby.show_room_list( rooms );
+            // } );
+
         });
     }
     
@@ -135,24 +142,49 @@ export class Lobby extends vc {
     }  
     static remove_user_list( socket : any ) :void {
         e.lobby_user_list.find('[socket="'+socket+'"]').remove();     
-    }   
-    static show_room_list( rooms : any ) :void {
-        for( let i in rooms ) {        
-            if ( ! rooms.hasOwnProperty(i) ) continue;
-            let room:any = rooms[i];
-            let $rooms:any = e.lobby_room_list.find('[id="'+room+'"]');
-            if ( $rooms.length ) $rooms.text(room);
-            else e.appendRoom( room );
+    }
+
+    // static show_room_list( rooms : any ) :void {
+    //     for( let i in rooms ) {        
+    //         if ( ! rooms.hasOwnProperty(i) ) continue;
+    //         let room:any = rooms[i];
+    //         let $rooms:any = e.lobby_room_list.find('[id="'+room+'"]');
+    //         if ( $rooms.length ) $rooms.text(room);
+    //         else e.appendRoom( room );
+    //     }         
+    // }
+
+
+    
+    static show_room_list( users ) :void {
+        for( let i in users ) {
+            if ( ! users.hasOwnProperty(i) ) continue;
+            let user = users[i];
+            console.log(room);
+            let room_id = MD5(user.room);
+            console.log("room id:" + room_id);
+
+            let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
+            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );
+            
+            e.appendUser( room_id, user.name );
+
+
+            // let $rooms:any = e.lobby_room_list.find('[id="'+room+'"]');
+            // if ( $rooms.length ) $rooms.text(room);
+            // else e.appendRoom( room );
+            
         }         
-    } 
-    static update_room_list( room : any ) :void {         
+    }
+
+    static update_room_list( room ) :void {         
        if ( e.lobby_room_list.length ) {        
             var $room = e.lobby_room_list.find('[id="'+room.room+'"]');
             if ( $room.length ) $room.text(room.room);
             else e.appendRoom( room.room );
         }
     }  
-    static remove_room_list( room : any ) :void {
+    static remove_room_list( room ) :void {
         e.lobby_room_list.find('[id="'+room+'"]').remove();     
     }  
        

@@ -156,20 +156,21 @@ define(["require", "exports"], function (require, exports) {
         Element.roomDisplayRoomname = function (roomname) {
             return Element.room.find('.roomname').text(roomname);
         };
-        Element.appendUser = function (user) {
-            return Element.lobby_user_list.append(Element.markup_username(user));
+        Element.appendUser = function (room_id, username) {
+            var $room = Element.lobby_room_list.find('[id="' + room_id + '"]');
+            $room.find('.users').append(',' + username);
         };
-        Element.appendRoom = function (room) {
-            return Element.lobby_room_list.append(Element.markup_room(room));
+        Element.appendRoom = function (roomname, room_id) {
+            return Element.lobby_room_list.append(Element.markup_room(roomname, room_id));
         };
         Element.markup_username = function (user) {
             return '<div class="userlistname" socket="' + user.socket + '">' + user.name + '</div>';
         };
-        Element.markup_room = function (room) {
+        Element.markup_room = function (roomname, room_id) {
             return '' +
-                '<div class="room">' +
-                '   <div class="roomlistname" id="' + room + '">' + room + '</div>' +
-                '   <div class="users"></div>' +
+                '<div class="room" id="' + room_id + '">' +
+                '   <span class="roomname">' + roomname + '</span>' +
+                '   <span class="users"></span>' +
                 '</div>';
         };
         Element.markup_chat_message = function (data) {
