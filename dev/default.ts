@@ -1,1 +1,1 @@
-const lobbyRoomName = 'Lobby';
+const lobbyRoomName:string = 'Lobby';

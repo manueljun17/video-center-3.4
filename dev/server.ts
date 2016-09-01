@@ -56,8 +56,8 @@ export class Server extends vc {
             callback( re );
         });
     }
-    static joinLobby( callback : any ) {
-        Server.emit("join-lobby", callback );
+    static joinLobby( roomname:string, callback : any ) {
+        Server.emit("join-room", roomname, callback );
     }
     static joinRoom( roomname:string, callback : any ) {
         Server.emit("join-room", roomname, callback );
