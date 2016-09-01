@@ -117,20 +117,24 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 var $room = element_1.Element.lobby_room_list.find('[id="' + room_id + '"]');
                 if ($room.length == 0)
                     element_1.Element.appendRoom(user.room, room_id);
-                element_1.Element.appendUser(room_id, user.name, user.socket);
+                Lobby.update_user_list(user);
             }
         };
-        Lobby.update_room_list = function (room) {
+        Lobby.update_room_list = function (user) {
             if (element_1.Element.lobby_room_list.length) {
-                var $room = element_1.Element.lobby_room_list.find('[id="' + room.room + '"]');
-                if ($room.length)
-                    $room.text(room.room);
-                else
-                    element_1.Element.appendRoom(room.room, room.room);
+                var room_id = MD5(user.room);
+                console.log("room id:" + room_id);
+                var $room = element_1.Element.lobby_room_list.find('[id="' + room_id + '"]');
+                if ($room.length == 0)
+                    element_1.Element.appendRoom(user.room, room_id);
+                Lobby.update_user_list(user);
             }
         };
         Lobby.remove_room_list = function (room) {
             element_1.Element.lobby_room_list.find('[id="' + room + '"]').remove();
+        };
+        Lobby.remove_user_list = function (user) {
+            element_1.Element.lobby_room_list.find('[socket="' + user.socket + '"]').remove();
         };
         Lobby.update_user_list = function (users) {
             console.log(users);

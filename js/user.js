@@ -32,6 +32,9 @@ define(["require", "exports", './videocenter'], function (require, exports, vide
         User.delete_username = function () {
             videocenter_1.VideoCenter.set(const_username, '');
         };
+        User.prototype.hasRoomname = function () {
+            return !!videocenter_1.VideoCenter.get(const_roomname);
+        };
         Object.defineProperty(User, "getRoomname", {
             get: function () {
                 var roomname = videocenter_1.VideoCenter.get(const_roomname);

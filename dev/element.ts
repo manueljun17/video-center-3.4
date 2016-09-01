@@ -96,7 +96,7 @@ export class Element {
 
     /*------Markup------*/
     static markup_username(  username:string, socket:string ) : any {
-      return ', <span class="userlistname" socket="'+socket+'">' + username + '</span>';       
+      return '<span class="userlistname" socket="'+socket+'">' +', '+ username + '</span>';       
     }
     static markup_room( roomname:string, room_id: string ) : string {
       return '' +

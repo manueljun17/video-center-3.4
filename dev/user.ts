@@ -22,6 +22,9 @@ export class User extends vc {
     static delete_username() : void {
         vc.set(const_username, '');
     }
+    public hasRoomname() : boolean {
+        return !! vc.get( const_roomname );
+    }
     static get getRoomname() : string {     
         let roomname = vc.get( const_roomname );
         return roomname;

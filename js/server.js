@@ -26,7 +26,8 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
                 console.log("user:", user);
                 lobby_1.Lobby.update_user_list(user);
             });
-            Server.socket.on('create-room', function (room) {
+            Server.socket.on('join-room', function (room) {
+                lobby_1.Lobby.remove_user_list(room);
                 lobby_1.Lobby.update_room_list(room);
             });
             Server.socket.on('remove-room', function (room) {

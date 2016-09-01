@@ -121,19 +121,24 @@ export class Lobby extends vc {
             console.log("room id:" + room_id);
             let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
             if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            e.appendUser( room_id, user.name ,user.socket);
+             Lobby.update_user_list(user);
         }         
     }
     /*------fix this one---------*/
-    static update_room_list( room ) :void {         
-       if ( e.lobby_room_list.length ) {        
-            var $room = e.lobby_room_list.find('[id="'+room.room+'"]');
-            if ( $room.length ) $room.text(room.room);
-            else e.appendRoom( room.room, room.room );
+    static update_room_list( user ) :void {         
+       if ( e.lobby_room_list.length ) {     
+            let room_id = MD5(user.room);
+            console.log("room id:" + room_id);   
+            var $room = e.lobby_room_list.find('[id="'+room_id+'"]');
+            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
+            Lobby.update_user_list(user);
         }
     }  
     static remove_room_list( room ) :void {
         e.lobby_room_list.find('[id="'+room+'"]').remove();     
+    }  
+    static remove_user_list( user ) :void {
+        e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();     
     }  
      static update_user_list( users : any ) :void {
          console.log( users);     
@@ -146,7 +151,7 @@ export class Lobby extends vc {
                 if ( $user.length ) $user.text(userobj.name);
                 else e.appendUser( room_id ,userobj.name,userobj.socket );
             }
-        }        
+                
     }
        
 }

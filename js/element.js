@@ -157,7 +157,7 @@ define(["require", "exports"], function (require, exports) {
             return Element.lobby_room_list.append(Element.markup_room(roomname, room_id));
         };
         Element.markup_username = function (username, socket) {
-            return ', <span class="userlistname" socket="' + socket + '">' + username + '</span>';
+            return '<span class="userlistname" socket="' + socket + '">' + ', ' + username + '</span>';
         };
         Element.markup_room = function (roomname, room_id) {
             return '' +
