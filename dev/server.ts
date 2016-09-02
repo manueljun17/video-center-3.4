@@ -41,7 +41,10 @@ export class Server extends vc {
         });
 
     }
-    static emit( protocol: string, data?: any, callback = false) {
+    /**
+     * @edited by JaeHo. Put better signature. 2016-09-02.
+     */
+    static emit( protocol: string, data?: any, callback?: boolean | any ) {
         if ( callback ) {
             // console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
             Server.socket.emit( protocol, data, callback );
@@ -52,7 +55,13 @@ export class Server extends vc {
         }
     }
     
-    public ping(callback) : void {
+
+
+    /**
+     * Pings to the server.
+     * @add Type on signature. Sep 2, 2016 by JaeHo Song.
+     */
+    public ping( callback: ( re: string) => void ) : void {
         Server.emit( 'ping', (re) => {
             // this;
             callback( re );
@@ -67,9 +76,15 @@ export class Server extends vc {
     static joinRoom( roomname:string, callback : any ) {
         Server.emit("join-room", roomname, callback );
     }
-    static updateUsername( username: string, callback: any ) : void {
+
+
+    /**
+     * @edited give proper signature. 2016-09-02 JaeHo Song.
+     */
+    static updateUsername( username: string, callback: ( username: string ) => void ) : void {
         Server.emit( 'update-username', username, callback );
     }
+
     static createRoom( roomname: string, callback: any ) : void {
         Server.emit( 'create-room', roomname, callback );
     }

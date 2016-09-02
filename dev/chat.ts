@@ -21,14 +21,15 @@ export class Chat extends vc {
         this.server = new Server();
         this.lobby = new Lobby();
     }
+
     start() : void {
         console.log('Chat::start() Begins ...');
         this.server.listen();
-        this.server.ping( (re) => console.log( 'Got: ' + re ) );
+        this.server.ping( (re : string) => console.log( 'Got: ' + re ) );
         
         if ( this.user.hasUsername() ) {
-            let username : any = User.getUsername;
-            Server.updateUsername( username, function(re) { 
+            let username : string = User.getUsername;
+            Server.updateUsername( username, function(re : string) { 
                 console.log("User has name already : " + re);
                 Lobby.show();
             } );
