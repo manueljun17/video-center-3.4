@@ -13,5 +13,7 @@ Put typescript submodule in private git server.
 * refactor folder strcuture
 
 
+# Coding Guide
+
 js/ext  ---- for external libraries.
 js/src  ---- for interal source codes.
