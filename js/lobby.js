@@ -145,7 +145,7 @@ define(["require", "exports", './videocenter', './element', './server', './room'
                 var $user = element_1.Element.lobby_room_list.find('[socket="' + userobj.socket + '"]');
                 console.log("Useruser" + $user);
                 if ($user.length)
-                    $user.text(userobj.name);
+                    $user.text(", " + userobj.name);
                 else
                     element_1.Element.appendUser(room_id, userobj.name, userobj.socket);
             }

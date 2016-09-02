@@ -5,7 +5,7 @@
   ],
   "compilerOptions": {
     "module" : "amd",
-    "outDir": "./js",
+    "outDir": "./js/src",
     "target": "es5",
     "watch": true,
     "sourceMap": true,
