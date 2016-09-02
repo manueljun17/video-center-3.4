@@ -148,7 +148,7 @@ export class Lobby extends vc {
                 console.log("room id:" + room_id);
                 let $user =  e.lobby_room_list.find('[socket="'+userobj.socket+'"]');
                 console.log("Useruser"+$user);           
-                if ( $user.length ) $user.text(userobj.name);
+                if ( $user.length ) $user.text(", "+userobj.name);
                 else e.appendUser( room_id ,userobj.name,userobj.socket );
             }
                 

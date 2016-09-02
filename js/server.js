@@ -33,11 +33,13 @@ define(["require", "exports", './videocenter', './lobby', './room'], function (r
             Server.socket.on('remove-room', function (room) {
                 lobby_1.Lobby.remove_room_list(room);
             });
-            Server.socket.on('log-out', function (socket) {
-                console.log("socket:" + socket);
+            Server.socket.on('log-out', function (user) {
+                console.log("socket:" + user);
+                lobby_1.Lobby.remove_user_list(user);
             });
-            Server.socket.on('disconnect', function (socket) {
-                console.log("socket:" + socket);
+            Server.socket.on('disconnect', function (user) {
+                console.log("socket:" + user);
+                lobby_1.Lobby.remove_user_list(user);
             });
         };
         Server.emit = function (protocol, data, callback) {

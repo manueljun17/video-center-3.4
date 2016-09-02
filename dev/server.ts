@@ -25,19 +25,19 @@ export class Server extends vc {
             lobby.update_user_list( user );
         });
         Server.socket.on('join-room', ( room )=>{
-            lobby.remove_user_list(room);
+           lobby.remove_user_list(room);
            lobby.update_room_list( room );
         });
         Server.socket.on('remove-room', ( room )=>{
            lobby.remove_room_list( room );
         });       
-        Server.socket.on('log-out', ( socket )=>{
-           console.log("socket:"+socket)
-        //    lobby.remove_user_list( socket );
+        Server.socket.on('log-out', ( user )=>{
+           console.log("socket:"+user)
+           lobby.remove_user_list( user );
         });
-        Server.socket.on('disconnect', ( socket )=>{
-           console.log("socket:"+socket)
-        //    lobby.remove_user_list( socket );
+        Server.socket.on('disconnect', ( user )=>{
+           console.log("socket:"+user)
+           lobby.remove_user_list( user );
         });
 
     }
