@@ -16,6 +16,49 @@ export class Element {
     static get lobby() : JQuery {
         return $('#lobby');
     }    
+    static lobby_show() : void {
+            Element.lobby.show();  
+            Element.entrance.hide();            
+            Element.lobby_form_username.hide();
+            Element.lobby_form_roomname.hide();
+    }
+    static lobby_show_message( data ) :void {
+         Element.lobby_display.append(Element.markup_chat_message( data ));
+         Element.lobby_display.animate({scrollTop: Element.lobby_display.prop('scrollHeight')});  
+    }
+    static lobby_show_form_roomname() : void {
+         Element.lobby_form_roomname.show();
+    }
+    static lobby_show_form_username() : void {
+         Element.lobby_form_username.show();
+    }
+    static lobby_hide_form_roomname() : void {     
+         Element.lobby_form_roomname.hide();
+    }
+    static lobby_hide_form_username() : void {     
+         Element.lobby_form_username.hide();
+    }
+    static lobbyUsernameEmpty () : void {
+        Element.lobby.find('[name="username"]').val("");
+    }
+    static get lobbyUsernameValue () : string {
+        return Element.lobby.find('[name="username"]').val();
+    }
+    static lobbyRoomnameEmpty () : void {
+        Element.lobby.find('[name="roomname"]').val("");
+    }
+    static get lobbyRoomnameValue () : string {
+        return Element.lobby.find('[name="roomname"]').val();
+    }
+    static get  lobby_message_value () : string {
+        return Element.lobby.find('[name="message"]').val();
+    } 
+    static lobby_message_empty () : void {
+        Element.lobby.find('[name="message"]').val("");
+    } 
+    static lobby_display_empty() : void {
+         Element.lobby_display.empty();
+    }   
     static get lobby_display() : JQuery {
         return Element.lobby.find('.display');
     }   
