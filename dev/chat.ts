@@ -28,34 +28,25 @@ export class Chat extends vc {
         this.server.ping( (re : string) => console.log( 'Got: ' + re ) );
         
         if ( this.user.hasUsername() ) {
-
-            if( this.user.hasRoomname() ) {
-                let roomname : string = User.getRoomname;
-                if( roomname != "Lobby" || roomname == "" || roomname == "Entrance"){                     
-                     let username : string = User.getUsername;
-                        Server.updateUsername( username, function(re : string) { 
-                            console.log("User has name already : " + re);
-                            Room.show();
-                        } );
-                }
-                else if ( roomname == "Lobby"){
-                    let username : string = User.getUsername;
-                    Server.updateUsername( username, function(re : string) { 
+          let username : string = User.getUsername;
+          Server.updateUsername( username, function(re : string) { 
+                if( User.hasRoomname() ) {
+                    let roomname : string = User.getRoomname;
+                    if( roomname != "Lobby" || roomname == "" || roomname == "Entrance"){
                         console.log("User has name already : " + re);
-                        Lobby.show();
-                    } );
+                        Room.show();                    
+                    }
+                    else if ( roomname == "Lobby"){                           
+                        Lobby.show();                  
+                    }
+                    else {
+                        Entrance.show();
+                    }
                 }
-                else {
-                    Entrance.show();
-                }
-            }
-            else {
-                let username : string = User.getUsername;
-                Server.updateUsername( username, function(re : string) { 
-                    console.log("User has name already : " + re);
-                    Lobby.show();
-                } );
-            }
+                else {                  
+                    Lobby.show();                 
+                }              
+          });
         }
         else {
             Entrance.show();

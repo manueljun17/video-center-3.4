@@ -22,7 +22,7 @@ export class User extends vc {
     static delete_username() : void {
         vc.set(const_username, '');
     }
-    public hasRoomname() : boolean {
+    static hasRoomname() : boolean {
         return !! vc.get( const_roomname );
     }
     static get getRoomname() : string {     
