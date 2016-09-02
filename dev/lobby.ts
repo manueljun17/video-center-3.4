@@ -136,7 +136,8 @@ export class Lobby extends vc {
         }
     }  
     static remove_room_list( room ) :void {
-        e.lobby_room_list.find('[id="'+room+'"]').remove();     
+        let room_id = MD5( room );
+        e.lobby_room_list.find('[id="'+room_id+'"]').remove();
     }  
     static remove_user_list( user ) :void {
         e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();     
