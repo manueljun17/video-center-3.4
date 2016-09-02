@@ -12,7 +12,7 @@ export class Lobby extends vc {
         this.initHandlers();
     }
 
-    static show() :void {        
+    static show() : void {        
         server.joinRoom(lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
             e.entrance.hide();

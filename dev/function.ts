@@ -1,5 +1,3 @@
-const lobbyRoomName:string = 'Lobby';
-
 
 
 /**

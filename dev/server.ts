@@ -2,6 +2,7 @@ import { VideoCenter as vc } from './videocenter';
 import { Chat as chat } from './chat';
 import { Lobby as lobby } from './lobby';
 import { Room as room } from './room';
+import * as dec from './declare';
 export class Server extends vc {
     static socket: any = false;
     constructor() {
@@ -81,11 +82,15 @@ export class Server extends vc {
     /**
      * @edited give proper signature. 2016-09-02 JaeHo Song.
      */
-    static updateUsername( username: string, callback: ( username: string ) => void ) : void {
+    static updateUsername( username: string, callback: dec.S ) : void {
         Server.emit( 'update-username', username, callback );
     }
 
-    static createRoom( roomname: string, callback: any ) : void {
+
+    /**
+     * @edited give proper signature. 2016-09-02 JaeHo Song.
+     */
+    static createRoom( roomname: string, callback: dec.S ) : void {
         Server.emit( 'create-room', roomname, callback );
     }
     static chatMessage( message: string, callback: any ) : void {

@@ -51,8 +51,8 @@ $socket_server_url = 'http://localhost:9001/';
 ?>
 
     <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
-    <script src="js/default.js"></script>
-    <script data-main="js/index.js" src="js/ext/require.js"></script>
+    <script src="js/src/function.js"></script>
+    <script data-main="js/src/index.js" src="js/ext/require.js"></script>
 </head>
 <body>
 
