@@ -103,12 +103,9 @@ export class Lobby extends vc {
         if(room_id=="Lobby") {
             alert('You cannot join Lobby.')
         }
-        else {
-            server.joinRoom( room_id, (data)=>{
-                User.save_roomname( data );                
-                room.show()
-           
-            } );
+        else {          
+            User.save_roomname( room_id );                
+            room.show()           
         }        
     }
  
