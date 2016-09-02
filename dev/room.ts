@@ -18,7 +18,8 @@ export class Room extends vc {
     static show() : void {
         let roomname : any = user.getRoomname;
         server.joinRoom( roomname, ()=>{
-            console.log("Room::show()");          
+            console.log("Room::show()");   
+            e.entrance.hide();      
             e.lobby.hide();
             e.room.show();
             let roomname : any = user.getRoomname;

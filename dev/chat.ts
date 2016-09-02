@@ -28,11 +28,34 @@ export class Chat extends vc {
         this.server.ping( (re : string) => console.log( 'Got: ' + re ) );
         
         if ( this.user.hasUsername() ) {
-            let username : string = User.getUsername;
-            Server.updateUsername( username, function(re : string) { 
-                console.log("User has name already : " + re);
-                Lobby.show();
-            } );
+
+            if( this.user.hasRoomname() ) {
+                let roomname : string = User.getRoomname;
+                if( roomname != "Lobby" || roomname == "" || roomname == "Entrance"){                     
+                     let username : string = User.getUsername;
+                        Server.updateUsername( username, function(re : string) { 
+                            console.log("User has name already : " + re);
+                            Room.show();
+                        } );
+                }
+                else if ( roomname == "Lobby"){
+                    let username : string = User.getUsername;
+                    Server.updateUsername( username, function(re : string) { 
+                        console.log("User has name already : " + re);
+                        Lobby.show();
+                    } );
+                }
+                else {
+                    Entrance.show();
+                }
+            }
+            else {
+                let username : string = User.getUsername;
+                Server.updateUsername( username, function(re : string) { 
+                    console.log("User has name already : " + re);
+                    Lobby.show();
+                } );
+            }
         }
         else {
             Entrance.show();

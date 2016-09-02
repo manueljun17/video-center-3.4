@@ -16,6 +16,7 @@ export class Lobby extends vc {
     static show() : void {        
         server.joinRoom(dec.lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
+            User.save_roomname( dec.lobbyRoomName );    
             e.entrance.hide();
             e.lobby.show();
             e.lobby_form_username.hide();
