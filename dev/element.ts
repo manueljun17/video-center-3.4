@@ -106,7 +106,7 @@ export class Element {
         '</div>';      
     }
     static markup_chat_message( data :any ) : string {
-        return '<div><strong>'+data.name+': </strong>'+data.message+'</div>';
+        return '<div><strong>'+data.name+' </strong>'+data.message+'</div>';
     }
 
 }
