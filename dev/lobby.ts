@@ -4,6 +4,7 @@ import { Server as server } from './server';
 import { Room as room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
+import * as dec from './declare';
 
 export class Lobby extends vc {    
     constructor() {
@@ -13,7 +14,7 @@ export class Lobby extends vc {
     }
 
     static show() : void {        
-        server.joinRoom(lobbyRoomName, (re)=>{
+        server.joinRoom(dec.lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
             e.entrance.hide();
             e.lobby.show();
