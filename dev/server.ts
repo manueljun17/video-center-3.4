@@ -2,6 +2,7 @@ import { VideoCenter as vc } from './videocenter';
 import { Chat as chat } from './chat';
 import { Lobby as lobby } from './lobby';
 import { Room as room } from './room';
+import { User } from './user';
 import * as dec from './declare';
 export class Server extends vc {
     static socket: any = false;
@@ -36,9 +37,13 @@ export class Server extends vc {
            console.log("socket:"+user)
            lobby.remove_user_list( user );
         });
-        Server.socket.on('disconnect', ( user )=>{
+        Server.socket.on('disconnect', ( user ,room?:any )=>{
            console.log("socket:"+user)
-           lobby.remove_user_list( user );
+           lobby.remove_user_list( user );      
+           /*-----Broadcast---*/
+           Server.emit('broadcast-leave', room, ()=>{
+               console.log("Disconnect");
+           });
         });
 
     }
@@ -104,8 +109,11 @@ export class Server extends vc {
     }
     static userList( roomname: string, callback : any ) : void {
         Server.emit('user-list', roomname, callback);
-    }
+    }    
     static roomList( callback : any ) : void {
         Server.emit('room-list', callback);
+    }
+    static broadcastLeave( roomname: string, callback : any ) : void {
+        Server.emit('broadcast-leave', roomname, callback);
     }   
 }

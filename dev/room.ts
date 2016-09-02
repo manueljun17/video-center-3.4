@@ -42,6 +42,10 @@ export class Room extends vc {
     private on_leave( event ) :void {
         event.preventDefault();
         console.log("on_leave()");
+        let oldroom :string= user.getRoomname;  
+        server.broadcastLeave( oldroom, ()=>{
+                console.log("Broadcast that you left the Lobby");
+            } );  
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    

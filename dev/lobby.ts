@@ -71,6 +71,10 @@ export class Lobby extends vc {
         }
         else {
         console.log('Lobby create room. roomname: ' +  roomname );
+        let oldroom :string= User.getRoomname;  
+        server.broadcastLeave( oldroom, ()=>{
+                console.log("Broadcast that you left the Lobby");
+            } );   
         server.createRoom( roomname, function(re) { 
             console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);
             User.save_roomname( re );
@@ -90,6 +94,10 @@ export class Lobby extends vc {
     private on_logout( event ) :void {
         event.preventDefault();
         console.log("on_logout()");
+        let oldroom :string= User.getRoomname;  
+        server.broadcastLeave( oldroom, ()=>{
+                console.log("Broadcast that you left the Lobby");
+            } );  
         server.logout( () => {            
             User.delete_username();   
             e.lobby_display.empty();
@@ -103,7 +111,11 @@ export class Lobby extends vc {
         if(room_id=="Lobby") {
             alert('You cannot join Lobby.')
         }
-        else {          
+        else {     
+            let oldroom :string= User.getRoomname;  
+            server.broadcastLeave( oldroom, ()=>{
+                console.log("Broadcast that you left the Lobby");
+            } );   
             User.save_roomname( room_id );                
             room.show()           
         }        
