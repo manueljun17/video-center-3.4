@@ -136,7 +136,7 @@ export class Lobby extends vc {
             console.log("room id:" + room_id);
             let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
             if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-             Lobby.add_user(user);
+            Lobby.add_user(user);
         }         
     }
     /*------fix this one---------*/

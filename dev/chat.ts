@@ -30,7 +30,7 @@ export class Chat extends vc {
         
         if ( this.user.hasUsername() ) {
           let username : string = User.getUsername;
-          Server.updateUsername( username, function(re : string) { 
+          Server.updateUsername( username, function(re : de.User) { 
                 if( User.hasRoomname() ) {
                     let roomname : string = User.getRoomname;
                     if( roomname != de.lobbyRoomName || roomname == "" || roomname == "Entrance"){

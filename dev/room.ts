@@ -3,6 +3,7 @@ import { Element as e } from './element';
 import { Server as server } from './server';
 import { User as user } from './user';
 import { Lobby } from './lobby';
+import * as de from './declare';
 export class Room extends vc {    
     constructor() {
         super();
@@ -26,13 +27,22 @@ export class Room extends vc {
             e.roomDisplayRoomname( roomname );
         });        
     }
-    static showMessage( data : any ) : void {
+    static showMessage( u: de.ChatMessage ) {
         let roomname : any = user.getRoomname;
-        if( roomname == data.room ){
-            e.room_display.append(e.markup_chat_message( data ));
-            e.room_display.animate({scrollTop: e.room_display.prop('scrollHeight')});  
-        }   
+        if( roomname == u.room ){
+            this.addMessage( u );  
+        }      
     }
+    static addMessage( data: de.ChatMessage ) {
+        e.room_show_message( data );
+    }
+    static addMessageJoin( u: de.User ) {
+        let roomname : any = user.getRoomname;
+        if( roomname == u.room ){
+            this.addMessage( { name: u.name, message: ' join into ' + u.room });
+        }
+    }
+   
     private send_message( event ) :void {
         event.preventDefault();       
         server.chatMessage( e.room_message.val(), (re)=> { 

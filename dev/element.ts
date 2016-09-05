@@ -113,7 +113,11 @@ export class Element {
     }     
     static get room_send_message () : JQuery {
         return Element.room.find('.chat form');
-    }  
+    } 
+     static room_show_message( data ) {
+         Element.room_display.append( Element.markup_chat_message( data ) );
+         Element.room_display.animate( { scrollTop: Element.room_display.prop('scrollHeight') } );        
+    } 
     static get room_message () : JQuery {
         return Element.room.find('[name="message"]');
     }  

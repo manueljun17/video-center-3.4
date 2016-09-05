@@ -4,6 +4,7 @@ export interface S {
 }
 export interface ChatMessage {
     name: string;
+    room?: string;
     message: string;
 }
 export interface User {
