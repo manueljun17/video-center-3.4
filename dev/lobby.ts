@@ -29,8 +29,8 @@ export class Lobby extends vc {
 
     private initHandlers() : void {
         e.body.on('click', '.roomnames', this.on_join_room );
-        e.lobby_form_username.submit( this.submit_user_name ); 
-        e.lobby_form_roomname.submit( this.submit_room_name );   
+        e.lobby_form_username.submit( this.update_username ); 
+        e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
         e.lobby_onclick_form_username.click( ()=> {
             e.lobby_hide_form_roomname();                  
@@ -39,11 +39,10 @@ export class Lobby extends vc {
         e.lobby_onclick_form_roomname.click( ()=> {
             e.lobby_hide_form_username();  
             e.lobby_show_form_roomname();         
-        } );               
-        e.lobby_onclick_logout.click( this.on_logout );   
-       
+        } );
+        e.lobby_onclick_logout.click( this.on_logout );
     }
-    private submit_user_name( event ) :void {
+    private update_username( event ) :void {
         event.preventDefault();
         let username = e.lobbyUsernameValue;
         if ( username == "" ) {
@@ -60,7 +59,7 @@ export class Lobby extends vc {
             } );
         }
     }
-    private submit_room_name( event ) :void {
+    private create_join_room( event ) :void {
         event.preventDefault();
         let roomname = e.lobbyRoomnameValue;
         if ( roomname == "" ) {
@@ -69,9 +68,9 @@ export class Lobby extends vc {
         else {
         console.log('Lobby create room. roomname: ' +  roomname );
         let oldroom :string= User.getRoomname;  
-        server.broadcastLeave( oldroom, ()=>{
-                console.log("Broadcast that you left the Lobby");
-            } );   
+        // server.broadcastLeave( oldroom, ()=>{
+        //         console.log("Broadcast that you left the Lobby");
+        //     } );
         server.createRoom( roomname, function(re) { 
             console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);
             User.save_roomname( re );
@@ -146,7 +145,17 @@ export class Lobby extends vc {
         let room_id = MD5( room );
         e.lobby_room_list.find('[id="'+room_id+'"]').remove();
     }  
+    /**
+     * This method will be called
+     *      When : a user leave a lobby
+     *      To :
+     *              - USER himself.
+     *              - Members in lobby.
+     *              - Member of the room that the USER want to join.
+     *          
+     */
     static remove_user_list( user ) :void {
+        // don't care about lobby is visible or not.
         e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();     
     }  
      static update_user_list( users : any ) :void {

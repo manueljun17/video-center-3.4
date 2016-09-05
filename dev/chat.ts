@@ -4,6 +4,7 @@ import { Entrance } from './entrance';
 import { Room } from './room';
 import { Server } from './server';
 import { VideoCenter as vc } from './videocenter';
+import * as de from './declare';
 export class Chat extends vc {
     private entrance: Entrance;
     private user: User;
@@ -32,11 +33,11 @@ export class Chat extends vc {
           Server.updateUsername( username, function(re : string) { 
                 if( User.hasRoomname() ) {
                     let roomname : string = User.getRoomname;
-                    if( roomname != "Lobby" || roomname == "" || roomname == "Entrance"){
+                    if( roomname != de.lobbyRoomName || roomname == "" || roomname == "Entrance"){
                         console.log("User has name already : " + re);
                         Room.show();                    
                     }
-                    else if ( roomname == "Lobby"){                           
+                    else if ( roomname == de.lobbyRoomName){                           
                         Lobby.show();                  
                     }
                     else {
