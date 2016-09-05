@@ -12,7 +12,17 @@ export class Server extends vc {
     }
     public listen( ) : void {
 
-        Server.socket.on('chat-message', ( data )=>{
+        Server.socket.on('chatMessage', ( data )=>{
+           if ( data.room == "Lobby"){
+                console.log("Go to Lobby chat.");
+                lobby.showMessage( data );
+            }
+            else {
+                console.log("Go to Room chat.");
+                room.showMessage( data );
+            }
+        });
+         Server.socket.on('broadcast-leave', ( data )=>{
            if ( data.room == "Lobby"){
                 console.log("Go to Lobby chat.");
                 lobby.showMessage( data );
@@ -31,6 +41,9 @@ export class Server extends vc {
            lobby.update_room_list( user );
         });
         Server.socket.on('remove-room', ( room )=>{
+           lobby.remove_room_list( room );
+        });  
+        Server.socket.on('leave-room', ( room )=>{
            lobby.remove_room_list( room );
         });       
         Server.socket.on('log-out', ( user )=>{
