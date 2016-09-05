@@ -32,18 +32,19 @@ body {
   color: black; }
 
 #lobby {
-  display: none; }
+  display: none;
+  font-size: 11pt; }
 
-.userlistname {
-  cursor: pointer;
-  cursor: hand; }
-
-.roomnames {
-  cursor: pointer;
-  cursor: hand; }
-
-.roomnames:hover {
-  background-color: #efefef; }
+.room-list {
+  background-color: #f4f4f4; }
+  .room-list .roomname {
+    display: block;
+    color: blue;
+    cursor: pointer;
+    font-size: 1.4em; }
+  .room-list .users .name {
+    display: inline-block;
+    padding: .4em .8em .4em 0; }
 
 #room {
   display: none; }

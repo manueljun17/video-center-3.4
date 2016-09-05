@@ -4,8 +4,7 @@ import { Server as server } from './server';
 import { Room as room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
-import * as dec from './declare';
-
+import * as de from './declare';
 export class Lobby extends vc {    
     constructor() {
         super();
@@ -14,21 +13,27 @@ export class Lobby extends vc {
     }
 
     static show() : void {        
-        server.joinRoom(dec.lobbyRoomName, (re)=>{
+        server.joinRoom(de.lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
-            User.save_roomname( dec.lobbyRoomName );  
+            User.save_roomname( de.lobbyRoomName );  
             e.lobby_show();           
-            e.lobbyDisplayUsername( User.getUsername );
+            // e.lobbyDisplayUsername( User.getUsername );
             server.userList( '', Lobby.show_room_list );
         });
     }
     
-    static showMessage( data ) : void {
-        e.lobby_show_message( data );        
+    static showMessage( data: de.ChatMessage ) {
+        this.addMessage( data );        
+    }
+    static addMessage( data: de.ChatMessage ) {
+        e.lobby_show_message( data );
+    }
+    static addMessageJoin( user: de.User ) {
+        this.addMessage( { name: user.name, message: ' join into ' + user.room });
     }
 
     private initHandlers() : void {
-        e.body.on('click', '.roomnames', this.on_join_room );
+        e.body.on('click', '.roomname', this.on_join_room );
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -50,14 +55,17 @@ export class Lobby extends vc {
         }
         else {
             console.log('lobby submit username: ',  username );
-            server.updateUsername( username, function(re) { 
-                console.log("server.updateUsername => username => re: ", re);
-                e.lobbyDisplayUsername( re );
-                User.save_username( re );    
+            server.updateUsername( username, function( user: de.User ) {
+                console.log("server.updateUsername => username => re: ", user);
+                // e.lobbyDisplayUsername( user );
+                User.save_username( user );    
                 e.lobbyUsernameEmpty();
                 e.lobby_hide_form_username();
             } );
         }
+    }
+    static on_event_update_username ( user: de.User ) {
+        e.lobby_update_username(user);
     }
     private create_join_room( event ) :void {
         event.preventDefault();
@@ -123,12 +131,12 @@ export class Lobby extends vc {
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;
             let user = users[i];
-            console.log(room);
+            // console.log(room);
             let room_id = MD5(user.room);
             console.log("room id:" + room_id);
             let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
             if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-             Lobby.update_user_list(user);
+             Lobby.add_user(user);
         }         
     }
     /*------fix this one---------*/
@@ -138,7 +146,7 @@ export class Lobby extends vc {
             console.log("room id:" + room_id);   
             var $room = e.lobby_room_list.find('[id="'+room_id+'"]');
             if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            Lobby.update_user_list(user);
+            Lobby.add_user(user);
         }
     }  
     static remove_room_list( room ) :void {
@@ -157,19 +165,20 @@ export class Lobby extends vc {
     static remove_user_list( user ) :void {
         // don't care about lobby is visible or not.
         e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();     
-    }  
-     static update_user_list( users : any ) :void {
-         console.log( users);     
-            let userobj = users;
-            if(userobj.room){
-                let room_id = MD5(userobj.room);
-                console.log("room id:" + room_id);
-                let $user =  e.lobby_room_list.find('[socket="'+userobj.socket+'"]');
-                console.log("Useruser"+$user);           
-                if ( $user.length ) $user.text(", "+userobj.name);
-                else e.appendUser( room_id ,userobj.name,userobj.socket );
-            }
-                
+    }
+
+    static add_user( user : any ) : void {
+        //console.log( user );
+        
+        if ( typeof user.room != 'undefined' && user.room ) {
+            let room_id = MD5( user.room );
+            //console.log("room id:" + room_id);
+            let $user =  e.lobby_room_list.find('[socket="'+user.socket+'"]');
+//            console.log("Useruser"+$user);
+            if ( $user.length == 0 ) e.appendUser( room_id ,user.name, user.socket );
+            //
+            this.addMessageJoin( user );
+        }
     }
        
 }

@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
+
+import * as de from './declare';
 export class Element {
-
-
     constructor() {
     }
     /*------Entrance-----*/
@@ -22,9 +22,9 @@ export class Element {
             Element.lobby_form_username.hide();
             Element.lobby_form_roomname.hide();
     }
-    static lobby_show_message( data ) :void {
-         Element.lobby_display.append(Element.markup_chat_message( data ));
-         Element.lobby_display.animate({scrollTop: Element.lobby_display.prop('scrollHeight')});  
+    static lobby_show_message( data ) {
+         Element.lobby_display.append( Element.markup_chat_message( data ) );
+         Element.lobby_display.animate( { scrollTop: Element.lobby_display.prop('scrollHeight') } );
     }
     static lobby_show_form_roomname() : void {
          Element.lobby_form_roomname.show();
@@ -40,6 +40,12 @@ export class Element {
     }
     static lobbyUsernameEmpty () : void {
         Element.lobby.find('[name="username"]').val("");
+    }
+    static lobby_user( user: de.User ) {
+        return this.lobby.find('[socket="'+user.socket+'"]');
+    }
+    static lobby_update_username( user: de.User ) {
+        this.lobby_user( user ).text( user.name  );
     }
     static get lobbyUsernameValue () : string {
         return Element.lobby.find('[name="username"]').val();
@@ -95,9 +101,10 @@ export class Element {
     static get body() : JQuery {
         return $("body");
     }
-    static lobbyDisplayUsername( username :string ) : JQuery {
-        return Element.lobby.find('.username').text( username );
-    }
+
+    // static lobbyDisplayUsername( user : de.User ) : JQuery {
+    //     return Element.lobby.find('.username').text( user.name );
+    // }
     
        
      /*------Room-----*/
@@ -129,8 +136,6 @@ export class Element {
         let $room = Element.lobby_room_list.find('[id="'+room_id+'"]');
         // $room.find('.users').append(',' + username);
         $room.find('.users').append( Element.markup_username( username, socket));
-
-
     }
 
     static appendRoom( roomname:string, room_id: string ) : JQuery {       
@@ -139,16 +144,16 @@ export class Element {
 
     /*------Markup------*/
     static markup_username(  username:string, socket:string ) : any {
-      return '<span class="userlistname" socket="'+socket+'">' +', '+ username + '</span>';       
+      return '<span class="name" socket="'+socket+'">'+ username + '</span>';       
     }
     static markup_room( roomname:string, room_id: string ) : string {
       return '' +
         '<div class="room" id="'+room_id+'">' +
-        '   <span class="roomnames">'+roomname+'</span>' +
+        '   <span class="roomname">'+roomname+'</span>' +
         '   <span class="users"></span>' +
         '</div>';      
     }
-    static markup_chat_message( data :any ) : string {
+    static markup_chat_message( data : de.ChatMessage ) : string {
         return '<div><strong>'+data.name+' </strong>'+data.message+'</div>';
     }
 

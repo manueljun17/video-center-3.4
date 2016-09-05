@@ -3,6 +3,7 @@ import { Element as e } from './element';
 import { Server as server } from './server';
 import { User as user } from './user';
 import { Lobby } from './lobby';
+import * as de from './declare';
 export class Entrance extends vc {    
     constructor() {
         super();
@@ -27,9 +28,9 @@ export class Entrance extends vc {
         alert('Username is empty.');
         }
         else {
-        server.updateUsername( username , re => {
-            console.log("server.updateUsername => callback => re: ", re);
-            user.save_username( username );    
+        server.updateUsername( username , ( u: de.User ) => {
+            console.log("entrance.updateUsername => callback => re: ", u);
+            user.save_username( u );    
             e.entranceUsername.val("");
             e.entrance.hide();        
             Lobby.show();            

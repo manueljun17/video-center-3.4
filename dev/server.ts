@@ -3,7 +3,7 @@ import { Chat as chat } from './chat';
 import { Lobby as lobby } from './lobby';
 import { Room as room } from './room';
 import { User } from './user';
-import * as dec from './declare';
+import * as de from './declare';
 export class Server extends vc {
     static socket: any = false;
     constructor() {
@@ -32,13 +32,11 @@ export class Server extends vc {
                 room.showMessage( data );
             }
         });
-        Server.socket.on('update-username', ( user )=>{
-            console.log("user:",user);
-            lobby.update_user_list( user );
-        });
-        Server.socket.on('join-room', ( user )=>{
-           lobby.remove_user_list( user );
-           lobby.update_room_list( user );
+        Server.socket.on('update-username', lobby.on_event_update_username);
+        Server.socket.on('join-room', ( user )=> {
+            lobby.remove_user_list( user );
+            lobby.update_room_list( user );
+
         });
         Server.socket.on('remove-room', ( room )=>{
            lobby.remove_room_list( room );
@@ -96,15 +94,18 @@ export class Server extends vc {
     /**
      * @edited give proper signature. 2016-09-02 JaeHo Song.
      */
-    static updateUsername( username: string, callback: dec.S ) : void {
-        Server.emit( 'update-username', username, callback );
+    static updateUsername( username: string, callback: (x:de.User) => void ) {
+        Server.emit( 'update-username', username, (x: de.User) => {
+            console.log('server.updateUsername callback: ',  x );
+            callback( x );
+        } );
     }
 
 
     /**
      * @edited give proper signature. 2016-09-02 JaeHo Song.
      */
-    static createRoom( roomname: string, callback: dec.S ) : void {
+    static createRoom( roomname: string, callback: de.S ) : void {
         Server.emit( 'create-room', roomname, callback );
     }
     static chatMessage( message: string, callback: any ) : void {

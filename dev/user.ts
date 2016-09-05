@@ -1,4 +1,5 @@
 import { VideoCenter as vc } from './videocenter';
+import * as de from './declare';
 const const_username:string = "username_key";
 const const_roomname:string = "roomname_key";
 export class User extends vc {
@@ -14,10 +15,11 @@ export class User extends vc {
         let username = vc.get( const_username );
         return username;
     }
-    static save_username( username : string ) : string {
-        vc.set(const_username, username);
-        console.log("User update it's name to:", username);
-        return  username;
+    static save_username( user : de.User ) : string {
+        console.log("User::save_user()", user.name);
+        vc.set(const_username, user.name );
+        console.log("User update it's name to:", vc.get( const_username ));
+        return user.name;
     }
     static delete_username() : void {
         vc.set(const_username, '');

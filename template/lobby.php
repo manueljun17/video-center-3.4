@@ -1,6 +1,6 @@
 <div id="lobby">
     <div id="lobby-menu">
-        <h1>Lobby - <span class="username">username</span></h1>
+        <h1>Lobby</h1>
         <button class="update-username">Update Username</button>
         <button class="create-room">Create Room</button>
         <button class="logout">Logout</button>
