@@ -37,13 +37,9 @@ export class Server extends vc {
            console.log("socket:"+user)
            lobby.remove_user_list( user );
         });
-        Server.socket.on('disconnect', ( user ,room?:any )=>{
+        Server.socket.on('disconnect', ( user )=>{
            console.log("socket:"+user)
-           lobby.remove_user_list( user );      
-           /*-----Broadcast---*/
-           Server.emit('broadcast-leave', room, ()=>{
-               console.log("Disconnect");
-           });
+           lobby.remove_user_list( user );             
         });
 
     }
