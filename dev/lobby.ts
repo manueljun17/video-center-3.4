@@ -28,6 +28,9 @@ export class Lobby extends vc {
     static addMessageJoin( user: de.User ) {
         this.addMessage( { name: user.name, message: ' join into ' + user.room });
     }
+    static addMessageDisconnect( user: de.User ) {
+        this.addMessage( { name: user.name, message: ' disconnect into ' + user.room });
+    }
 
     private initHandlers() : void {
         e.body.on('click', '.roomname', this.on_join_room );
@@ -191,6 +194,9 @@ export class Lobby extends vc {
     static on_event_join_room( user: de.User ) {
         Lobby.add_user( user );
         Lobby.addMessageJoin( user );
+    }
+    static on_event_disconnect_room( user: de.User ) {      
+        Lobby.addMessageDisconnect( user );
     }
 
        

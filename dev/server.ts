@@ -64,6 +64,8 @@ export class Server extends vc {
         });
         Server.socket.on('disconnect', ( user )=>{
            console.log("socket:"+user)
+            if ( User.getRoomname == de.lobbyRoomName ) lobby.on_event_disconnect_room( user );
+            else room.on_event_disconnect_room( user );
            lobby.remove_user( user );             
         });
 

@@ -40,7 +40,9 @@ export class Room extends vc {
         let roomname : any = user.getRoomname;
         this.addMessage( { name: u.name, message: ' join into ' + u.room });
     }
-   
+   static addMessageDisconnect( user: de.User ) {
+        this.addMessage( { name: user.name, message: ' disconnect into ' + user.room });
+    }
     private send_message( event ) :void {
         event.preventDefault();       
         server.chatMessage( e.room_message.val(), (re)=> { 
@@ -78,5 +80,8 @@ export class Room extends vc {
     
     static on_event_join_room( user: de.User ) {
         Room.addMessageJoin( user );
+    }
+    static on_event_disconnect_room( user: de.User ) {      
+        Room.addMessageDisconnect( user );
     }
 }
