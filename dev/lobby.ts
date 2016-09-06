@@ -12,7 +12,7 @@ export class Lobby extends vc {
         this.initHandlers();
     }
 
-    static show() : void {        
+    static show() : void {
         server.joinRoom(de.lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
             User.save_roomname( de.lobbyRoomName );  
@@ -20,7 +20,11 @@ export class Lobby extends vc {
             // e.lobbyDisplayUsername( User.getUsername );
             e.updateMyName( User.getUsername );
             server.userList( '', Lobby.show_room_list );
+
+
         });
+
+
     }
     static addMessage( data: de.ChatMessage ) {
         e.lobby_show_message( data );
@@ -57,8 +61,7 @@ export class Lobby extends vc {
             console.log('lobby submit username: ',  username );
             server.updateUsername( username, function( user: de.User ) {
                 console.log("server.updateUsername => username => re: ", user);
-                // e.lobbyDisplayUsername( user );
-                User.save_username( user );    
+                User.save_username( user );
                 e.lobbyUsernameEmpty();
                 e.lobby_hide_form_username();
             } );
@@ -149,8 +152,6 @@ export class Lobby extends vc {
      *          
      */
     static remove_user( user: de.User ) {
-        // don't care about lobby is visible or not.
-        // e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();
         e.lobby_remove_user( user );
     }
 
@@ -161,22 +162,12 @@ export class Lobby extends vc {
     static add_user( user : de.User ) : void {
         let room_id = MD5( user.room );
         console.log("add_user: room_id : " + room_id);
-        let $room = e.lobby_room( room_id );
-        if ( $room.length == 0 ) e.appendRoom( user.room, room_id ); // create room if it does not exist.
+        // let $room = e.lobby_room( room_id );
+        if ( _.room( room_id ).length == 0 ) e.appendRoom( user.room, room_id ); // create room if it does not exist.
         e.lobby_remove_user(user); // remove the user.
         e.appendUser( room_id, user ); // append the user into the room.
     }
-    /*
-    static update_room_list( user ) :void {         
-       if ( e.lobby_room_list.length ) {     
-            let room_id = MD5(user.room);
-            console.log("room id:" + room_id);   
-            var $room = e.lobby_room_list.find('[id="'+room_id+'"]');
-            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            Lobby.add_user(user);
-        }
-    }
-    */
+    
 
 
     /**

@@ -27,12 +27,6 @@ export class Room extends vc {
             e.roomDisplayRoomname( roomname );
         });        
     }
-    static showMessage( u: de.ChatMessage ) {
-        let roomname : any = user.getRoomname;
-        if( roomname == u.room ){
-            this.addMessage( u );  
-        }      
-    }
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
     }
@@ -56,7 +50,7 @@ export class Room extends vc {
         let oldroom :string= user.getRoomname;  
         server.broadcastLeave( oldroom, ()=>{
                 console.log("Broadcast that you left the Lobby");
-            } );  
+            } );
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    

@@ -19,7 +19,7 @@ export class Server extends vc {
             }
             else {
                 console.log("Go to Room chat.");
-                room.showMessage( data );
+                room.addMessage( data );
             }
         });
         // Server.socket.on('broadcast-leave', ( data )=>{
@@ -63,10 +63,16 @@ export class Server extends vc {
            lobby.remove_user( user );
         });
         Server.socket.on('disconnect', ( user )=>{
-           console.log("socket:"+user)
-            if ( User.getRoomname == de.lobbyRoomName ) lobby.on_event_disconnect_room( user );
-            else room.on_event_disconnect_room( user );
-           lobby.remove_user( user );             
+            console.log("socket ?? : " + user)
+            if ( user.name == User.getUsername ) return;
+            if ( typeof user.socket == 'undefined' ) return; // @todo tricky. Do not add message on my chat display box IF i am the one who leave the room.
+            if ( User.getRoomname == de.lobbyRoomName ) {
+                lobby.on_event_disconnect_room( user );
+                lobby.remove_user( user );
+            }
+            else {
+                room.on_event_disconnect_room( user );
+            }
         });
 
     }

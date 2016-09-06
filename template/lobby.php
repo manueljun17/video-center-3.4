@@ -1,4 +1,5 @@
 <div id="lobby">
+
     <div id="lobby-menu">
         <h1>Lobby <span class="my-name"></span></h1>
         <button class="update-username">Update Username</button>

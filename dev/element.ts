@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 
+import './jquery-helper';
 import * as de from './declare';
 export class Element {
     constructor() {
@@ -15,7 +16,7 @@ export class Element {
     /*------Lobby-----*/
     static get lobby() : JQuery {
         return $('#lobby');
-    }    
+    }
     static lobby_show() : void {
             Element.lobby.show();  
             Element.entrance.hide();            
@@ -112,11 +113,20 @@ export class Element {
     //     return Element.lobby.find('.username').text( user.name );
     // }
     
+
+    /**
+     *
+     * Lobby helpers.
+     *  
+     */
+
+
+
        
      /*------Room-----*/
     static get room() : JQuery {
         return $('#room');
-    }     
+    }
     static get room_send_message () : JQuery {
         return Element.room.find('.chat form');
     } 
