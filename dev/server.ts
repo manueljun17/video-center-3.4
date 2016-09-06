@@ -36,7 +36,7 @@ export class Server extends vc {
         Server.socket.on('join-room', ( user )=> {
             lobby.remove_user_list( user );
             lobby.update_room_list( user );
-            room.addMessageJoin( user );
+            if( user.room != de.lobbyRoomName )room.addMessageJoin( user );
             
 
         });
