@@ -44,6 +44,9 @@ export class Element {
     static lobby_user( user: de.User ) {
         return this.lobby.find('[socket="'+user.socket+'"]');
     }
+    static lobby_remove_user( user: de.User ) {
+        this.lobby_user( user ).remove();
+    }
     static lobby_update_username( user: de.User ) {
         this.lobby_user( user ).text( user.name  );
     }
@@ -98,6 +101,9 @@ export class Element {
     static get lobby_room_list( ) : JQuery {       
         return Element.lobby.find(".room-list");     
     }
+    static lobby_room( room_id ) : JQuery {
+        return Element.lobby_room_list.find('[id="'+room_id+'"]');
+    }
     static get body() : JQuery {
         return $("body");
     }
@@ -135,15 +141,21 @@ export class Element {
     //     return Element.lobby_user_list.append( Element.markup_username( user ) );       
     // }
     
-    static appendUser( room_id: string, username:string, socket:string ) : void {       
+    static appendUser( room_id: string, user: de.User ) : void {       
         // return Element.lobby_user_list.append( Element.markup_username( user ) );
-        let $room = Element.lobby_room_list.find('[id="'+room_id+'"]');
+        //let $room = Element.lobby_room_list.find('[id="'+room_id+'"]');
         // $room.find('.users').append(',' + username);
-        $room.find('.users').append( Element.markup_username( username, socket));
+        let $room = this.lobby_room( room_id );
+        $room.find('.users').append( Element.markup_username( user.name, user.socket));
+    }
+    
+    static updateUser( room_id: string, user: de.User ) : void {       
+        this.lobby_user( user ).text( user.name );
     }
 
-    static appendRoom( roomname:string, room_id: string ) : JQuery {       
-        return Element.lobby_room_list.append( Element.markup_room( roomname, room_id ) );       
+
+    static appendRoom( roomname:string, room_id: string ) {       
+        Element.lobby_room_list.append( Element.markup_room( roomname, room_id ) );       
     }
 
     /*------Markup------*/
@@ -159,6 +171,10 @@ export class Element {
     }
     static markup_chat_message( data : de.ChatMessage ) : string {
         return '<div><strong>'+data.name+' </strong>'+data.message+'</div>';
+    }
+
+    static updateMyName( name: string ) {
+        $('.my-name').text( name );
     }
 
 }

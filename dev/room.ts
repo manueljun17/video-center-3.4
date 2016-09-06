@@ -38,9 +38,7 @@ export class Room extends vc {
     }
     static addMessageJoin( u: de.User ) {
         let roomname : any = user.getRoomname;
-        if( roomname == u.room ){
-            this.addMessage( { name: u.name, message: ' join into ' + u.room });
-        }
+        this.addMessage( { name: u.name, message: ' join into ' + u.room });
     }
    
     private send_message( event ) :void {
@@ -65,4 +63,20 @@ export class Room extends vc {
         });    
     }
     
+
+
+    /**
+     * -------------------------------------------------------
+     * 
+     * Events from Server
+     * 
+     * -------------------------------------------------------
+     */
+
+    
+
+    
+    static on_event_join_room( user: de.User ) {
+        Room.addMessageJoin( user );
+    }
 }

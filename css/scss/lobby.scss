@@ -2,6 +2,11 @@ $background: #f4f4f4;
 #lobby {
   display:none;
   font-size: 11pt;
+
+  .my-name {
+    font-style: italic;
+    color: blue;
+  }
 }
 
 

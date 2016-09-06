@@ -15,42 +15,42 @@ export class Server extends vc {
         Server.socket.on('chatMessage', ( data )=>{
            if ( data.room == "Lobby"){
                 console.log("Go to Lobby chat.");
-                lobby.showMessage( data );
+                lobby.addMessage( data );
             }
             else {
                 console.log("Go to Room chat.");
                 room.showMessage( data );
             }
         });
-         Server.socket.on('broadcast-leave', ( data )=>{
-           if ( data.room == "Lobby"){
-                console.log("Go to Lobby chat.");
-                lobby.showMessage( data );
-            }
-            else {
-                console.log("Go to Room chat.");
-                room.showMessage( data );
-            }
-        });
+        // Server.socket.on('broadcast-leave', ( data )=>{
+        //    if ( data.room == "Lobby"){
+        //         console.log("Go to Lobby chat.");
+        //         lobby.showMessage( data );
+        //     }
+        //     else {
+        //         console.log("Go to Room chat.");
+        //         room.showMessage( data );
+        //     }
+        // });
         Server.socket.on('update-username', lobby.on_event_update_username);
-        Server.socket.on('join-room', ( user )=> {
-            lobby.remove_user_list( user );
-            lobby.update_room_list( user );
-            // if( user.room != de.lobbyRoomName )
-            // room.addMessageJoin( user );
-            // lobby.addMessageJoin( user );
-         
+        Server.socket.on('join-room', (user: de.User) => {
+            
+            if ( User.getRoomname == de.lobbyRoomName ) lobby.on_event_join_room( user );
+            else room.on_event_join_room( user );
 
         });
-          Server.socket.on('broadcast-room', ( user,roomdestination )=> {
-            if( roomdestination == de.lobbyRoomName) {
-                 lobby.addMessageJoin( user );
-            }
-            else {
-                room.addMessageJoin( user );
-            }
 
-        });
+
+
+        // Server.socket.on('broadcast-room', ( user,roomdestination )=> {
+        //     if( roomdestination == de.lobbyRoomName) {
+        //          lobby.addMessageJoin( user );
+        //     }
+        //     else {
+        //         room.addMessageJoin( user );
+        //     }
+        // });
+
         
         Server.socket.on('remove-room', ( room )=>{
            lobby.remove_room_list( room );
@@ -60,11 +60,11 @@ export class Server extends vc {
         });       
         Server.socket.on('log-out', ( user )=>{
            console.log("socket:"+user)
-           lobby.remove_user_list( user );
+           lobby.remove_user( user );
         });
         Server.socket.on('disconnect', ( user )=>{
            console.log("socket:"+user)
-           lobby.remove_user_list( user );             
+           lobby.remove_user( user );             
         });
 
     }

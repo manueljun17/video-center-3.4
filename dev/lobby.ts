@@ -18,12 +18,9 @@ export class Lobby extends vc {
             User.save_roomname( de.lobbyRoomName );  
             e.lobby_show();           
             // e.lobbyDisplayUsername( User.getUsername );
+            e.updateMyName( User.getUsername );
             server.userList( '', Lobby.show_room_list );
         });
-    }
-    
-    static showMessage( data: de.ChatMessage ) {
-        this.addMessage( data );        
     }
     static addMessage( data: de.ChatMessage ) {
         e.lobby_show_message( data );
@@ -63,9 +60,6 @@ export class Lobby extends vc {
                 e.lobby_hide_form_username();
             } );
         }
-    }
-    static on_event_update_username ( user: de.User ) {
-        e.lobby_update_username(user);
     }
     private create_join_room( event ) :void {
         event.preventDefault();
@@ -125,10 +119,10 @@ export class Lobby extends vc {
     }
  
       
-    static show_room_list( users ) :void {
+    static show_room_list( users: Array<de.User> ) :void {
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;
-            let user = users[i];      
+            let user: de.User = users[i];      
             let room_id = MD5(user.room);
             console.log("room id:" + room_id);
             let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
@@ -136,16 +130,8 @@ export class Lobby extends vc {
             Lobby.add_user(user);
         }         
     }
-    /*------fix this one---------*/
-    static update_room_list( user ) :void {         
-       if ( e.lobby_room_list.length ) {     
-            let room_id = MD5(user.room);
-            console.log("room id:" + room_id);   
-            var $room = e.lobby_room_list.find('[id="'+room_id+'"]');
-            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            Lobby.add_user(user);
-        }
-    }  
+    
+    
     static remove_room_list( room ) :void {
         let room_id = MD5( room );
         e.lobby_room_list.find('[id="'+room_id+'"]').remove();
@@ -159,17 +145,53 @@ export class Lobby extends vc {
      *              - Member of the room that the USER want to join.
      *          
      */
-    static remove_user_list( user ) :void {
+    static remove_user( user: de.User ) {
         // don't care about lobby is visible or not.
-        e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();     
+        // e.lobby_room_list.find('[socket="'+user.socket+'"]').remove();
+        e.lobby_remove_user( user );
     }
 
-    static add_user( user : any ) : void {
-        if ( typeof user.room != 'undefined' && user.room ) {
-            let room_id = MD5( user.room );           
-            let $user =  e.lobby_room_list.find('[socket="'+user.socket+'"]');  
-            if ( $user.length == 0 ) e.appendUser( room_id ,user.name, user.socket );           
+    /**
+     * 
+     * 
+     */
+    static add_user( user : de.User ) : void {
+        let room_id = MD5( user.room );
+        console.log("add_user: room_id : " + room_id);
+        let $room = e.lobby_room( room_id );
+        if ( $room.length == 0 ) e.appendRoom( user.room, room_id ); // create room if it does not exist.
+        e.lobby_remove_user(user); // remove the user.
+        e.appendUser( room_id, user ); // append the user into the room.
+    }
+    /*
+    static update_room_list( user ) :void {         
+       if ( e.lobby_room_list.length ) {     
+            let room_id = MD5(user.room);
+            console.log("room id:" + room_id);   
+            var $room = e.lobby_room_list.find('[id="'+room_id+'"]');
+            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
+            Lobby.add_user(user);
         }
     }
+    */
+
+
+    /**
+     * -------------------------------------------------------
+     * 
+     * Events from Server
+     * 
+     * -------------------------------------------------------
+     */
+
+    
+    static on_event_update_username ( user: de.User ) {
+        e.lobby_update_username(user);
+    }
+    static on_event_join_room( user: de.User ) {
+        Lobby.add_user( user );
+        Lobby.addMessageJoin( user );
+    }
+
        
 }
