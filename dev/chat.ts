@@ -30,24 +30,17 @@ export class Chat extends vc {
         
         if ( this.user.hasUsername() ) {
           let username : string = User.getUsername;
-          Server.updateUsername( username, function(re : de.User) { 
+          Server.updateUsername( username, ( user: de.User ) => {
                 if( User.hasRoomname() ) {
                     let roomname : string = User.getRoomname;
-                    if( roomname != de.lobbyRoomName || roomname == "" || roomname == "Entrance"){
-                        console.log("User has name already : " + re);
-                        Room.show();                    
-                    }
-                    else if ( roomname == de.lobbyRoomName){                           
-                        Lobby.show();                  
-                    }
-                    else {
-                        Entrance.show();
-                    }
+                    console.log("User has name and roomname already : ", user, roomname);
+                    if ( roomname == de.lobbyRoomName ) Lobby.show();
+                    else Room.show();
                 }
-                else {                  
-                    Lobby.show();                 
-                }              
-          });
+                else {
+                    Lobby.show();
+                }
+          } );
         }
         else {
             Entrance.show();
