@@ -36,10 +36,22 @@ export class Server extends vc {
         Server.socket.on('join-room', ( user )=> {
             lobby.remove_user_list( user );
             lobby.update_room_list( user );
-            if( user.room != de.lobbyRoomName )room.addMessageJoin( user );
-            
+            // if( user.room != de.lobbyRoomName )
+            // room.addMessageJoin( user );
+            // lobby.addMessageJoin( user );
+         
 
         });
+          Server.socket.on('broadcast-room', ( user,roomdestination )=> {
+            if( roomdestination == de.lobbyRoomName) {
+                 lobby.addMessageJoin( user );
+            }
+            else {
+                room.addMessageJoin( user );
+            }
+
+        });
+        
         Server.socket.on('remove-room', ( room )=>{
            lobby.remove_room_list( room );
         });  
