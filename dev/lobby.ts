@@ -76,9 +76,7 @@ export class Lobby extends vc {
         else {
         console.log('Lobby create room. roomname: ' +  roomname );
         let oldroom :string= User.getRoomname;  
-        // server.broadcastLeave( oldroom, ()=>{
-        //         console.log("Broadcast that you left the Lobby");
-        //     } );
+      
         server.createRoom( roomname, function(re) { 
             console.log("server.createRoom => request roomname: " + roomname + ", response roomname: => re: " + re);
             User.save_roomname( re );
@@ -130,8 +128,7 @@ export class Lobby extends vc {
     static show_room_list( users ) :void {
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;
-            let user = users[i];
-            // console.log(room);
+            let user = users[i];      
             let room_id = MD5(user.room);
             console.log("room id:" + room_id);
             let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
@@ -168,16 +165,10 @@ export class Lobby extends vc {
     }
 
     static add_user( user : any ) : void {
-        //console.log( user );
-        
         if ( typeof user.room != 'undefined' && user.room ) {
-            let room_id = MD5( user.room );
-            //console.log("room id:" + room_id);
-            let $user =  e.lobby_room_list.find('[socket="'+user.socket+'"]');
-//            console.log("Useruser"+$user);
-            if ( $user.length == 0 ) e.appendUser( room_id ,user.name, user.socket );
-            //
-            this.addMessageJoin( user );
+            let room_id = MD5( user.room );           
+            let $user =  e.lobby_room_list.find('[socket="'+user.socket+'"]');  
+            if ( $user.length == 0 ) e.appendUser( room_id ,user.name, user.socket );           
         }
     }
        
