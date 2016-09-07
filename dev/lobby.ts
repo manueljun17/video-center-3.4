@@ -5,6 +5,8 @@ import { Room as room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
 import * as de from './declare';
+import './jquery-helper';
+
 export class Lobby extends vc {    
     constructor() {
         super();
@@ -134,6 +136,9 @@ export class Lobby extends vc {
      */
     static remove_user( user: de.User ) {
         e.lobby_remove_user( user );
+        //Lobby.user.remove();
+        // lobby.user( user ).remove();
+        $lobby.user( user ).remove();
     }
 
     /**
@@ -144,7 +149,7 @@ export class Lobby extends vc {
         let room_id = MD5( user.room );
         console.log("add_user: room_id : " + room_id);
         // let $room = e.lobby_room( room_id );
-        if ( _.room( room_id ).length == 0 ) e.appendRoom( user.room, room_id ); // create room if it does not exist.
+        if ( $lobby.room( room_id ).length == 0 ) e.appendRoom( user.room, room_id ); // create room if it does not exist.
         e.lobby_remove_user(user); // remove the user.
         e.appendUser( room_id, user ); // append the user into the room.
     }

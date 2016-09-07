@@ -32,19 +32,20 @@ js/src  ---- for interal source codes.
 ### Case 1.5. When an old user re-visits chat website. he has username and roomname 'lobby'.
 
 * he has 'username' and
-    * his old room is 'empty roomname'
+    * his old roomis ( programmactially ) 'empty roomname'
     * his new room is 'lobby'.
 * he joins 'lobby'.
 * he informs 'lobby users'.
 
+
 ### Case 1.6. An old user revisit. He has username and roomname 'Room A'.
 
 * his
-    * old room is 'empty roomname'
+    * old room is ( programmactially ) 'empty roomname'
     * new room is 'Room A'
 * he enters his room 'Room A'.
-* he informs 'Room A'. ( Do not inform 'lobby users' )
-
+* he informs 'lobby room users'.
+* he informs 'Room A users'.
 
 
 ### Case 2. When a user named 'A' creates a room named 'Room A'.
@@ -54,7 +55,7 @@ js/src  ---- for interal source codes.
 
     * he informs 'lobby users'. ( O )
 
-### Case 3. user named 'B' enters 'Room A'.
+### Case 3. user named 'B' joins 'Room A' from 'lobby'.
 
 * he is in lobby.
 * he joins the room.
@@ -63,25 +64,30 @@ js/src  ---- for interal source codes.
     * he informs 'Room A users'. ( O )
 
 
-### Case 4. A user named 'B' leaves 'Room A' which means He joins 'lobby'.
+### Case 4. user named 'B' leaves 'Room A' which means He joins 'lobby'.
 
 * he is in 'Room A'
 * he joins 'lobby'
-* he informs 'Room A users'. ( O )
+* he informs his old room ('Room A') users. ( O )
 * he informs 'lobby users'. ( O )
 
 
-### Case X. A user named 'X' refresh his web browser when he is in lobby.
+### Case X. user named 'X' refresh his web browser when he is in lobby.
 
 * he is in 'lobby'.
-* he disconnects.
-* he informs 'lobby users'.
+* he disconnects - he informs his disconnection to his prev room ('lobby users') for leaving.
+* he informs lobby.
 * GO TO : Case 1.5.
 
 
 
-### Case Y. User 'B' refreshes web browser when he is in 'Room A'.
-* he disconnects.
-* he informs 'Room A users'.
-* GO TO : Case 2. 
+### Case Y. User 'B' refreshes web browser when he is in 'Room A'. Which means, the user may not return to the room( ending the browser. )
+* he disconnects. - he informs 'Room A users' that he is leaving.
+* GO TO : Case 1.6
+
+
+
+
+
+### Case Z. User 'C' in room 'Room A' and 'C' lost internet connection for 5 seconds. He will be disconnected and he will be... where? any how?
 

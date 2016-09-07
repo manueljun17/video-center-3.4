@@ -1,6 +1,6 @@
 import { VideoCenter as vc } from './videocenter';
 import { Chat as chat } from './chat';
-import { Lobby as lobby } from './lobby';
+import { Lobby } from './lobby';
 import { Room as room } from './room';
 import { User } from './user';
 import * as de from './declare';
@@ -15,17 +15,17 @@ export class Server extends vc {
         Server.socket.on('chatMessage', ( data )=>{
            if ( data.room == "Lobby"){
                 console.log("Go to Lobby chat.");
-                lobby.addMessage( data );
+                Lobby.addMessage( data );
             }
             else {
                 console.log("Go to Room chat.");
                 room.addMessage( data );
             }
         });      
-        Server.socket.on('update-username', lobby.on_event_update_username);
+        Server.socket.on('update-username', Lobby.on_event_update_username);
         Server.socket.on('join-room', (user: de.User) => {
             
-            if ( User.getRoomname == de.lobbyRoomName ) lobby.on_event_join_room( user );
+            if ( User.getRoomname == de.lobbyRoomName ) Lobby.on_event_join_room( user );
             else room.on_event_join_room( user );
 
         });
@@ -33,19 +33,19 @@ export class Server extends vc {
            room.remove_room_list( user );
         }); 
         Server.socket.on('leave-room', ( room )=>{           
-           lobby.remove_room_list( room );
+           Lobby.remove_room_list( room );
         });       
         Server.socket.on('log-out', ( user )=>{
            console.log("socket:"+user)
-           lobby.remove_user( user );
+           Lobby.remove_user( user );
         });
         Server.socket.on('disconnect', ( user )=>{
             console.log("socket ?? : " + user)
             if ( user.name == User.getUsername ) return;
             if ( typeof user.socket == 'undefined' ) return; // @todo tricky. Do not add message on my chat display box IF i am the one who leave the room.
             if ( User.getRoomname == de.lobbyRoomName ) {
-                lobby.on_event_disconnect_room( user );
-                lobby.remove_user( user );
+                Lobby.on_event_disconnect_room( user );
+                Lobby.remove_user( user );
             }
             else {
                 room.on_event_disconnect_room( user );
