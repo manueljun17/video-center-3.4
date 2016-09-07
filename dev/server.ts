@@ -21,17 +21,7 @@ export class Server extends vc {
                 console.log("Go to Room chat.");
                 room.addMessage( data );
             }
-        });
-        // Server.socket.on('broadcast-leave', ( data )=>{
-        //    if ( data.room == "Lobby"){
-        //         console.log("Go to Lobby chat.");
-        //         lobby.showMessage( data );
-        //     }
-        //     else {
-        //         console.log("Go to Room chat.");
-        //         room.showMessage( data );
-        //     }
-        // });
+        });      
         Server.socket.on('update-username', lobby.on_event_update_username);
         Server.socket.on('join-room', (user: de.User) => {
             
@@ -39,23 +29,7 @@ export class Server extends vc {
             else room.on_event_join_room( user );
 
         });
-
-
-
-        // Server.socket.on('broadcast-room', ( user,roomdestination )=> {
-        //     if( roomdestination == de.lobbyRoomName) {
-        //          lobby.addMessageJoin( user );
-        //     }
-        //     else {
-        //         room.addMessageJoin( user );
-        //     }
-        // });
-
-        
-        Server.socket.on('remove-room', ( room )=>{
-           lobby.remove_room_list( room );
-        });  
-        Server.socket.on('leave-room', ( room )=>{
+        Server.socket.on('leave-room', ( room )=>{           
            lobby.remove_room_list( room );
         });       
         Server.socket.on('log-out', ( user )=>{
@@ -81,11 +55,9 @@ export class Server extends vc {
      */
     static emit( protocol: string, data?: any, callback?: boolean | any ) {
         if ( callback ) {
-            // console.log('Server.emit() protocol: ' + protocol + ', data:  ' + data + ', callback: ', callback);
             Server.socket.emit( protocol, data, callback );
         }
         else {
-            // console.log('Server.emit() protocol: ' + protocol + ', data:  ', data);
             Server.socket.emit( protocol, data );
         }
     }
@@ -98,16 +70,9 @@ export class Server extends vc {
      */
     public ping( callback: ( re: string) => void ) : void {
         Server.emit( 'ping', (re) => {
-            // this;
             callback( re );
         });
-    }
-
-    /**
-    static joinLobby( roomname:string, callback : any ) {
-        Server.emit("join-room", roomname, callback );
-    }
-    */
+    }    
     static joinRoom( roomname:string, callback : any ) {
         Server.emit("join-room", roomname, callback );
     }

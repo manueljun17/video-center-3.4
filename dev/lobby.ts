@@ -17,7 +17,6 @@ export class Lobby extends vc {
             console.log("Lobby::show()=>re",re );
             User.save_roomname( de.lobbyRoomName );  
             e.lobby_show();           
-            // e.lobbyDisplayUsername( User.getUsername );
             e.updateMyName( User.getUsername );
             server.userList( '', Lobby.show_room_list );
 
