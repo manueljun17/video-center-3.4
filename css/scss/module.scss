@@ -1,0 +1,16 @@
+
+// @todo Do it with @mixin
+.display {
+    padding: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 110px;
+    background-color: #efefef;        
+}
+.footer {
+    background-color: $strong_color;
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;   
+}

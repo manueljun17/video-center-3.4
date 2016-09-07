@@ -1,4 +1,11 @@
+
+
 <div id="lobby">
+
+    <header>
+        <span class="logo">Lobby: Video English</span>
+    </header>
+
 
     <div id="lobby-menu">
         <h1>Lobby <span class="my-name"></span></h1>
@@ -31,5 +38,10 @@
     </div> 
     <h4>Room List</h4>
     <div class="room-list"></div>
+
+    
+    <footer class="footer">
+        <h4>Copyright</h4>
+    </footer>
 
 </div>

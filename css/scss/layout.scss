@@ -1,33 +1,4 @@
-body{
-    margin: 0;
-    padding: 0;
-    overflow-x:hidden;
-}
+
 strong {
-    color:#19b5fe; 
-}
-#content {
-    padding: 0 50px;
-}
-.navbar{
-    background-color: #19b5fe;  
-    color: white;        
-}
-.display {
-        padding: 1rem;
-        overflow: hidden;
-        overflow-y: scroll;
-        height: 110px;
-        background-color: #efefef;        
-}
-.footer {
-    background-color: #19b5fe;  
-    position:absolute;
-    bottom: 0;
-    width: 100%;
-    color: white;   
-}
-.room-list {
-  padding: 1rem;
-  background-color: #dfdfdf;
+    color: $strong_color; 
 }

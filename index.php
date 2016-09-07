@@ -14,6 +14,7 @@ $socket_server_url = 'http://localhost:9001/';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link href="css/index.css" rel="stylesheet">
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <script>
         var socket_server_url = '<?php echo $socket_server_url?>';
     </script>
@@ -57,20 +58,9 @@ $socket_server_url = 'http://localhost:9001/';
 <body>
 
 
-
-<header class="navbar">
-    <span class="logo">Video English</span>
-</header>
-
-<section id="content">
-    <?php include "template/entrance.php"; ?>
-    <?php include "template/lobby.php"; ?>
-    <?php include "template/room.php"; ?>
-</section>
-
-<footer class="footer">
-    <h4>Copyright</h4>
-</footer>
+<?php include "template/entrance.php"; ?>
+<?php include "template/lobby.php"; ?>
+<?php include "template/room.php"; ?>
 
 
 

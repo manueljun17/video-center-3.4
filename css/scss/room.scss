@@ -1,5 +1,8 @@
 $background: #f4f4f4;
 #room {
+  header {
+    background-color: grey;
+  }
   display:none;
   .roomname{
     color:#19b5fe; 
@@ -14,5 +17,9 @@ $background: #f4f4f4;
       font-size: 1.2em;
       color:#19b5fe; 
     }
+}
 
+
+main .whiteboard {
+  width: 20em;
 }
