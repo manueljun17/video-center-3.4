@@ -82,7 +82,11 @@ export class Room extends vc {
         e.room_remove_user( user );
         e.room_user_append( user ); // append the user into the room.
     }
+    static remove_room_list( user : de.User ) :void {
+         e.room_remove_user( user );
+    } 
     static on_event_join_room( user: de.User ) {
+        Room.add_user( user );
         Room.addMessageJoin( user );
     }
     static on_event_disconnect_room( user: de.User ) {      

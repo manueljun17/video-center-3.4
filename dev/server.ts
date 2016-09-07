@@ -29,6 +29,9 @@ export class Server extends vc {
             else room.on_event_join_room( user );
 
         });
+        Server.socket.on('remove-user', ( user )=>{           
+           room.remove_room_list( user );
+        }); 
         Server.socket.on('leave-room', ( room )=>{           
            lobby.remove_room_list( room );
         });       
