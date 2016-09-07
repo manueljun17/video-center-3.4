@@ -146,28 +146,36 @@ export class Element {
     static roomDisplayRoomname( roomname :string ) : JQuery {
         return Element.room.find('.roomname').text( roomname );
     }
+    static get room_user_list( ) : JQuery {       
+        return Element.room.find(".user-list");     
+    }
     /*------Dom Handlers------*/
     // static appendUser( user:any ) : JQuery {       
     //     return Element.lobby_user_list.append( Element.markup_username( user ) );       
     // }
     
     static appendUser( room_id: string, user: de.User ) : void {       
-        // return Element.lobby_user_list.append( Element.markup_username( user ) );
-        //let $room = Element.lobby_room_list.find('[id="'+room_id+'"]');
-        // $room.find('.users').append(',' + username);
         let $room = this.lobby_room( room_id );
         $room.find('.users').append( Element.markup_username( user.name, user.socket));
+    }
+    static room_user_append( user: de.User ) : void {       
+  
+        this.room_user_list.append( Element.markup_username( user.name, user.socket));
     }
     
     static updateUser( room_id: string, user: de.User ) : void {       
         this.lobby_user( user ).text( user.name );
     }
 
-
     static appendRoom( roomname:string, room_id: string ) {       
         Element.lobby_room_list.append( Element.markup_room( roomname, room_id ) );       
     }
-
+    static room_remove_user( user: de.User ) {
+        this.room_user( user ).remove();
+    }
+    static room_user( user: de.User ) {
+        return this.room.find('[socket="'+user.socket+'"]');
+    }
     /*------Markup------*/
     static markup_username(  username:string, socket:string ) : any {
       return '<span class="name" socket="'+socket+'">'+ username + '</span>';       

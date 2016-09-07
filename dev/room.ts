@@ -10,12 +10,6 @@ export class Room extends vc {
         console.log("Room::constructor()");
         this.initHandlers();   
     }
-
-    private initHandlers() : void {
-        e.room_send_message.submit( this.send_message ); 
-        e.room_onclick_leave.click( this.on_leave );        
-    } 
-
     static show() : void {
         let roomname : any = user.getRoomname;
         server.joinRoom( roomname, ()=>{
@@ -25,8 +19,13 @@ export class Room extends vc {
             e.room.show();
             let roomname : any = user.getRoomname;
             e.roomDisplayRoomname( roomname );
+            server.userList( roomname, Room.show_user_list );
         });        
     }
+    private initHandlers() : void {
+        e.room_send_message.submit( this.send_message ); 
+        e.room_onclick_leave.click( this.on_leave );        
+    }     
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
     }
@@ -71,7 +70,18 @@ export class Room extends vc {
 
     
 
-    
+    static show_user_list( users: Array<de.User> ) :void {        
+        for( let i in users ) {
+            if ( ! users.hasOwnProperty(i) ) continue;
+            let user: de.User = users[i]; 
+            console.log( "show_user_list() "+user.name );                          
+            Room.add_user(user);
+        }         
+    } 
+    static add_user( user : de.User ) : void {        
+        e.room_remove_user( user );
+        e.room_user_append( user ); // append the user into the room.
+    }
     static on_event_join_room( user: de.User ) {
         Room.addMessageJoin( user );
     }

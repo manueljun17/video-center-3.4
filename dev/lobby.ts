@@ -19,8 +19,6 @@ export class Lobby extends vc {
             e.lobby_show();           
             e.updateMyName( User.getUsername );
             server.userList( '', Lobby.show_room_list );
-
-
         });
 
 
@@ -36,7 +34,7 @@ export class Lobby extends vc {
     }
 
     private initHandlers() : void {
-        e.body.on('click', '.roomname', this.on_join_room );
+        e.lobby.on('click', '.roomname', this.on_join_room );
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -124,23 +122,7 @@ export class Lobby extends vc {
     }
  
       
-    static show_room_list( users: Array<de.User> ) :void {
-        for( let i in users ) {
-            if ( ! users.hasOwnProperty(i) ) continue;
-            let user: de.User = users[i];      
-            let room_id = MD5(user.room);
-            console.log("room id:" + room_id);
-            let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
-            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            Lobby.add_user(user);
-        }         
-    }
     
-    
-    static remove_room_list( room ) :void {
-        let room_id = MD5( room );
-        e.lobby_room_list.find('[id="'+room_id+'"]').remove();
-    }  
     /**
      * This method will be called
      *      When : a user leave a lobby
@@ -166,7 +148,21 @@ export class Lobby extends vc {
         e.lobby_remove_user(user); // remove the user.
         e.appendUser( room_id, user ); // append the user into the room.
     }
-    
+    static show_room_list( users: Array<de.User> ) :void {
+        for( let i in users ) {
+            if ( ! users.hasOwnProperty(i) ) continue;
+            let user: de.User = users[i];      
+            let room_id = MD5(user.room);
+            console.log("room id:" + room_id);
+            let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
+            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
+            Lobby.add_user(user);
+        }         
+    }        
+    static remove_room_list( room ) :void {
+        let room_id = MD5( room );
+        e.lobby_room_list.find('[id="'+room_id+'"]').remove();
+    }  
 
 
     /**

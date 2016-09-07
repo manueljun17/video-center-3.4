@@ -7,4 +7,5 @@
         </form>
     </div>
     <button type="button" class="room-leave">Leave</button>
+    <div class="user-list"></div>
 </div>
