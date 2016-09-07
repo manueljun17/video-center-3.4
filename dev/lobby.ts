@@ -61,6 +61,8 @@ export class Lobby extends vc {
             server.updateUsername( username, function( user: de.User ) {
                 console.log("server.updateUsername => username => re: ", user);
                 User.save_username( user );
+                let username : string = user.name;
+                e.updateMyName( username );
                 e.lobbyUsernameEmpty();
                 e.lobby_hide_form_username();
             } );
