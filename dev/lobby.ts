@@ -22,14 +22,12 @@ export class Lobby extends vc {
             e.updateMyName( User.getUsername );
             server.userList( '', Lobby.show_room_list );
         });
-
-
     }
     static addMessage( data: de.ChatMessage ) {
         e.lobby_show_message( data );
     }
     static addMessageJoin( user: de.User ) {
-        this.addMessage( { name: user.name, message: ' join into ' + user.room });
+        this.addMessage( { name: user.name, message: ' joins into ' + user.room });
     }
     static addMessageDisconnect( user: de.User ) {
         this.addMessage( { name: user.name, message: ' disconnect into ' + user.room });

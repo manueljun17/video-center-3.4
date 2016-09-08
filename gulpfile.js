@@ -18,7 +18,7 @@ gulp.task('server', function () {
 // 모든 scss 파일들이 컴파일 된다.
 gulp.task('compile-sass', function () {
 	return gulp.src("css/index.scss")
-		.pipe(sass())
+		.pipe( sass().on('error', sass.logError) ) // sass 에러 처리. on(...) 을 안하면 gulp 가 멈춘다.
 		.pipe(gulp.dest('css'));
 });
 
@@ -30,6 +30,7 @@ gulp.task('watch', function () {
     gulp.watch("./css/*.scss", ['compile-sass']); // scss 파일이 변경되면, 컴파일
     gulp.watch("./css/*.css").on('change', livereload.changed); // index.css 가 변경되면 리로드
 	gulp.watch("./js/**").on('change', livereload.changed); // TypeScirpt compiler 에 의해서 TS 가 JS 로 컴파일되면 리로드
+	gulp.watch("./index.html").on('change', livereload.changed); // index.html 이 변경되면 reload
 });
 
 

@@ -21,4 +21,9 @@ $background: #f4f4f4;
 
 main .whiteboard {
   width: 20em;
+  max-width: 100%;
+
+  .book {
+    width: 100%;
+  }
 }

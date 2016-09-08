@@ -30,6 +30,11 @@ strong {
     font-style: italic;
     color: blue; }
 
+#lobby header {
+  background-color: #e7e8e9;
+  padding: 1em;
+  font-weight: bold; }
+
 .room-list {
   padding: 1rem;
   background-color: #f4f4f4; }
@@ -59,4 +64,7 @@ strong {
     color: #19b5fe; }
 
 main .whiteboard {
-  width: 20em; }
+  width: 20em;
+  max-width: 100%; }
+  main .whiteboard .book {
+    width: 100%; }

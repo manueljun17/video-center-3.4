@@ -8,10 +8,15 @@
   }
 }
 
+#lobby header {
+  background-color: $header_background_color;
+  padding: 1em;
+  font-weight: bold;
+}
 
 .room-list {
   padding: 1rem;
-  background-color: $background;
+  background-color: $background_color;
   .roomname {
     display: block;
     color: #19b5fe; 
