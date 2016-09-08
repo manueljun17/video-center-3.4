@@ -39,3 +39,4 @@ gulp.task('watch', function () {
 // 2. sass 를 한번 컴파일한다. ( 참고로 : js 는 tsc 가 컴파일한다. )
 // 3. 그리고 맨 마지막 watch 를 해서 이 후 부터 변경되는 파일은 watch 콜백에서 정해진 대로 처리한다.
 gulp.task( 'default', [ 'server', 'compile-sass', 'watch'  ] );
+
