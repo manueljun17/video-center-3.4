@@ -91,3 +91,11 @@ js/src  ---- for interal source codes.
 
 ### Case Z. User 'C' in room 'Room A' and 'C' lost internet connection for 5 seconds. He will be disconnected and he will be... where? any how?
 
+
+
+# Install
+
+## npm install
+
+Do 'npm install'
+
