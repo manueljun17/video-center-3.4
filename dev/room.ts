@@ -7,13 +7,13 @@ import * as de from './declare';
 export class Room extends vc {    
     constructor() {
         super();
-        console.log("Room::constructor()");
+        console.log("Room::constructor() ..");
         this.initHandlers();   
     }
     static show() : void {
         let roomname : any = user.getRoomname;
         server.joinRoom( roomname, ()=>{
-            console.log("Room::show()");   
+            console.log("Room::show() ....");   
             e.entrance.hide();      
             e.lobby.hide();
             e.room.show();
@@ -31,7 +31,7 @@ export class Room extends vc {
     }
     static addMessageJoin( u: de.User ) {
         let roomname : any = user.getRoomname;
-        this.addMessage( { name: u.name, message: ' join into ' + u.room });
+        this.addMessage( { name: u.name, message: ' joins into room: ' + u.room });
     }
    static addMessageDisconnect( user: de.User ) {
         this.addMessage( { name: user.name, message: ' disconnect into ' + user.room });

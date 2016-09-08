@@ -28,7 +28,7 @@ strong {
   font-size: 11pt; }
   #lobby .my-name {
     font-style: italic;
-    color: #19b5fe; }
+    color: blue; }
 
 .room-list {
   padding: 1rem;
@@ -45,7 +45,7 @@ strong {
 #room {
   display: none; }
   #room header {
-    background-color: grey; }
+    background-color: #efefef; }
   #room .roomname {
     color: blue; }
 
@@ -60,5 +60,3 @@ strong {
 
 main .whiteboard {
   width: 20em; }
-
-/*# sourceMappingURL=index.css.map */

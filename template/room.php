@@ -1,18 +1,14 @@
 <div id="room">
-
     <header>
         <span class="logo">LOGO</span>
         <span class="roomname">...</span>
-
         <span class="buttons">
             <button type="button" class="room-leave">Leave</button>
             <button type="button" class="whiteboard">Whiteboard</button>
         </span>
-
     </header>
 
     <main>
-
         <div class="chat">
             <div class="display"></div>
             <form>
@@ -50,16 +46,9 @@
                 <canvas id="whiteboard-canvas"></canvas>
             </div><!--/.wrapper-->
         </div><!--/.whiteboard-->
-
-        
-
     </main>
-
-
-
     
     <footer class="footer">
         <h4>Copyright</h4>
     </footer>
-
 </div>
