@@ -86,7 +86,7 @@ export class Room extends vc {
          e.room_remove_user( user );
     } 
     static on_event_join_room( user: de.User ) {
-        Room.add_user( user );
+        if( user.room != de.lobbyRoomName )Room.add_user( user );
         Room.addMessageJoin( user );
     }
     static on_event_disconnect_room( user: de.User ) {      
