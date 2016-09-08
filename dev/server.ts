@@ -44,7 +44,7 @@ export class Server extends vc {
             if ( user.name == User.getUsername ) return;
             if ( typeof user.socket == 'undefined' ) return; // @todo tricky. Do not add message on my chat display box IF i am the one who leave the room.
             if ( User.getRoomname == de.lobbyRoomName ) {
-                Lobby.on_event_disconnect_room( user );
+                if(user.room != "")Lobby.on_event_disconnect_room( user );//send only if the user.room is not empty
                 Lobby.remove_user( user );
             }
             else {
