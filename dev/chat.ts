@@ -37,7 +37,6 @@ export class Chat extends vc {
           Server.updateUsername( username, ( user: de.User ) => {
                 if( User.hasRoomname() ) {
                     let roomname : string = User.getRoomname;
-                    console.log("User has name and roomname already : ", user, roomname);
                     if ( roomname == de.lobbyRoomName ) Lobby.show();
                     else Room.show();
                 }

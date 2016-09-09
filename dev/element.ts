@@ -118,13 +118,7 @@ export class Element {
      *
      * Lobby helpers.
      *  
-     */
-
-
-    /*------Whiteboard-----*/
-    static get whiteboard() : JQuery {
-        return $('#room .whiteboard');
-    }
+     */    
        
      /*------Room-----*/
     static get room() : JQuery {
@@ -153,6 +147,13 @@ export class Element {
     static get room_user_list( ) : JQuery {       
         return Element.room.find(".user-list");     
     }
+
+    /*------Whiteboard-----*/
+    static get whiteboard() : JQuery {
+        return $('#room .whiteboard');
+    }
+    
+
     /*------Dom Handlers------*/
     // static appendUser( user:any ) : JQuery {       
     //     return Element.lobby_user_list.append( Element.markup_username( user ) );       

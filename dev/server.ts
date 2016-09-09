@@ -84,10 +84,9 @@ export class Server extends vc {
     /**
      * @edited give proper signature. 2016-09-02 JaeHo Song.
      */
-    static updateUsername( username: string, callback: (x:de.User) => void ) {
-        Server.emit( 'update-username', username, (x: de.User) => {
-            console.log('server.updateUsername callback: ',  x );
-            callback( x );
+    static updateUsername( username: string, callback: (user:de.User) => void ) {
+        Server.emit( 'update-username', username, (user: de.User) => {
+            callback( user );
         } );
     }
 
