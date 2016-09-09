@@ -1,21 +1,28 @@
 $background: #f4f4f4;
-#room {
-  header {
-    background-color: #efefef;
-  }
+#room {  
+  background-color:$color_gray;
   display:none;
+  
   .roomname{
-    color: blue;
+    color: white;
   }
+    header {
+    background-color: $header_background_color;
+    padding: 1em;
+    font-weight: bold;
+      .logo{
+        color:white;
+      }
+    }
 }
 .user-list {
-  background-color: $background;
+  background-color: $color_gray;
    .name {
       display: block;
       padding: .4em .8em .4em .8em;
       cursor: pointer;
       font-size: 1.2em;
-      color:#19b5fe; 
+      color:white; 
     }
 }
 

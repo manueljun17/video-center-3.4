@@ -1,25 +1,25 @@
 #lobby {
+  
   display:none;
   font-size: 11pt;
-
+  header {
+  background-color: $header_background_color;
+  padding: 1em;
+  font-weight: bold;
+    .logo{
+      color:white;
+    }
+  }
   .my-name {
     font-style: italic;
     color: $strong_color;
   }
-}
-
-#lobby header {
-  background-color: $header_background_color;
-  padding: 1em;
-  font-weight: bold;
-}
-
-.room-list {
+  .room-list {
   padding: 1rem;
   background-color: $background_color;
   .roomname {
     display: block;
-    color: #19b5fe; 
+    color: $color_blue;
     cursor: pointer;
     font-size: 1.4em;
   }
@@ -30,3 +30,9 @@
     }
   }
 }
+  
+}
+
+
+
+
