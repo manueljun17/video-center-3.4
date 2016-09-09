@@ -86,7 +86,15 @@ export class Whiteboard extends vc {
         ele.whiteboard.css('cursor', 'pointer'); // apply first
         ele.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.  
     }  
-
+    
+    //Get linesize or radius of drawing
+    private getLineSize () {
+        return ele.whiteboard.find('.line-size.selectBox .selected').attr('value'); //code#782016 custom select
+    }
+    //get color of drawing
+    private getColor () {
+        return ele.whiteboard.find('.colors.selectBox .selected').attr('value'); //code#782016 custom select
+    }
     //Set Drawing data
     private draw( e, obj) : void {
         var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0;
@@ -126,9 +134,8 @@ export class Whiteboard extends vc {
         }
         
         let data :any =  { line : [this.mouse.pos, this.mouse.pos_prev] };
-        data.lineWidth = ele.whiteboard.css('font-size');
-        // data.color = ele.whiteboard.css("color");
-        data.color = "black";
+        data.lineWidth = this.getLineSize();
+        data.color = this.getColor();
         data.room_name = User.getRoomname;
         data.draw_mode = this.draw_mode;        
         server.whiteboard_draw_line( data, ()=>{
@@ -167,6 +174,7 @@ export class Whiteboard extends vc {
             console.log("color:%s dx:%s dataline:%s ox:%s",data.color,dx,dy,data.lineWidth);
             ctx.fillStyle = data.color;
             ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, true);
+            console.log(ctx);
             ctx.closePath();
             ctx.fill();
         }
