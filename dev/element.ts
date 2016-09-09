@@ -121,12 +121,16 @@ export class Element {
      */
 
 
-
+    /*------Whiteboard-----*/
+    static get whiteboard() : JQuery {
+        return $('#room .whiteboard');
+    }
        
      /*------Room-----*/
     static get room() : JQuery {
         return $('#room');
     }
+    
     static get room_send_message () : JQuery {
         return Element.room.find('.chat form');
     } 

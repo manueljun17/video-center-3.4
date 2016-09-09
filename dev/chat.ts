@@ -1,26 +1,30 @@
 import { User } from './user';
-import { Lobby } from './lobby';
 import { Entrance } from './entrance';
+import { Lobby } from './lobby';
 import { Room } from './room';
 import { Server } from './server';
+import { Whiteboard } from './whiteboard';
 import { VideoCenter as vc } from './videocenter';
 import * as de from './declare';
 export class Chat extends vc {
-    private entrance: Entrance;
     private user: User;
+    private entrance: Entrance;    
     private lobby: Lobby;
     private room: Room;
-    private vc: vc;
     private server: Server;
+    private whiteboard: Whiteboard;
+    private vc: vc;
+    
     constructor( url: string ) {
         super();
         console.log("Chat::constructor()");
         super.setSocketUrl( 'http://localhost:9001/' );
         this.user = new User();
         this.entrance = new Entrance();
-        this.room = new Room();
-        this.server = new Server();
         this.lobby = new Lobby();
+        this.room = new Room();              
+        this.server = new Server();
+        this.whiteboard = new Whiteboard();
     }
 
     start() : void {
