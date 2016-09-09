@@ -115,4 +115,8 @@ export class Server extends vc {
     static broadcastLeave( roomname: string, callback : any ) : void {
         Server.emit('broadcast-leave', roomname, callback);
     }   
+    //Whiteboard
+    static whiteboard_draw_line( data, callback: de.S ) : void {
+        Server.emit( 'whiteboard-draw-line', data, callback );
+    }
 }
