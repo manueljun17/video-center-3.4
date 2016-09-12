@@ -3,6 +3,7 @@ import { Chat as chat } from './chat';
 import { Lobby } from './lobby';
 import { Room as room } from './room';
 import { User } from './user';
+import { Whiteboard as wb } from './whiteboard';
 import * as de from './declare';
 export class Server extends vc {
     static socket: any = false;
@@ -38,6 +39,12 @@ export class Server extends vc {
         Server.socket.on('log-out', ( user )=>{
            console.log("socket:"+user)
            Lobby.remove_user( user );
+        });
+        Server.socket.on('whiteboard-draw-line', function(data){
+            console.log('whiteboard-draw-line from server');
+            setTimeout(function(){
+                wb.draw_on_canvas(data);
+            },100);
         });
         Server.socket.on('disconnect', ( user )=>{
             console.log("socket ?? : " + user)
@@ -117,6 +124,6 @@ export class Server extends vc {
     }   
     //Whiteboard
     static whiteboard_draw_line( data, callback: de.S ) : void {
-        Server.emit( 'whiteboard-draw-line', data, callback );
+        Server.emit( 'whiteboard', data, callback );
     }
 }

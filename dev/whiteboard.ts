@@ -13,10 +13,10 @@ interface mouse {
 export class Whiteboard extends vc {    
     mouse : mouse; //mouse settings
     draw_mode : string; // l-line e-erase
-    draw_line_count : number; //how much drawing
+    static draw_line_count : number; //how much drawing
     canvas : any; //canvas HTMLCanvasElement
     $canvas:any; //canvas Object
-    canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
+    static canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
     
     constructor() {
         super();
@@ -28,10 +28,10 @@ export class Whiteboard extends vc {
             pos_prev: { x: 0, y: 0 }
         };
         this.canvas = document.getElementById("whiteboard-canvas");       
-        this.canvas_context = this.canvas.getContext('2d');
+        Whiteboard.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
         this.$canvas = ele.whiteboard.find('canvas');
-        this.draw_line_count = 0;
+        Whiteboard.draw_line_count = 0;
         this.initHandlers();   
     }
     //Show the whiteboard
@@ -47,7 +47,7 @@ export class Whiteboard extends vc {
         this.canvas.onmousedown = ( e ) => {           
             this.mouse.click = true;
             this.mouse.pos_prev = {x: -12345, y: -12345};
-            if ( this.draw_line_count > 3500 ) {
+            if ( Whiteboard.draw_line_count > 3500 ) {
                 alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
                 this.mouse.click = false;
             }            
@@ -147,13 +147,13 @@ export class Whiteboard extends vc {
         server.whiteboard_draw_line( data, ()=>{
             console.log('success');
         });
-        this.draw_on_canvas( data );
+        Whiteboard.draw_on_canvas( data );
         this.mouse.pos_prev.x = this.mouse.pos.x;
         this.mouse.pos_prev.y = this.mouse.pos.y;      
 
     }    
 
-    private draw_on_canvas( data ) {
+    static draw_on_canvas( data ) {
         let w = ele.whiteboard.width();
         let h = ele.whiteboard.height();
         console.log("W"+w);
