@@ -150,7 +150,7 @@ export class Element {
 
     /*------Whiteboard-----*/
     static get whiteboard() : JQuery {
-        return $('#room .whiteboard');
+        return $('#room #whiteboard-canvas');
     }
     
 

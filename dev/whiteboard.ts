@@ -27,7 +27,7 @@ export class Whiteboard extends vc {
             pos: { x:0, y:0 },
             pos_prev: { x: 0, y: 0 }
         };
-        this.canvas = document.getElementById("whiteboard-canvas");
+        this.canvas = document.getElementById("whiteboard-canvas");       
         this.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
         this.$canvas = ele.whiteboard.find('canvas');
@@ -50,8 +50,8 @@ export class Whiteboard extends vc {
             if ( this.draw_line_count > 3500 ) {
                 alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
                 this.mouse.click = false;
-            }
-            this.draw( e, this );        
+            }            
+            this.draw( e, this.canvas );        
        }
        //This event will run if mouse is up      
        this.canvas.onmouseup = ( e ) => {            
@@ -61,7 +61,7 @@ export class Whiteboard extends vc {
        //This event will run while the mouse is moving
        this.canvas.onmousemove = ( e ) => {          
            if ( ! this.mouse.click ) return;
-            this.draw( e, this );
+            this.draw( e, this.canvas );
             this.mouse.pos_prev = {x: -12345, y: -12345};
        }        
        //This event will run if mouse leave the canvas area
@@ -116,15 +116,21 @@ export class Whiteboard extends vc {
                 e_posy += obj.offsetTop;
             } while ( obj = obj.offsetParent);
         }
+        console.log("e_posx"+e_posx);
+        console.log("e_posy"+e_posy);
         let x : number = m_posx-e_posx;
         let y : number = m_posy-e_posy;
-
+        console.log("m_posx"+m_posx);
+        console.log("m_posy"+m_posy);
+        console.log("x"+x);
+        console.log("y"+y);
         let w : number = ele.whiteboard.width();
         let h : number = ele.whiteboard.height();
 
         let rx : string = (x / w).toFixed(4);
         var ry : string = (y / h).toFixed(4);
-
+        console.log("rx"+rx);
+        console.log("ry"+ry);
         this.mouse.pos.x = rx;
         this.mouse.pos.y = ry;
 
@@ -150,6 +156,8 @@ export class Whiteboard extends vc {
     private draw_on_canvas( data ) {
         let w = ele.whiteboard.width();
         let h = ele.whiteboard.height();
+        console.log("W"+w);
+        console.log("H"+h);
         let line = data.line;
         if ( typeof data.lineJoin == 'undefined' ) data.lineJoin = 'round';
         if ( typeof data.lineWidth == 'undefined' ) data.lineWidth = 3;
@@ -158,6 +166,10 @@ export class Whiteboard extends vc {
         let oy = line[0].y * h;
         let dx = line[1].x * w;
         let dy = line[1].y * h; 
+        console.log("ox"+ox);
+        console.log("oy"+oy);
+        console.log("dx"+dx);
+        console.log("dy"+dy);
         let ctx = this.canvas_context;  
         ctx.beginPath();
         ctx.lineJoin = data.lineJoin;
@@ -170,11 +182,9 @@ export class Whiteboard extends vc {
         }
         // console.log("ox:%s dx:%s oy:%s ox:%s",ox,dx,oy,dy);
         // if x and y are equal, then just put a dot.
-        if ( ox == dx && oy == dy ) {
-            console.log("color:%s dx:%s dataline:%s ox:%s",data.color,dx,dy,data.lineWidth);
+        if ( ox == dx && oy == dy ) {           
             ctx.fillStyle = data.color;
-            ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, true);
-            console.log(ctx);
+            ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, false);            
             ctx.closePath();
             ctx.fill();
         }
