@@ -85,6 +85,8 @@ main .whiteboard {
       z-index: 500;
       top: 10px;
       right: 5px; }
+      main .whiteboard .container nav .options {
+        float: right; }
     main .whiteboard .container .book {
       position: absolute;
       z-index: 100;

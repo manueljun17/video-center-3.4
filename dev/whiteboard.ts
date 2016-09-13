@@ -1,5 +1,5 @@
 import { VideoCenter as vc } from './videocenter';
-import { Element as ele } from './element';
+import { Element } from './element';
 import { Server as server } from './server';
 import { User } from './user';
 import { Lobby } from './lobby';
@@ -10,28 +10,6 @@ interface mouse {
     pos: { x:number | string, y:number | string };
     pos_prev: { x: number | string, y: number | string };
 }
-// function onmousemove(e){
-//      var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0;
-//         //get mouse position on document crossbrowser
-//         let obj =document.getElementById("whiteboard-canvas");       
-//         if ( ! e ) e = window.event;
-//         if (e.pageX || e.pageY){
-//             m_posx = e.pageX;
-//             m_posy = e.pageY;
-//         } else if (e.clientX || e.clientY){
-//             m_posx = e.clientX + document.body.scrollLeft
-//                 + document.documentElement.scrollLeft;
-//             m_posy = e.clientY + document.body.scrollTop
-//                 + document.documentElement.scrollTop;
-//         }
-//         //get parent element position in document
-//         if ( obj.offsetParent){
-//             do {
-//                 e_posx += obj.offsetLeft;
-//                 e_posy += obj.offsetTop;
-//             } while ( obj = obj.offsetParent);
-//         }
-// }
 
 export class Whiteboard extends vc {    
     mouse : mouse; //mouse settings
@@ -53,7 +31,7 @@ export class Whiteboard extends vc {
         this.canvas = document.getElementById("whiteboard-canvas");       
         Whiteboard.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
-        this.$canvas = ele.whiteboard.find('canvas');
+        this.$canvas = Element.whiteboard.find('canvas');
         Whiteboard.draw_line_count = 0;
         this.initHandlers();   
     }
@@ -61,9 +39,38 @@ export class Whiteboard extends vc {
     static show() : void {
         console.log("Whiteboard::show()");          
     }
+   
+    private custom_select() {     
+        
+        $('div.selectBox').each(function(){
+            let $selectBox = $(this);         
+            let $options = $(this).find( '.options' );
+            let $firstOption = $(this).find( '.options option:first' );
+            console.log($selectBox);            
+            console.log($options);
+            console.log($firstOption);
+            //select the first option
+            $firstOption.attr("selected", "selected");
+            let $selected = $selectBox.find( '[selected = selected]' );
+            //Change the selected option
+            $selectBox.on('click',".option", function() {    
+                let $option = $(this);
+                remove_selected();
+                $option.attr("selected", "selected");
+            });
+
+            function remove_selected(){
+                $selectBox.find( '[selected = selected]' ).each(function(){
+                    $(this).removeAttr('selected');
+                });
+            }
+            
+        });
+    }
     //Initialize the whiteboard
     private initHandlers() : void {
-        //events
+        //events         
+        this.custom_select();        
         console.log("canvas "+this.canvas );
         console.log("$canvas "+this.$canvas );
         //This event will run if mouse is down     
@@ -99,29 +106,29 @@ export class Whiteboard extends vc {
     private set_draw_mode() : void {
         console.log("Whiteboard::set_draw_mode()"); 
         this.draw_mode = 'l';
-        ele.whiteboard.css( 'cursor', 'pointer' );         
+        Element.whiteboard.css( 'cursor', 'pointer' );         
     }
 
     //Set the mode to erase mode
     private set_erase_mode() : void {
         console.log("Whiteboard::set_erase_mode()"); 
         this.draw_mode = 'e';
-        ele.whiteboard.css('cursor', 'pointer'); // apply first
-        ele.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.  
+        Element.whiteboard.css('cursor', 'pointer'); // apply first
+        Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.  
     }  
     
     //Get linesize or radius of drawing
     private getLineSize () {
-        return ele.whiteboard.find('.line-size.selectBox .selected').attr('value'); //code#782016 custom select
+        return Element.selectbox_linesize_selected.attr('value'); //code#782016 custom select
     }
     //get color of drawing
     private getColor () {
-        return ele.whiteboard.find('.colors.selectBox .selected').attr('value'); //code#782016 custom select
+        return Element.selectbox_color_selected.attr('value'); //code#782016 custom select
     }
     //Set Drawing data
     private draw( e, obj) : void {
         var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0;
-        //get mouse position on document crossbrowser
+        //get mouse position on document crossbrowser        
         if ( ! e ) e = window.event;
         if (e.pageX || e.pageY){
             m_posx = e.pageX;
@@ -147,8 +154,8 @@ export class Whiteboard extends vc {
         console.log("m_posy"+m_posy);
         console.log("x"+x);
         console.log("y"+y);
-        let w : number = ele.whiteboard.width();
-        let h : number = ele.whiteboard.height();
+        let w : number = Element.whiteboard.width();
+        let h : number = Element.whiteboard.height();
 
         let rx : string = (x / w).toFixed(4);
         var ry : string = (y / h).toFixed(4);
@@ -177,8 +184,8 @@ export class Whiteboard extends vc {
     }    
 
     static draw_on_canvas( data ) {
-        let w = ele.whiteboard.width();
-        let h = ele.whiteboard.height();
+        let w = Element.whiteboard.width();
+        let h = Element.whiteboard.height();
         console.log("W"+w);
         console.log("H"+h);
         let line = data.line;

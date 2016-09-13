@@ -150,7 +150,19 @@ export class Element {
 
     /*------Whiteboard-----*/
     static get whiteboard() : JQuery {
-        return $('#room #whiteboard-canvas');
+        return $('#room .whiteboard');
+    }
+    static get selectbox_color() : JQuery {
+        return Element.whiteboard.find('.colors.selectBox');        
+    }
+    static get selectbox_color_selected() : JQuery {        
+        return Element.selectbox_color.find('[selected = selected]');
+    }
+    static get selectbox_linesize() : JQuery {
+        return Element.whiteboard.find('.line-size.selectBox');        
+    }
+    static get selectbox_linesize_selected() : JQuery {        
+        return Element.selectbox_linesize.find('[selected = selected]');
     }
     
 
