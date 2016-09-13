@@ -10,6 +10,29 @@ interface mouse {
     pos: { x:number | string, y:number | string };
     pos_prev: { x: number | string, y: number | string };
 }
+// function onmousemove(e){
+//      var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0;
+//         //get mouse position on document crossbrowser
+//         let obj =document.getElementById("whiteboard-canvas");       
+//         if ( ! e ) e = window.event;
+//         if (e.pageX || e.pageY){
+//             m_posx = e.pageX;
+//             m_posy = e.pageY;
+//         } else if (e.clientX || e.clientY){
+//             m_posx = e.clientX + document.body.scrollLeft
+//                 + document.documentElement.scrollLeft;
+//             m_posy = e.clientY + document.body.scrollTop
+//                 + document.documentElement.scrollTop;
+//         }
+//         //get parent element position in document
+//         if ( obj.offsetParent){
+//             do {
+//                 e_posx += obj.offsetLeft;
+//                 e_posy += obj.offsetTop;
+//             } while ( obj = obj.offsetParent);
+//         }
+// }
+
 export class Whiteboard extends vc {    
     mouse : mouse; //mouse settings
     draw_mode : string; // l-line e-erase
@@ -43,7 +66,7 @@ export class Whiteboard extends vc {
         //events
         console.log("canvas "+this.canvas );
         console.log("$canvas "+this.$canvas );
-        //This event will run if mouse is down      
+        //This event will run if mouse is down     
         this.canvas.onmousedown = ( e ) => {           
             this.mouse.click = true;
             this.mouse.pos_prev = {x: -12345, y: -12345};
@@ -61,8 +84,8 @@ export class Whiteboard extends vc {
        //This event will run while the mouse is moving
        this.canvas.onmousemove = ( e ) => {          
            if ( ! this.mouse.click ) return;
-            this.draw( e, this.canvas );
-            this.mouse.pos_prev = {x: -12345, y: -12345};
+               let obj = this.canvas;
+               this.draw( e, obj );
        }        
        //This event will run if mouse leave the canvas area
         this.$canvas.mouseleave( () => {           
@@ -194,6 +217,7 @@ export class Whiteboard extends vc {
             ctx.moveTo( ox, oy);
             ctx.lineTo( dx, dy);
             ctx.stroke();
+            console.log("HIHIHIHI");
         }
         this.draw_line_count ++;
         console.log('whiteboard::draw_line_count:' + this.draw_line_count);
