@@ -46,6 +46,10 @@ export class Server extends vc {
                 wb.draw_on_canvas(data);
             },100);
         });
+        Server.socket.on('whiteboard-clear', function(data){
+            console.log('whiteboard-clear');
+            wb.clear_canvas();
+        });
         Server.socket.on('disconnect', ( user )=>{
             console.log("socket ?? : " + user)
             if ( user.name == User.getUsername ) return;
@@ -125,5 +129,8 @@ export class Server extends vc {
     //Whiteboard
     static whiteboard_draw_line( data, callback: de.S ) : void {
         Server.emit( 'whiteboard', data, callback );
+    }
+    static whiteboard_clear( roomname : string, callback: de.S ) : void {
+        Server.emit( 'whiteboard-clear', roomname, callback );
     }
 }

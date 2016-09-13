@@ -15,7 +15,7 @@ export class Whiteboard extends vc {
     mouse : mouse; //mouse settings
     static draw_mode : string; // l-line e-erase
     static draw_line_count : number; //how much drawing
-    canvas : any; //canvas HTMLCanvasElement
+    static canvas : any; //canvas HTMLCanvasElement
     $canvas:any; //canvas Object
     static canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
     
@@ -28,8 +28,8 @@ export class Whiteboard extends vc {
             pos: { x:0, y:0 },
             pos_prev: { x: 0, y: 0 }
         };
-        this.canvas = document.getElementById("whiteboard-canvas");       
-        Whiteboard.canvas_context = this.canvas.getContext('2d');
+        Whiteboard.canvas = document.getElementById("whiteboard-canvas");       
+        Whiteboard.canvas_context = Whiteboard.canvas.getContext('2d');
         this.set_draw_mode();
         this.$canvas = Element.whiteboard.find('canvas');
         Whiteboard.draw_line_count = 0;
@@ -94,30 +94,38 @@ export class Whiteboard extends vc {
     private initHandlers() : void {
         //events         
         this.custom_select();        
-        console.log("canvas "+this.canvas );
+        console.log("canvas "+Whiteboard.canvas );
         console.log("$canvas "+this.$canvas );
-        //this event will run if you click the clear button
+        //this event will run if you click the clear button 
         Element.body.on('click', '.whiteboard button.eraser', this.set_erase_mode );  
+        //this event will run if you click the draw button
         Element.body.on('click', '.whiteboard button.draw', this.set_draw_mode );
+        //this will clear the whiteboard
+        Element.body.on('click', '.whiteboard button.clear', function() {
+        //Clear Whiteboard
+            server.whiteboard_clear( User.getRoomname, ()=>{
+                console.log('clear whiteboard');
+            });
+        });
         //This event will run if mouse is down        
-        this.canvas.onmousedown = ( e ) => {           
+        Whiteboard.canvas.onmousedown = ( e ) => {           
             this.mouse.click = true;
             this.mouse.pos_prev = {x: -12345, y: -12345};
             if ( Whiteboard.draw_line_count > 3500 ) {
                 alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
                 this.mouse.click = false;
             }            
-            this.draw( e, this.canvas );        
+            this.draw( e, Whiteboard.canvas );        
        }
        //This event will run if mouse is up      
-       this.canvas.onmouseup = ( e ) => {            
+       Whiteboard.canvas.onmouseup = ( e ) => {            
             this.mouse.click = false;
             this.mouse.pos_prev = {x: -12345, y: -12345};
        }
        //This event will run while the mouse is moving
-       this.canvas.onmousemove = ( e ) => {          
+       Whiteboard.canvas.onmousemove = ( e ) => {          
            if ( ! this.mouse.click ) return;
-               let obj = this.canvas;
+               let obj = Whiteboard.canvas;
                this.draw( e, obj );
        }        
        //This event will run if mouse leave the canvas area
@@ -260,4 +268,20 @@ export class Whiteboard extends vc {
         this.draw_line_count ++;
         console.log('whiteboard::draw_line_count:' + this.draw_line_count);
     }
+    static clear_canvas() {
+        //get the canvas context
+        let ctx = this.canvas_context; 
+        let canvas = this.canvas; 
+        // Store the current transformation matrix
+        ctx.save(); 
+        // Use the identity matrix while clearing the canvas
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Restore the transform
+        ctx.restore();
+        // clear drawing history count
+        Whiteboard.draw_line_count = 0;
+
+    }
+
 }
