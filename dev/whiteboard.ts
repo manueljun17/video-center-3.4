@@ -13,7 +13,7 @@ interface mouse {
 
 export class Whiteboard extends vc {    
     mouse : mouse; //mouse settings
-    draw_mode : string; // l-line e-erase
+    static draw_mode : string; // l-line e-erase
     static draw_line_count : number; //how much drawing
     canvas : any; //canvas HTMLCanvasElement
     $canvas:any; //canvas Object
@@ -96,7 +96,10 @@ export class Whiteboard extends vc {
         this.custom_select();        
         console.log("canvas "+this.canvas );
         console.log("$canvas "+this.$canvas );
-        //This event will run if mouse is down     
+        //this event will run if you click the clear button
+        Element.body.on('click', '.whiteboard button.eraser', this.set_erase_mode );  
+        Element.body.on('click', '.whiteboard button.draw', this.set_draw_mode );
+        //This event will run if mouse is down        
         this.canvas.onmousedown = ( e ) => {           
             this.mouse.click = true;
             this.mouse.pos_prev = {x: -12345, y: -12345};
@@ -128,16 +131,16 @@ export class Whiteboard extends vc {
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
         console.log("Whiteboard::set_draw_mode()"); 
-        this.draw_mode = 'l';
+        Whiteboard.draw_mode = 'l';
         Element.whiteboard.css( 'cursor', 'pointer' );         
     }
 
     //Set the mode to erase mode
     private set_erase_mode() : void {
-        console.log("Whiteboard::set_erase_mode()"); 
-        this.draw_mode = 'e';
+        console.log("Whiteboard::set_erase_mode()");       
+        Whiteboard.draw_mode = 'e';
         Element.whiteboard.css('cursor', 'pointer'); // apply first
-        Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.  
+        Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.
     }  
     
     //Get linesize or radius of drawing
@@ -196,7 +199,7 @@ export class Whiteboard extends vc {
         data.lineWidth = this.getLineSize();
         data.color = this.getColor();
         data.room_name = User.getRoomname;
-        data.draw_mode = this.draw_mode;        
+        data.draw_mode = Whiteboard.draw_mode;        
         server.whiteboard_draw_line( data, ()=>{
             console.log('success');
         });
@@ -207,6 +210,7 @@ export class Whiteboard extends vc {
     }    
 
     static draw_on_canvas( data ) {
+        
         let w = Element.whiteboard.width();
         let h = Element.whiteboard.height();
         console.log("W"+w);
@@ -226,11 +230,11 @@ export class Whiteboard extends vc {
         let ctx = this.canvas_context;  
         ctx.beginPath();
         ctx.lineJoin = data.lineJoin;
-        if ( data.drawMode == 'e' ) {
+        if ( data.draw_mode == 'e' ) {       
         ctx.globalCompositeOperation = 'destination-out';
         data.lineWidth = 12;
         }
-        else if ( data.drawMode == 'l' ) {
+        else if ( data.draw_mode == 'l' ) {
             ctx.globalCompositeOperation = 'source-over';
         }
         // console.log("ox:%s dx:%s oy:%s ox:%s",ox,dx,oy,dy);
@@ -247,8 +251,12 @@ export class Whiteboard extends vc {
             ctx.moveTo( ox, oy);
             ctx.lineTo( dx, dy);
             ctx.stroke();
-            console.log("HIHIHIHI");
+            ctx.fillStyle = data.color;
+            ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, false);            
+            ctx.closePath();
+            ctx.fill();
         }
+       
         this.draw_line_count ++;
         console.log('whiteboard::draw_line_count:' + this.draw_line_count);
     }
