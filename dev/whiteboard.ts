@@ -51,18 +51,41 @@ export class Whiteboard extends vc {
             console.log($firstOption);
             //select the first option
             $firstOption.attr("selected", "selected");
-            let $selected = $selectBox.find( '[selected = selected]' );
+            let $selected = $selectBox.find( '.selected' );
             //Change the selected option
+            $selected
+                .html( $firstOption.html() )
+                .attr( 'value', $firstOption.attr('value') );
+            $selected.click(function(){
+                if( $options.css( 'display' ) == 'none' ) {
+                    $options.css( 'display','block' );
+                }
+                else
+                {
+                    $options.css('display','none');
+                }
+            });
+               
             $selectBox.on('click',".option", function() {    
                 let $option = $(this);
                 remove_selected();
                 $option.attr("selected", "selected");
+                display_selected();
             });
 
             function remove_selected(){
                 $selectBox.find( '[selected = selected]' ).each(function(){
                     $(this).removeAttr('selected');
                 });
+            }
+            function display_selected(){
+                if( $options.css( 'display' ) == 'none' ) {
+                    $options.css( 'display','block' );
+                }
+                else
+                {
+                    $options.css('display','none');
+                }
             }
             
         });
