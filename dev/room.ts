@@ -3,6 +3,7 @@ import { Element as e } from './element';
 import { Server as server } from './server';
 import { User as user } from './user';
 import { Lobby } from './lobby';
+import { Whiteboard as wb } from './whiteboard';
 import * as de from './declare';
 export class Room extends vc {    
     constructor() {
@@ -54,6 +55,7 @@ export class Room extends vc {
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    
+            wb.clear_canvas();
             e.room.hide();  
             Lobby.show();
         });    

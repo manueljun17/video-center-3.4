@@ -40,22 +40,7 @@ export class Server extends vc {
            console.log("socket:"+user)
            Lobby.remove_user( user );
         });
-        Server.socket.on('whiteboard-draw-line', function(data){
-            console.log('whiteboard-draw-line from server');
-            setTimeout(function(){
-                wb.draw_on_canvas(data);
-            },100);
-        });
-        Server.socket.on('whiteboard-draw-line-history', function(data){
-            console.log('whiteboard-draw-line-history from server');
-            setTimeout(function(){
-                wb.draw_on_canvas(data);
-            },100);
-        });        
-        Server.socket.on('whiteboard-clear', function(data){
-            console.log('whiteboard-clear');
-            wb.clear_canvas();
-        });
+        
         Server.socket.on('disconnect', ( user )=>{
             console.log("socket ?? : " + user)
             if ( user.name == User.getUsername ) return;
@@ -69,6 +54,27 @@ export class Server extends vc {
             }
         });
 
+        Server.socket.on('whiteboard-draw-line', ( data ) => {
+            console.log('whiteboard-draw-line from server');
+            setTimeout(function(){
+                wb.draw_on_canvas(data);
+            },100);
+        });
+        Server.socket.on('whiteboard-draw-line-history', ( data ) => {
+            console.log('whiteboard-draw-line-history from server');
+            setTimeout(function(){
+                wb.draw_on_canvas(data);
+            },100);
+        });        
+        Server.socket.on('whiteboard-clear', ( data ) => {
+            console.log('whiteboard-clear');
+            wb.clear_canvas();
+        });
+        
+        Server.socket.on('error', ( data ) => {
+            let message = 'Server error\nPlease notify this error message to administrator\n\n[ ERROR MESSAGE ] ' + data;
+            console.log(message);
+        });        
     }
     /**
      * @edited by JaeHo. Put better signature. 2016-09-02.
