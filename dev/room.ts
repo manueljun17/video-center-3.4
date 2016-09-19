@@ -20,6 +20,7 @@ export class Room extends vc {
             let roomname : any = user.getRoomname;
             e.roomDisplayRoomname( roomname );
             server.userList( roomname, Room.show_user_list );
+            server.whiteboard_get_draw_line_history( roomname, Room.whiteboard_get_draw_line_history );
         });        
     }
     private initHandlers() : void {
@@ -70,6 +71,10 @@ export class Room extends vc {
 
     
 
+    static whiteboard_get_draw_line_history(  ) :void {        
+         // Callback whiteboard_get_draw_line_history
+         console.log("Get whiteboard draw line history");
+    } 
     static show_user_list( users: Array<de.User> ) :void {        
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;
