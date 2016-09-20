@@ -1,3 +1,5 @@
+/// <reference path="../d.ts/lockr.d.ts" />
+/// <reference path="../d.ts/rmc3.d.ts" />
 /**
  * 
  * @file videocenter.ts

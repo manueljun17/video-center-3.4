@@ -262,10 +262,7 @@ export class Whiteboard extends vc {
             ctx.moveTo( ox, oy);
             ctx.lineTo( dx, dy);
             ctx.stroke();
-            ctx.fillStyle = data.color;
-            ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, false);            
-            ctx.closePath();
-            ctx.fill();
+          
         }
        
         this.draw_line_count ++;
