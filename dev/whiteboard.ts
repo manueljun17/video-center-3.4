@@ -103,7 +103,9 @@ export class Whiteboard extends vc {
         //this will clear the whiteboard
         Element.body.on('click', '.whiteboard button.clear', function() {
         //Clear Whiteboard
-            server.whiteboard_clear( User.getRoomname, ()=>{
+        let data :any = { room_name : User.getRoomname };
+        data.command = "clear";
+            server.whiteboard( data, ()=>{
                 console.log('clear whiteboard');
             });
         });
@@ -207,8 +209,9 @@ export class Whiteboard extends vc {
         data.lineWidth = this.getLineSize();
         data.color = this.getColor();
         data.room_name = User.getRoomname;
-        data.draw_mode = Whiteboard.draw_mode;        
-        server.whiteboard_draw_line( data, ()=>{
+        data.draw_mode = Whiteboard.draw_mode;  
+        data.command = "draw";      
+        server.whiteboard( data, ()=>{
             console.log('success');
         });
         Whiteboard.draw_on_canvas( data );
@@ -259,10 +262,7 @@ export class Whiteboard extends vc {
             ctx.moveTo( ox, oy);
             ctx.lineTo( dx, dy);
             ctx.stroke();
-            ctx.fillStyle = data.color;
-            ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, false);            
-            ctx.closePath();
-            ctx.fill();
+          
         }
        
         this.draw_line_count ++;

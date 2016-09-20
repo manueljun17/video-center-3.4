@@ -21,7 +21,9 @@ export class Room extends vc {
             let roomname : any = user.getRoomname;
             e.roomDisplayRoomname( roomname );
             server.userList( roomname, Room.show_user_list );
-            server.whiteboard_get_draw_line_history( roomname, Room.whiteboard_get_draw_line_history );
+            let data :any = { room_name : roomname };
+            data.command = "history";
+            server.whiteboard( data, Room.whiteboard_get_draw_line_history );
         });        
     }
     private initHandlers() : void {
