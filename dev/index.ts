@@ -1,3 +1,3 @@
 import {Chat} from './chat';
-let chat = new Chat( 'http://localhost:9001/' );
+let chat = new Chat( "http://dev.withcenter.com:9001/" );
 chat.start();
