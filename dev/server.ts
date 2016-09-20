@@ -35,7 +35,6 @@ export class Server extends vc {
         }); 
         Server.socket.on('leave-room', ( room )=>{           
            Lobby.remove_room_list( room );
-           wb.clear_canvas();
         });       
         Server.socket.on('log-out', ( user )=>{
            console.log("socket:"+user)
