@@ -35,6 +35,7 @@ export class Server extends vc {
         }); 
         Server.socket.on('leave-room', ( room )=>{           
            Lobby.remove_room_list( room );
+           wb.clear_canvas();
         });       
         Server.socket.on('log-out', ( user )=>{
            console.log("socket:"+user)
@@ -70,7 +71,7 @@ export class Server extends vc {
             console.log('whiteboard-clear');
             wb.clear_canvas();
         });
-        
+
         Server.socket.on('error', ( data ) => {
             let message = 'Server error\nPlease notify this error message to administrator\n\n[ ERROR MESSAGE ] ' + data;
             console.log(message);
@@ -139,13 +140,8 @@ export class Server extends vc {
         Server.emit('broadcast-leave', roomname, callback);
     }   
     //Whiteboard
-    static whiteboard_draw_line( data, callback: de.S ) : void {
+    static whiteboard( data, callback: de.S ) : void {
         Server.emit( 'whiteboard', data, callback );
     }
-    static whiteboard_get_draw_line_history( roomname: string, callback : any ) : void {
-        Server.emit('get-whiteboard-draw-line-history', roomname, callback);
-    }   
-    static whiteboard_clear( roomname : string, callback: de.S ) : void {
-        Server.emit( 'whiteboard-clear', roomname, callback );
-    }
+  
 }
