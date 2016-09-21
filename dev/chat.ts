@@ -17,8 +17,8 @@ export class Chat extends vc {
     
     constructor( url: string ) {
         super();
-        console.log("Chat::constructor()");
-        super.setSocketUrl( 'http://localhost:9001/' );
+        console.log("Chat::constructor() : ", url);
+        super.setSocketUrl( url );
         this.user = new User();
         this.entrance = new Entrance();
         this.lobby = new Lobby();

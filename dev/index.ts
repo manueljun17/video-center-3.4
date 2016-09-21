@@ -1,3 +1,4 @@
 import {Chat} from './chat';
-let chat = new Chat( 'http://localhost:9001/' );
+import * as de from './declare';
+let chat = new Chat( de.socket_server_url );
 chat.start();
