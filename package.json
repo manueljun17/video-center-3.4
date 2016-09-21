@@ -20,7 +20,9 @@
     "url": "https://github.com/thruthesky/video-center-3.4/issues"
   },
   "homepage": "https://github.com/thruthesky/video-center-3.4#readme",
-  "dependencies": {},
+  "dependencies": {
+    "forever": "^0.15.2"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-livereload": "^3.8.1",
