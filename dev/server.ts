@@ -53,24 +53,7 @@ export class Server extends vc {
             else {
                 room.on_event_disconnect_room( user );
             }
-        });
-
-        //  Server.socket.on('whiteboard-draw-line', ( data ) => {
-        //      console.log('whiteboard-draw-line from server');
-        //      setTimeout(function(){
-        //          wb.draw_on_canvas(data);
-        //      },100);
-        //  });
-        //  Server.socket.on('whiteboard-draw-line-history', ( data ) => {
-        //      console.log('whiteboard-draw-line-history from server');
-        //      setTimeout(function(){
-        //          wb.draw_on_canvas(data);
-        //      },100);
-        //  });        
-        //  Server.socket.on('whiteboard-clear', ( data ) => {
-        //      console.log('whiteboard-clear');
-        //      wb.clear_canvas();
-        //  });
+        });      
 
         Server.socket.on('whiteboard', ( data ) => {
                 Server.oWhiteboard.socket_on_from_server( data );

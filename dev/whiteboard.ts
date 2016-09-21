@@ -1,28 +1,33 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element, Element as e } from './element';
 import { Server as server } from './server';
+import { Room as room } from './room';
 import { User } from './user';
 import { Lobby } from './lobby';
 import * as de from './declare';
 
 export class Whiteboard extends vc {    
     private mouse : de.Mouse = de.mouse; //mouse settings
-    private draw_mode : string; // l-line e-erase
     private draw_line_count : number; //how much drawing
     private canvas : any; //canvas HTMLCanvasElement
-    $canvas:any; //canvas Object
+    private $canvas:any; //canvas Object
     private canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
-    
+    /*
+    *Sir the reason i use static in draw mode because when calling the set_draw_mode or set_erase_mode
+    *the (this) will be the element because it was invoke by using on click so i use static instead
+    */
+    static draw_mode: string;// l-line e-erase
     constructor() {
         super();
         server.oWhiteboard = this;
+        room.oWhiteboard = this;
         console.log("Whiteboard::constructor()");        
         this.canvas = document.getElementById("whiteboard-canvas");       
         this.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
         this.$canvas = Element.whiteboard.find('canvas');
         this.draw_line_count = 0;
-        this.initHandlers();   
+        this.initHandlers(); 
     }
 
     //Show the whiteboard
@@ -90,20 +95,9 @@ export class Whiteboard extends vc {
         console.log("$canvas "+this.$canvas );
 
         e.body.on('click', 'button.eraser', this.set_erase_mode );
-        e.body.on('click', 'button.clear', this.clear );
-        //this event will run if you click the clear button 
-        // Element.body.on('click', '.whiteboard button.eraser', this.set_erase_mode );  
-        //this event will run if you click the draw button
+        e.body.on('click', 'button.clear', this.clear );       
         Element.body.on('click', '.whiteboard button.draw', this.set_draw_mode );
-        //this will clear the whiteboard
-        //Element.body.on('click', '.whiteboard button.clear', function() {
-        //Clear Whiteboard
-        // let data :any = { room_name : User.getRoomname };
-        // data.command = "clear";
-        //     server.whiteboard( data, ()=>{
-        //         console.log('clear whiteboard');
-        //     });
-        // });
+       
         //This event will run if mouse is down        
         this.canvas.onmousedown = ( e ) => { 
             this.mouse.click = true;
@@ -135,15 +129,15 @@ export class Whiteboard extends vc {
 
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
-        console.log("Whiteboard::set_draw_mode()"); 
-        this.draw_mode = 'l';
+        console.log("Whiteboard::set_draw_mode()");
+        Whiteboard.draw_mode = 'l';
         Element.whiteboard.css( 'cursor', 'pointer' );         
     }
 
     //Set the mode to erase mode
     private set_erase_mode() : void {
-        console.log("Whiteboard::set_erase_mode()");       
-        this.draw_mode = 'e';
+        console.log("Whiteboard::set_erase_mode()");
+        Whiteboard.draw_mode = 'e';
         Element.whiteboard.css('cursor', 'pointer'); // apply first
         Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.
     }  
@@ -204,7 +198,7 @@ export class Whiteboard extends vc {
         data.lineWidth = this.getLineSize();
         data.color = this.getColor();
         data.room_name = User.getRoomname;
-        data.draw_mode = this.draw_mode;  
+        data.draw_mode = Whiteboard.draw_mode;  
         data.command = "draw";      
         server.whiteboard( data, ()=>{
             console.log('success');
@@ -257,6 +251,10 @@ export class Whiteboard extends vc {
             ctx.moveTo( ox, oy);
             ctx.lineTo( dx, dy);
             ctx.stroke();
+            ctx.fillStyle = data.color;
+            ctx.arc( dx, dy, data.lineWidth * 0.5, 0, Math.PI*2, false);            
+            ctx.closePath();
+            ctx.fill();
           
         }
        
@@ -287,8 +285,18 @@ export class Whiteboard extends vc {
             });
     }
     socket_on_from_server (data) {
-        console.log(data);
-
-    }
+        let $this = this;
+        if ( data.command == 'draw' ) {
+            setTimeout(function(){
+                 $this.draw_on_canvas(data);
+             },100);
+        }
+        else if ( data.command == 'history' ) { 
+            setTimeout(function(){
+                 $this.draw_on_canvas(data);
+             },100);     
+        }     
+        else if ( data.command == 'clear' ) $this.clear_canvas();        
+    }  
 }
 
