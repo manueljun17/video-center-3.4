@@ -15,6 +15,7 @@ export class Whiteboard extends vc {
     
     constructor() {
         super();
+        server.oWhiteboard = this;
         console.log("Whiteboard::constructor()");        
         this.canvas = document.getElementById("whiteboard-canvas");       
         this.canvas_context = this.canvas.getContext('2d');
@@ -285,4 +286,9 @@ export class Whiteboard extends vc {
                 console.log('clear whiteboard');
             });
     }
+    socket_on_from_server (data) {
+        console.log(data);
+
+    }
 }
+

@@ -7,6 +7,7 @@ import { Whiteboard as wb } from './whiteboard';
 import * as de from './declare';
 export class Server extends vc {
     static socket: any = false;
+    static oWhiteboard;
     constructor() {
         super();
         Server.socket = super.getSocket();  
@@ -54,22 +55,26 @@ export class Server extends vc {
             }
         });
 
-        // Server.socket.on('whiteboard-draw-line', ( data ) => {
-        //     console.log('whiteboard-draw-line from server');
-        //     setTimeout(function(){
-        //         wb.draw_on_canvas(data);
-        //     },100);
-        // });
-        // Server.socket.on('whiteboard-draw-line-history', ( data ) => {
-        //     console.log('whiteboard-draw-line-history from server');
-        //     setTimeout(function(){
-        //         wb.draw_on_canvas(data);
-        //     },100);
-        // });        
-        // Server.socket.on('whiteboard-clear', ( data ) => {
-        //     console.log('whiteboard-clear');
-        //     wb.clear_canvas();
-        // });
+        //  Server.socket.on('whiteboard-draw-line', ( data ) => {
+        //      console.log('whiteboard-draw-line from server');
+        //      setTimeout(function(){
+        //          wb.draw_on_canvas(data);
+        //      },100);
+        //  });
+        //  Server.socket.on('whiteboard-draw-line-history', ( data ) => {
+        //      console.log('whiteboard-draw-line-history from server');
+        //      setTimeout(function(){
+        //          wb.draw_on_canvas(data);
+        //      },100);
+        //  });        
+        //  Server.socket.on('whiteboard-clear', ( data ) => {
+        //      console.log('whiteboard-clear');
+        //      wb.clear_canvas();
+        //  });
+
+        Server.socket.on('whiteboard', ( data ) => {
+                Server.oWhiteboard.socket_on_from_server( data );
+        });
 
         Server.socket.on('error', ( data ) => {
             let message = 'Server error\nPlease notify this error message to administrator\n\n[ ERROR MESSAGE ] ' + data;
