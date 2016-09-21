@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/thruthesky/video-center-3.4#readme",
   "dependencies": {
-    "forever": "^0.15.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
