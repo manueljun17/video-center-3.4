@@ -1,40 +1,29 @@
 import { VideoCenter as vc } from './videocenter';
-import { Element } from './element';
+import { Element, Element as e } from './element';
 import { Server as server } from './server';
 import { User } from './user';
 import { Lobby } from './lobby';
 import * as de from './declare';
-interface mouse {
-    click: boolean;
-    move: boolean;
-    pos: { x:number | string, y:number | string };
-    pos_prev: { x: number | string, y: number | string };
-}
 
 export class Whiteboard extends vc {    
-    mouse : mouse; //mouse settings
-    static draw_mode : string; // l-line e-erase
-    static draw_line_count : number; //how much drawing
-    static canvas : any; //canvas HTMLCanvasElement
+    private mouse : de.Mouse = de.mouse; //mouse settings
+    private draw_mode : string; // l-line e-erase
+    private draw_line_count : number; //how much drawing
+    private canvas : any; //canvas HTMLCanvasElement
     $canvas:any; //canvas Object
-    static canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
+    private canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
     
     constructor() {
         super();
         console.log("Whiteboard::constructor()");        
-        this.mouse = {
-            click: false,
-            move: false,
-            pos: { x:0, y:0 },
-            pos_prev: { x: 0, y: 0 }
-        };
-        Whiteboard.canvas = document.getElementById("whiteboard-canvas");       
-        Whiteboard.canvas_context = Whiteboard.canvas.getContext('2d');
+        this.canvas = document.getElementById("whiteboard-canvas");       
+        this.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
         this.$canvas = Element.whiteboard.find('canvas');
-        Whiteboard.draw_line_count = 0;
+        this.draw_line_count = 0;
         this.initHandlers();   
     }
+
     //Show the whiteboard
     static show() : void {
         console.log("Whiteboard::show()");          
@@ -72,7 +61,6 @@ export class Whiteboard extends vc {
                 $option.attr("selected", "selected");
                 display_selected();
             });
-
             function remove_selected(){
                 $selectBox.find( '[selected = selected]' ).each(function(){
                     $(this).removeAttr('selected');
@@ -87,47 +75,53 @@ export class Whiteboard extends vc {
                     $options.css('display','none');
                 }
             }
-            
         });
+
+
+
     }
+
     //Initialize the whiteboard
     private initHandlers() : void {
         //events         
         this.custom_select();        
-        console.log("canvas "+Whiteboard.canvas );
+        console.log("canvas "+this.canvas );
         console.log("$canvas "+this.$canvas );
+
+        e.body.on('click', 'button.eraser', this.set_erase_mode );
+        e.body.on('click', 'button.clear', this.clear );
         //this event will run if you click the clear button 
-        Element.body.on('click', '.whiteboard button.eraser', this.set_erase_mode );  
+        // Element.body.on('click', '.whiteboard button.eraser', this.set_erase_mode );  
         //this event will run if you click the draw button
         Element.body.on('click', '.whiteboard button.draw', this.set_draw_mode );
         //this will clear the whiteboard
-        Element.body.on('click', '.whiteboard button.clear', function() {
+        //Element.body.on('click', '.whiteboard button.clear', function() {
         //Clear Whiteboard
-        let data :any = { room_name : User.getRoomname };
-        data.command = "clear";
-            server.whiteboard( data, ()=>{
-                console.log('clear whiteboard');
-            });
-        });
+        // let data :any = { room_name : User.getRoomname };
+        // data.command = "clear";
+        //     server.whiteboard( data, ()=>{
+        //         console.log('clear whiteboard');
+        //     });
+        // });
         //This event will run if mouse is down        
-        Whiteboard.canvas.onmousedown = ( e ) => {           
+        this.canvas.onmousedown = ( e ) => { 
             this.mouse.click = true;
             this.mouse.pos_prev = {x: -12345, y: -12345};
-            if ( Whiteboard.draw_line_count > 3500 ) {
+            if ( this.draw_line_count > 3500 ) {
                 alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
                 this.mouse.click = false;
             }            
-            this.draw( e, Whiteboard.canvas );        
+            this.draw( e, this.canvas );        
        }
        //This event will run if mouse is up      
-       Whiteboard.canvas.onmouseup = ( e ) => {            
+       this.canvas.onmouseup = ( e ) => {            
             this.mouse.click = false;
             this.mouse.pos_prev = {x: -12345, y: -12345};
        }
        //This event will run while the mouse is moving
-       Whiteboard.canvas.onmousemove = ( e ) => {          
+       this.canvas.onmousemove = ( e ) => {          
            if ( ! this.mouse.click ) return;
-               let obj = Whiteboard.canvas;
+               let obj = this.canvas;
                this.draw( e, obj );
        }        
        //This event will run if mouse leave the canvas area
@@ -141,14 +135,14 @@ export class Whiteboard extends vc {
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
         console.log("Whiteboard::set_draw_mode()"); 
-        Whiteboard.draw_mode = 'l';
+        this.draw_mode = 'l';
         Element.whiteboard.css( 'cursor', 'pointer' );         
     }
 
     //Set the mode to erase mode
     private set_erase_mode() : void {
         console.log("Whiteboard::set_erase_mode()");       
-        Whiteboard.draw_mode = 'e';
+        this.draw_mode = 'e';
         Element.whiteboard.css('cursor', 'pointer'); // apply first
         Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.
     }  
@@ -209,18 +203,18 @@ export class Whiteboard extends vc {
         data.lineWidth = this.getLineSize();
         data.color = this.getColor();
         data.room_name = User.getRoomname;
-        data.draw_mode = Whiteboard.draw_mode;  
+        data.draw_mode = this.draw_mode;  
         data.command = "draw";      
         server.whiteboard( data, ()=>{
             console.log('success');
         });
-        Whiteboard.draw_on_canvas( data );
+        this.draw_on_canvas( data );
         this.mouse.pos_prev.x = this.mouse.pos.x;
         this.mouse.pos_prev.y = this.mouse.pos.y;      
 
     }    
 
-    static draw_on_canvas( data ) {
+    draw_on_canvas( data ) {
         
         let w = Element.whiteboard.width();
         let h = Element.whiteboard.height();
@@ -268,7 +262,7 @@ export class Whiteboard extends vc {
         this.draw_line_count ++;
         console.log('whiteboard::draw_line_count:' + this.draw_line_count);
     }
-    static clear_canvas() {
+    clear_canvas() {
         //get the canvas context
         let ctx = this.canvas_context; 
         let canvas = this.canvas; 
@@ -280,8 +274,15 @@ export class Whiteboard extends vc {
         // Restore the transform
         ctx.restore();
         // clear drawing history count
-        Whiteboard.draw_line_count = 0;
-
+        this.draw_line_count = 0;
     }
 
+    //Clear Whiteboard
+    clear() {
+        let data :any = { room_name : User.getRoomname };
+        data.command = "clear";
+            server.whiteboard( data, ()=>{
+                console.log('clear whiteboard');
+            });
+    }
 }
