@@ -31,13 +31,10 @@ main{
             .book{
                 position: absolute;
                 z-index: 100;
-                max-width: 100%;
-                max-height: 100%;
             }
             #whiteboard-canvas{
                 position:relative;
-                z-index: 200;                
-                background-color:white;
+                z-index: 200;
             }
         }
     }

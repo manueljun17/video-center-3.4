@@ -98,10 +98,7 @@ main .whiteboard {
       margin: 5px 0px 0px 5px; }
     main .whiteboard .container .book {
       position: absolute;
-      z-index: 100;
-      max-width: 100%;
-      max-height: 100%; }
+      z-index: 100; }
     main .whiteboard .container #whiteboard-canvas {
       position: relative;
-      z-index: 200;
-      background-color: white; }
+      z-index: 200; }

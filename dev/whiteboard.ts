@@ -245,9 +245,8 @@ export class Whiteboard extends vc {
             ctx.fill();
           
         }
-       
         this.draw_line_count ++;
-        console.log('whiteboard::draw_line_count:' + this.draw_line_count);
+        console.log('whiteboard::draw_line_count: ' + this.draw_line_count);
     }
     clear_canvas() {
         //get the canvas context
