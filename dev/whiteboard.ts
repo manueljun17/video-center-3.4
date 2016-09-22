@@ -175,19 +175,10 @@ export class Whiteboard extends vc {
         console.log("e_posy"+e_posy);
         let x : number = m_posx-e_posx;
         let y : number = m_posy-e_posy;
-        console.log("m_posx"+m_posx);
-        console.log("m_posy"+m_posy);
-        console.log("x"+x);
-        console.log("y"+y);
-        let w : number = Element.whiteboard.width();
-        let h : number = Element.whiteboard.height();
-
-        let rx : string = (x / w).toFixed(4);
-        var ry : string = (y / h).toFixed(4);
-        console.log("rx"+rx);
-        console.log("ry"+ry);
-        this.mouse.pos.x = rx;
-        this.mouse.pos.y = ry;
+     
+    
+        this.mouse.pos.x = x;
+        this.mouse.pos.y = y;
 
         if ( this.mouse.pos_prev.x == -12345 ) {
             this.mouse.pos_prev.x = this.mouse.pos.x;
@@ -211,18 +202,15 @@ export class Whiteboard extends vc {
 
     draw_on_canvas( data ) {
         
-        let w = Element.whiteboard.width();
-        let h = Element.whiteboard.height();
-        console.log("W"+w);
-        console.log("H"+h);
+ 
         let line = data.line;
         if ( typeof data.lineJoin == 'undefined' ) data.lineJoin = 'round';
         if ( typeof data.lineWidth == 'undefined' ) data.lineWidth = 3;
         if ( typeof data.color == 'undefined' ) data.color = 'black';
-        let ox = line[0].x * w;
-        let oy = line[0].y * h;
-        let dx = line[1].x * w;
-        let dy = line[1].y * h; 
+        let ox = line[0].x;
+        let oy = line[0].y;
+        let dx = line[1].x;
+        let dy = line[1].y; 
         console.log("ox"+ox);
         console.log("oy"+oy);
         console.log("dx"+dx);
@@ -232,7 +220,7 @@ export class Whiteboard extends vc {
         ctx.lineJoin = data.lineJoin;
         if ( data.draw_mode == 'e' ) {       
         ctx.globalCompositeOperation = 'destination-out';
-        data.lineWidth = 12;
+            data.lineWidth = 12;
         }
         else if ( data.draw_mode == 'l' ) {
             ctx.globalCompositeOperation = 'source-over';
