@@ -1,6 +1,7 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element, Element as e } from './element';
 import { Server as server } from './server';
+import { Document } from './document';
 import { Room as room } from './room';
 import { User } from './user';
 import { Lobby } from './lobby';
@@ -19,8 +20,9 @@ export class Whiteboard extends vc {
     static draw_mode: string;// l-line e-erase
     constructor() {
         super();
-        server.oWhiteboard = this;
-        room.oWhiteboard = this;
+        server.onWhiteboard = this;
+        Document.onWhiteboard = this;
+        room.onWhiteboard = this;
         console.log("Whiteboard::constructor()");        
         this.canvas = document.getElementById("whiteboard-canvas");       
         this.canvas_context = this.canvas.getContext('2d');
@@ -271,5 +273,8 @@ export class Whiteboard extends vc {
         }     
         else if ( data.command == 'clear' ) $this.clear_canvas();        
     }  
+    image ( url ) {
+        e.book.prop( 'src', url);
+    }
 }
 

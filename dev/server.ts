@@ -7,7 +7,7 @@ import { Whiteboard as wb } from './whiteboard';
 import * as de from './declare';
 export class Server extends vc {
     static socket: any = false;
-    static oWhiteboard;
+    static onWhiteboard;
     constructor() {
         super();
         Server.socket = super.getSocket();  
@@ -56,7 +56,7 @@ export class Server extends vc {
         });      
 
         Server.socket.on('whiteboard', ( data ) => {
-                Server.oWhiteboard.socket_on_from_server( data );
+                Server.onWhiteboard.socket_on_from_server( data );
         });
 
         Server.socket.on('error', ( data ) => {
