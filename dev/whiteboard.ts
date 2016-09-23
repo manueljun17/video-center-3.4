@@ -40,10 +40,7 @@ export class Whiteboard extends vc {
         $('div.selectBox').each(function(){
             let $selectBox = $(this);         
             let $options = $(this).find( '.options' );
-            let $firstOption = $(this).find( '.options option:first' );
-            console.log($selectBox);            
-            console.log($options);
-            console.log($firstOption);
+            let $firstOption = $(this).find( '.options option:first' );            
             //select the first option
             $firstOption.attr("selected", "selected");
             let $selected = $selectBox.find( '.selected' );
@@ -90,10 +87,7 @@ export class Whiteboard extends vc {
     //Initialize the whiteboard
     private initHandlers() : void {
         //events         
-        this.custom_select();        
-        console.log("canvas "+this.canvas );
-        console.log("$canvas "+this.$canvas );
-
+        this.custom_select(); 
         e.body.on('click', 'button.eraser', this.set_erase_mode );
         e.body.on('click', 'button.clear', this.clear );       
         Element.body.on('click', '.whiteboard button.draw', this.set_draw_mode );
@@ -129,14 +123,12 @@ export class Whiteboard extends vc {
 
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
-        console.log("Whiteboard::set_draw_mode()");
         Whiteboard.draw_mode = 'l';
         Element.whiteboard.css( 'cursor', 'pointer' );         
     }
 
     //Set the mode to erase mode
     private set_erase_mode() : void {
-        console.log("Whiteboard::set_erase_mode()");
         Whiteboard.draw_mode = 'e';
         Element.whiteboard.css('cursor', 'pointer'); // apply first
         Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.
@@ -171,8 +163,6 @@ export class Whiteboard extends vc {
                 e_posy += obj.offsetTop;
             } while ( obj = obj.offsetParent);
         }
-        console.log("e_posx"+e_posx);
-        console.log("e_posy"+e_posy);
         let x : number = m_posx-e_posx;
         let y : number = m_posy-e_posy;
      
@@ -211,10 +201,6 @@ export class Whiteboard extends vc {
         let oy = line[0].y;
         let dx = line[1].x;
         let dy = line[1].y; 
-        console.log("ox"+ox);
-        console.log("oy"+oy);
-        console.log("dx"+dx);
-        console.log("dy"+dy);
         let ctx = this.canvas_context;  
         ctx.beginPath();
         ctx.lineJoin = data.lineJoin;
@@ -246,7 +232,7 @@ export class Whiteboard extends vc {
           
         }
         this.draw_line_count ++;
-        console.log('whiteboard::draw_line_count: ' + this.draw_line_count);
+        // console.log('whiteboard::draw_line_count: ' + this.draw_line_count);
     }
     clear_canvas() {
         //get the canvas context
