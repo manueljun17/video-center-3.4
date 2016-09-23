@@ -99,12 +99,44 @@
                 </form>
 
             </div>
+            
+            <!--Document-->
+            <div class="document">
+                <span class="books">Books</span>
+                <div class="container">
+                    <select name="books" class="btn">
+                        <option value="">Books</option>
+                        <option value="Let's Go">Let's Go</option>
+                        <option value="Side By Side">Side By Side</option>
+                        <option value="Express Yourself">Express Yourself</option>
+                        <option value="Speak Your Mind">Speak Your Mind</option>
+                    </select>
 
+                    <a class="btn folder_up">
+                        <i class="fa fa-level-up" title="One folder up" aria-hidden="true"></i>
+                        <span class="sr-only">One folder up</span>
+                    </a>
+                    <div class="file-upload">
+                        <!--<form target="_hidden_file_upload_frame" enctype="multipart/form-data" action="<?php echo $url_server?>upload.php" method="POST">-->
+                        <form target="_hidden_file_upload_frame" enctype="multipart/form-data" method="POST">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+                            <input name="userfile" type="file" />
+                        </form>
+                    </div>
+                </div>
+                <div class="document-content">
 
+                </div>
+
+            </div>
+
+            <!--Document-->
+
+            <!--Whiteboard-->
             <div class="whiteboard">
                 <div class="container">
                     <img class="book" src="img/whiteboard.jpg">
-                    <canvas id="whiteboard-canvas" height="350px" width="1280px"></canvas>
+                    <canvas id="whiteboard-canvas" height="350px" width="1035px"></canvas>
 
                     <nav>
                         <button class="clear btn btn-primary btn-sm"><i class="fa fa-file-o" aria-hidden="true"></i> <span>Clear Whiteboard</span></button>
@@ -141,7 +173,7 @@
             </div>
             <!--/.whiteboard-->
         </main>
-
+        
         <footer class="footer">
             <h4>Copyright</h4>
         </footer>

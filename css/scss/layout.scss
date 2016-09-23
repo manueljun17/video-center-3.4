@@ -2,3 +2,11 @@
 strong {
     color: $strong_color; 
 }
+#room{
+    .chat {
+        width: 245px;
+    }
+    .document {
+        width: 245px;
+    }
+}

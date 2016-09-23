@@ -2,7 +2,11 @@ $background: #f4f4f4;
 #room {  
   background-color:$color_gray;
   display:none;
-  
+  .chat {
+    input {
+      width:242px;
+    }
+  }
   .roomname{
     color: white;
   }
@@ -15,7 +19,8 @@ $background: #f4f4f4;
       }
     }
   .user-list {
-    background-color: $color_gray;
+    background-color: $color_orange;
+;
    .name {
       display: block;
       padding: .4em .8em .4em .8em;
