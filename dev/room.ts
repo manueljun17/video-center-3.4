@@ -6,7 +6,7 @@ import { Lobby } from './lobby';
 import { Whiteboard as wb } from './whiteboard';
 import * as de from './declare';
 export class Room extends vc {    
-    static oWhiteboard;
+    static onWhiteboard;
     constructor() {
         super();
         console.log("Room::constructor() ..");
@@ -58,7 +58,7 @@ export class Room extends vc {
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    
-            Room.oWhiteboard.clear_canvas();
+            Room.onWhiteboard.clear_canvas();
             e.room.hide();  
             Lobby.show();
         });    

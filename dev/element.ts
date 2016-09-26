@@ -164,6 +164,9 @@ export class Element {
     static get selectbox_linesize_selected() : JQuery {        
         return Element.selectbox_linesize.find('[selected = selected]');
     }
+    static get book() : JQuery {        
+        return $(".book");
+    }
     
 
     /*------Dom Handlers------*/

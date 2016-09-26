@@ -7,7 +7,7 @@ import { Whiteboard as wb } from './whiteboard';
 import * as de from './declare';
 export class Server extends vc {
     static socket: any = false;
-    static oWhiteboard;
+    static onWhiteboard;
     constructor() {
         super();
         Server.socket = super.getSocket();  
@@ -56,7 +56,13 @@ export class Server extends vc {
         });      
 
         Server.socket.on('whiteboard', ( data ) => {
-                Server.oWhiteboard.socket_on_from_server( data );
+                Server.onWhiteboard.socket_on_from_server( data );
+        });
+        Server.socket.on('room-cast', ( data ) => {
+                console.info( 'socket.on("room-cast")', data );
+                if ( data['command'] == 'whiteboard-show' ) wb.show();
+                // else if ( data['command'] == 'whiteboard-hide' ) wb.hide();
+                else if ( data['command'] == 'whiteboard-image' ) Server.onWhiteboard.image( data['url'] );
         });
 
         Server.socket.on('error', ( data ) => {
@@ -129,6 +135,10 @@ export class Server extends vc {
     //Whiteboard
     static whiteboard( data, callback: de.S ) : void {
         Server.emit( 'whiteboard', data, callback );
+    }
+    //Roomcast
+    static roomcast( data, callback: de.S ) : void {        
+        Server.emit( 'room-cast', data, callback );
     }
   
 }
