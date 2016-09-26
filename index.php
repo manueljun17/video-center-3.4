@@ -120,11 +120,12 @@
                         <span class="sr-only">One folder up</span>
                     </a>
                     <div class="file-upload">
-                        <form target="_hidden_file_upload_frame" enctype="multipart/form-data" action="<?php echo $url_server?>upload.php" method="POST">
+                        <form target="_hidden_file_upload_frame" enctype="multipart/form-data" action="upload.php" method="POST">
                         <!--<form target="_hidden_file_upload_frame" enctype="multipart/form-data" method="POST">-->
                             <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-                            <input name="userfile" type="file" />
+                            <input name="userfile" type="file" onchange="submit();"/>
                         </form>
+                       
                     </div>
                 </div>
                 <div class="document-content"></div>
