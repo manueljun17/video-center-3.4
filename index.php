@@ -137,7 +137,7 @@
             <div class="whiteboard">
                 <div class="container">
                     <img class="book" src="img/white.jpg">
-                    <canvas id="whiteboard-canvas" height="500px" width="1035px"></canvas>
+                    <canvas id="whiteboard-canvas" height="535px" width="1035px"></canvas>
 
                     <nav>
                         <button class="clear btn btn-primary btn-sm"><i class="fa fa-file-o" aria-hidden="true"></i> <span>Clear Whiteboard</span></button>
