@@ -11,8 +11,11 @@
     <script src="js/ext/jquery-3.1.0.min.js"></script>
 
     <script src="js/ext/underscore-min.js"></script>
-    <script src="js/ext/underscore.string.min.js"></script>
-
+    <script src="js/ext/underscore.string.min.js"></script>    
+    <?php
+        $url_server = "http://dev.withcenter.com:9001/";
+        // $url_server = "http://localhost:9001/";    
+    ?>
     <script src="http://dev.withcenter.com:9001/socket.io/socket.io.js"></script>
     <!--<script src="http://localhost:9001/socket.io/socket.io.js"></script>-->
 
@@ -117,8 +120,8 @@
                         <span class="sr-only">One folder up</span>
                     </a>
                     <div class="file-upload">
-                        <!--<form target="_hidden_file_upload_frame" enctype="multipart/form-data" action="<?php echo $url_server?>upload.php" method="POST">-->
-                        <form target="_hidden_file_upload_frame" enctype="multipart/form-data" method="POST">
+                        <form target="_hidden_file_upload_frame" enctype="multipart/form-data" action="<?php echo $url_server?>upload.php" method="POST">
+                        <!--<form target="_hidden_file_upload_frame" enctype="multipart/form-data" method="POST">-->
                             <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
                             <input name="userfile" type="file" />
                         </form>

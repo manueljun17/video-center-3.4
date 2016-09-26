@@ -26,25 +26,29 @@ export class Document extends vc {
             Document.onWhiteboard.image( url );
         });
     }
-    private load_book() : void {
-        //Sample of dispplaying an image on canvas
-        let $content = $('.document-content');
-        let data = new Array();
-        data["img/white.jpg"] = "white";
-        data["img/whiteboard.jpg"] = "whiteboard";
-        data["img/whiteboard2.jpg"] = "whiteboard2";
-        data["img/001.jpg"] = "001";
-        data["img/002.jpg"] = "002";
-        data["img/003.jpg"] = "003";
-        data["img/004.jpg"] = "004";
-        data["img/005.jpg"] = "005";
-        var m = '<ul class="dirs">';
-            for ( var i in data ) {
-                let dir = data[i];
-                m += '<li class="file-name" data-file="'+i+'">' + dir + '</li>';
+    private load_book() : void {        
+        $.ajax({
+            url: "getimage.php",
+            dataType: "json",
+            success: function (data) {
+                let $content = $('.document-content');
+                let m = '<ul class="dirs">';
+                    $.each(data, function(i,filename) {
+                        let removeimg = filename.replace('img\/','');
+                        let newname = removeimg;
+                        if( removeimg.includes("jpg") || removeimg.includes("jpeg")) newname = removeimg.replace('.jpg','');
+                        if( removeimg.includes("png")) newname = removeimg.replace('.png','');
+                         
+                        console.log("Filename: " + newname + " img src: " + filename );
+                        m += '<li class="file-name" data-file="'+filename+'">' + newname + '</li>';                       
+                    });
+                m += '</ul>';    
+                $content.html(m);
             }
-            m += '</ul>';
-            $content.html(m);
+        });
+
+        
+        
     }
 }
 
