@@ -190,6 +190,7 @@ window.addEventListener('load', function() {
     console.log('window.addEventListener( "load", ... ) begins ');
 });
 </script>
+<iframe name="_hidden_file_upload_frame" src="javascript:;" style="display:none; width: 0; height: 0; opacity: .01;"></iframe>
 
 </body>
 
