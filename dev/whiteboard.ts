@@ -96,7 +96,7 @@ export class Whiteboard extends vc {
 
         e.body.on('click', 'button.eraser', this.set_erase_mode );
         e.body.on('click', 'button.clear', this.clear );       
-        Element.body.on('click', '.whiteboard button.draw', this.set_draw_mode );
+        e.body.on('click', 'button.draw', this.set_draw_mode );
        
         //This event will run if mouse is down        
         this.canvas.onmousedown = ( e ) => { 
@@ -106,7 +106,7 @@ export class Whiteboard extends vc {
                 alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
                 this.mouse.click = false;
             }            
-            this.draw( e, this.canvas );        
+            this.draw( e, this.canvas );
        }
        //This event will run if mouse is up      
        this.canvas.onmouseup = ( e ) => {            
@@ -179,21 +179,13 @@ export class Whiteboard extends vc {
         console.log("m_posy"+m_posy);
         console.log("x"+x);
         console.log("y"+y);
-        let w : number = Element.whiteboard.width();
-        let h : number = Element.whiteboard.height();
-
-        let rx : string = (x / w).toFixed(4);
-        var ry : string = (y / h).toFixed(4);
-        console.log("rx"+rx);
-        console.log("ry"+ry);
-        this.mouse.pos.x = rx;
-        this.mouse.pos.y = ry;
+        this.mouse.pos.x = x;
+        this.mouse.pos.y = y;
 
         if ( this.mouse.pos_prev.x == -12345 ) {
             this.mouse.pos_prev.x = this.mouse.pos.x;
             this.mouse.pos_prev.y = this.mouse.pos.y;
         }
-        
         let data :any =  { line : [this.mouse.pos, this.mouse.pos_prev] };
         data.lineWidth = this.getLineSize();
         data.color = this.getColor();
@@ -206,23 +198,18 @@ export class Whiteboard extends vc {
         this.draw_on_canvas( data );
         this.mouse.pos_prev.x = this.mouse.pos.x;
         this.mouse.pos_prev.y = this.mouse.pos.y;      
-
     }    
 
     draw_on_canvas( data ) {
         
-        let w = Element.whiteboard.width();
-        let h = Element.whiteboard.height();
-        console.log("W"+w);
-        console.log("H"+h);
         let line = data.line;
         if ( typeof data.lineJoin == 'undefined' ) data.lineJoin = 'round';
         if ( typeof data.lineWidth == 'undefined' ) data.lineWidth = 3;
         if ( typeof data.color == 'undefined' ) data.color = 'black';
-        let ox = line[0].x * w;
-        let oy = line[0].y * h;
-        let dx = line[1].x * w;
-        let dy = line[1].y * h; 
+        let ox = line[0].x;
+        let oy = line[0].y;
+        let dx = line[1].x;
+        let dy = line[1].y; 
         console.log("ox"+ox);
         console.log("oy"+oy);
         console.log("dx"+dx);
