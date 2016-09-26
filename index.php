@@ -85,7 +85,7 @@
     </div>
     <div id="room">
         <header>
-            <span class="logo">LOGO</span>
+            <span class="logo">Room:</span>
             <span class="roomname">...</span>
             <span class="buttons">
             <button type="button" class="room-leave">Leave</button>
