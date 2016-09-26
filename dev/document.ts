@@ -24,7 +24,7 @@ export class Document extends vc {
             var dec = ($this.attr('data-file'));
             var url = dec;
             Document.onWhiteboard.image( url );
-            server.roomcast({ 'command' : 'whiteboard-image', 'roomname' : User.getRoomname, 'url': url }, function{
+            server.roomcast({ 'command' : 'whiteboard-image', 'roomname' : User.getRoomname, 'url': url }, ()=>{
                 console.log("hello");
             });
         });
