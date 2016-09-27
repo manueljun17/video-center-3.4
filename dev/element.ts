@@ -211,8 +211,9 @@ export class Element {
         '   <span class="users"></span>' +
         '</div>';      
     }
+    
     static markup_chat_message( data : de.ChatMessage ) : string {
-        return '<div><strong>'+data.name+' </strong>'+data.message+'</div>';
+        return '<div><i>'+data.name+' </i><span>'+data.message+'<span></div>';
     }
 
     static updateMyName( name: string ) {

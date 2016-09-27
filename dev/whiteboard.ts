@@ -21,7 +21,7 @@ export class Whiteboard extends vc {
     static draw_mode: string;// l-line e-erase
     constructor() {
         super();       
-        console.log("Whiteboard::constructor()");        
+        console.log("Whiteboard::constructor()");
         this.init(); 
         this.initHandlers();
     }
@@ -86,7 +86,7 @@ export class Whiteboard extends vc {
      * There is no harm calling twice on this init() over.
      */
     private init() {
-        this.canvas = document.getElementById("whiteboard-canvas");       
+        this.canvas = document.getElementsByTagName("canvas")[0];
         this.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
         this.$canvas = Element.whiteboard.find('canvas');

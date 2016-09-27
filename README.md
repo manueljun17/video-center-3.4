@@ -6,14 +6,7 @@ Video Center Version 3.4
 
 # TODO
 
-* Put the server address only in 1 place. right now it is stated in index.html, chat.ts
-
-* Hide typescript source code by submodule.
-
-* Put typescript submodule in private git server.
-
-* refactor folder strcuture
-
+* make a book site which has lots of books ready to use and let teacher use books on the site.
 
 # Coding Guide
 

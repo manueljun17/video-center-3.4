@@ -1,26 +1,30 @@
 $background: #f4f4f4;
+
 #room {  
   background-color:$color_gray;
   display:none;
-  .chat {
-    input {
-      width:242px;
+  header {
+    background-color: $header_background_color;
+    padding: .6em;
+    overflow:auto;
+    .logo {
+      float: left;
+      color:white;
     }
+    .roomname {
+      float: left;
+    }
+    .buttons {
+      float: right;
+    }
+
   }
   .roomname{
     color: white;
   }
-    header {
-    background-color: $header_background_color;
-    padding: 1em;
-    font-weight: bold;
-      .logo{
-        color:white;
-      }
-    }
+  /*
   .user-list {
     background-color: $color_darkblue;
-;
    .name {
       display: block;
       padding: .4em .8em .4em .8em;
@@ -29,6 +33,45 @@ $background: #f4f4f4;
       color:white; 
     }
   }
+  */
 }
 
 
+#room .users {
+  .user {
+    float: left;
+    width: 50%;
+    height: 50vw;
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+#room .chat {
+  input {
+    box-sizing: border-box;
+    padding: .4em;
+    width: 100%;
+  }
+  // @todo Do it with @mixin
+  // @todo move it into proper place
+  .display {
+      padding: .6rem;
+      overflow: hidden;
+      overflow-y: scroll;
+      min-height: 4em;
+      max-height: 10em;
+      background-color: #efefef;        
+      font-size: .9em;
+      i {
+        text-decoration: underline;
+      }
+      span {
+        padding-left: 1em;
+      }
+  }
+
+}

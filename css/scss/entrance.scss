@@ -1,11 +1,25 @@
 #entrance {
-  color:black;   
+  color:black;
   header {
-  background-color: $header_background_color;
-  padding: 1em;
-  font-weight: bold;
+    background-color: $header_background_color;
+    padding: 1em;
+    font-weight: bold;
     .logo{
       color:white;
     }
+  }
+  .content {
+    padding: 1em;
+    form {
+      input {
+        padding: .6em;
+        box-sizing: border-box;
+        width: 80%;
+      }
+    }
+  }
+  footer {
+    background-color: $footer_background_color;  
+    padding: 1em;
   }
 }

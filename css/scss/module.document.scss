@@ -1,7 +1,6 @@
 #room {
     .document {
         position: relative;
-        height: 331px;
         background-color: #85bdf5;
         border-right: 1px solid #b3b3b3;
         ul li {
@@ -21,19 +20,9 @@
             }
         }
     }
+
     .books {
-        position: absolute;
-        display: inherit;
-        width: 100%;
         color: #fff;
         background-color: #69a3dc;
-    }
-   
-    .document-content {
-        height: 191px;
-        padding-top: 10px;
-        border-top: 1px solid #69a3dc;
-        overflow: hidden;
-        overflow-y: scroll;
     }
 }

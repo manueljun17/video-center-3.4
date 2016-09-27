@@ -1,46 +1,19 @@
-main{
-    position:relative;
-    .whiteboard {
-        background: no-repeat; 
-        background-size: 100%;  
-        height:350;
-        width:350;
-        position:absolute;
-        top:0px;
-        left:245px;
-        .container{
-            
-            position: relative;
-            nav{
-                position: absolute;
-                z-index: 500;
-                top: 10px;
-                left: 5px;
-               
-            }  
-            .options {
-                position:absolute;
-                top:31px;
-                left:0;
-                border:1px solid #ccc;
-                overflow:hidden;
-                display:none;
-                background-color: WhiteSmoke ;
-            }
-            .selected{
-                float:left;
-                border:black 1px solid;
-                margin: 5px 0px 0px 5px;
-                background-color: WhiteSmoke ;
-            }
-            .book{
-                position: absolute;
-                z-index: 100;
-            }
-            #whiteboard-canvas{
-                position:relative;
-                z-index: 200;
-            }
-        }
+#room .whiteboard {
+    .container {
+        position: relative;
+        width: 340px;
+        height: 400px;
+        overflow: hidden;
     }
-} 
+    .book {
+        width: 100%;
+    }
+    canvas {
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}

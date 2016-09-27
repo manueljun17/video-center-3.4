@@ -36,22 +36,26 @@
 <body>
 
 
-    <div id="entrance">
+    <div id="entrance" style="display:none;">
         <header>
-            <span class="logo">Video English</span>
+            <h2 class="logo">Video English</h2>
         </header>
-        <form>
-            <input name="username" placeholder="Input Username" />
-            <input type="submit" value="Log In" />
-        </form>
+        <section class="content">
+            <form>
+                <label>Please input your name</label>
+                <input name="username" placeholder="Input Username" />
+                <input type="submit" value="Log In" />
+            </form>
+        </section>
         <footer class="footer">
-            <h4>Copyright</h4>
+            <h2>Copyright</h2>
         </footer>
     </div>
     <div id="lobby">
         <header>
-            <span class="logo">Lobby: TITLE ...</span>
+            <h2 class="logo">Lobby: TITLE ...</h2>
         </header>
+        <section class="content">
         <div id="lobby-menu">
             <h1>Lobby <span class="my-name"></span></h1>
             <button class="update-username">Update Username</button>
@@ -81,23 +85,30 @@
         </div>
         <h4>Room List</h4>
         <div class="room-list"></div>
+        </section>
         <footer class="footer">
-            <h4>Copyright</h4>
+            <h2>Copyright</h2>
         </footer>
     </div>
     <div id="room">
         <header>
-            <span class="logo">LOGO</span>
-            <span class="roomname">...</span>
-            <span class="buttons">
-            <button type="button" class="room-leave">Leave</button>
-            <button type="button" class="whiteboard">Whiteboard</button>
-        </span>
+            <div class="logo">LOGO</div>
+            <div class="roomname">Room Name</div>
+            <div class="buttons">
+                <button type="button" class="room-leave">Leave</button>
+                <button type="button" class="whiteboard">Whiteboard</button>
+            </div>
         </header>
 
-        <main>
+        <section class="content">
+            <div class="users">
+                <div class="user"><img src="tmp/1.png"></div>
+                <div class="user"><img src="tmp/2.png"></div>
+                <div class="user"><img src="tmp/3.png"></div>
+                <div class="user"><img src="tmp/4.png"></div>
+            </div>
             <div class="chat">
-                <div class="user-list"></div>
+                <div class="user-list" style="display:none;"></div>
                 <div class="display"></div>
                 <form>
                     <input name="message">
@@ -108,27 +119,13 @@
             <!--Document-->
             <div id="document" class="document">
                 <span class="books">Books</span>
-                <div class="container">
-                    <select name="books" class="btn">
-                        <option value="">Books</option>
-                        <option value="Let's Go">Let's Go</option>
-                        <option value="Side By Side">Side By Side</option>
-                        <option value="Express Yourself">Express Yourself</option>
-                        <option value="Speak Your Mind">Speak Your Mind</option>
-                    </select>
 
-                    <a class="btn folder_up">
-                        <i class="fa fa-level-up" title="One folder up" aria-hidden="true"></i>
-                        <span class="sr-only">One folder up</span>
-                    </a>
                     <div class="file-upload">
                         <form enctype="multipart/form-data" method="POST" target="file_upload_iframe">
                             <input name="userfile" type="file" onchange="submit();" />
                         </form>
                         <iframe name='file_upload_iframe' src="javascript:void(0)" style="width:0; height:0; position: absolute; left:-1024px;" width="0" height="0"></iframe>
                     </div>
-                </div>
-                <div class="document-content"></div>
             </div>
 
             <!--Document-->
@@ -137,7 +134,7 @@
             <div class="whiteboard">
                 <div class="container">
                     <img class="book" src="img/white.jpg">
-                    <canvas id="whiteboard-canvas" height="500px" width="1035px"></canvas>
+                    <canvas></canvas>
 
                     <nav>
                         <button class="clear btn btn-primary btn-sm"><i class="fa fa-file-o" aria-hidden="true"></i> <span>Clear Whiteboard</span></button>
@@ -173,11 +170,8 @@
                 <!--/.container-->
             </div>
             <!--/.whiteboard-->
-        </main>
+        </section>
         
-        <footer class="footer">
-            <h4>Copyright</h4>
-        </footer>
     </div>
 
     <script>
