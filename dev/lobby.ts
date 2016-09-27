@@ -11,7 +11,7 @@ export class Lobby extends vc {
     static doneInit: boolean = false;
     constructor() {
         super();
-        console.log("Lobby::constructor()");     
+        console.log("Lobby::constructor()");
         this.initHandlers();
     }
 
@@ -37,7 +37,7 @@ export class Lobby extends vc {
     private initHandlers() : void {
         if ( Lobby.doneInit ) return;
         Lobby.doneInit = true;
-        e.lobby.on('click', '.roomname', event => this.on_join_room(event) );
+        e.lobby.on('click', '.roomname',this.on_join_room );
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -84,7 +84,7 @@ export class Lobby extends vc {
             User.save_roomname( re );
             e.lobbyRoomnameEmpty();
             e.lobby_hide_form_roomname();
-            this.room.show()
+            new Room().show()
          } );
         }
     }

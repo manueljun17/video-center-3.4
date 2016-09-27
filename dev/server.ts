@@ -3,13 +3,14 @@ import { Chat as chat } from './chat';
 import { Lobby } from './lobby';
 import { Room as room } from './room';
 import { User } from './user';
-import { Whiteboard as wb } from './whiteboard';
+import { Whiteboard} from './whiteboard';
 import * as de from './declare';
 export class Server extends vc {
-    static socket: any = false;
-    static onWhiteboard;
+    static socket: any = false;   
+    private whiteboard: Whiteboard;
     constructor() {
         super();
+        this.whiteboard = new Whiteboard();
         Server.socket = super.getSocket();  
     }
     public listen( ) : void {
@@ -56,13 +57,13 @@ export class Server extends vc {
         });      
 
         Server.socket.on('whiteboard', ( data ) => {
-                Server.onWhiteboard.socket_on_from_server( data );
+                this.whiteboard.socket_on_from_server( data );
         });
         Server.socket.on('room-cast', ( data ) => {
                 console.info( 'socket.on("room-cast")', data );
-                if ( data['command'] == 'whiteboard-show' ) wb.show();
+                if ( data['command'] == 'whiteboard-show' ) this.whiteboard.show();
                 // else if ( data['command'] == 'whiteboard-hide' ) wb.hide();
-                else if ( data['command'] == 'whiteboard-image' ) Server.onWhiteboard.image( data['url'] );
+                else if ( data['command'] == 'whiteboard-image' ) this.whiteboard.image( data['url'] );
         });
 
         Server.socket.on('error', ( data ) => {

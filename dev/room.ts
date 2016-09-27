@@ -8,10 +8,11 @@ import * as de from './declare';
 export class Room extends vc {    
     static doneInit: boolean = false;
     private whiteboard: Whiteboard;
+    
     constructor() {
         super();
         console.log("Room::constructor() ..");
-        this.whiteboard = new Whiteboard();
+        this.whiteboard = new Whiteboard();        
         this.initHandlers();
     }
     show() : void {
@@ -62,9 +63,9 @@ export class Room extends vc {
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    
-            this.whiteboard.clear_canvas();
+            new Whiteboard().clear_canvas();
             e.room.hide();  
-            Lobby.show();
+            new Lobby().show();
         });    
     }
     

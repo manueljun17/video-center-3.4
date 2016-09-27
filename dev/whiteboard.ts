@@ -20,15 +20,14 @@ export class Whiteboard extends vc {
     */
     static draw_mode: string;// l-line e-erase
     constructor() {
-        super();
-        server.onWhiteboard = this;
-        room.onWhiteboard = this;
+        super();       
         console.log("Whiteboard::constructor()");        
         this.init(); 
+        this.initHandlers();
     }
 
     //Show the whiteboard
-    static show() : void {
+    show() : void {
         console.log("Whiteboard::show()");          
     }
    
