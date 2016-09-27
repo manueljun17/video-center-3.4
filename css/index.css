@@ -8,6 +8,7 @@ strong {
 
 #room .chat {
   width: 245px; }
+
 #room .document {
   width: 245px; }
 
@@ -41,12 +42,14 @@ strong {
       margin: 10px 0; }
     #room .document .container input[name='userfile'] {
       width: 100%; }
+
 #room .books {
   position: absolute;
   display: inherit;
   width: 100%;
   color: #fff;
   background-color: #69a3dc; }
+
 #room .document-content {
   height: 191px;
   padding-top: 10px;
@@ -145,5 +148,3 @@ main {
       main .whiteboard .container #whiteboard-canvas {
         position: relative;
         z-index: 200; }
-
-/*# sourceMappingURL=index.css.map */

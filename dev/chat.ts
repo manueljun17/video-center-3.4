@@ -3,17 +3,15 @@ import { Entrance } from './entrance';
 import { Lobby } from './lobby';
 import { Room } from './room';
 import { Server } from './server';
-//import { Whiteboard } from './whiteboard';
 import { Document } from './document';
 import { VideoCenter as vc } from './videocenter';
 import * as de from './declare';
 export class Chat extends vc {
     private user: User;
-    //private entrance: Entrance;    
+    private entrance: Entrance;
     private lobby: Lobby;
-    //private room: Room;
+    private room: Room;
     private server: Server;
-    //private whiteboard: Whiteboard;
     private document: Document;
     private vc: vc;
     
@@ -22,12 +20,11 @@ export class Chat extends vc {
         console.log("Chat::constructor() : ", url);
         super.setSocketUrl( url );
         this.user = new User();
-        //this.entrance = new Entrance();
-        //this.lobby = new Lobby();
-        //this.room = new Room();              
+        this.entrance = new Entrance();
         this.server = new Server();
-        //this.whiteboard = new Whiteboard();
         this.document = new Document();
+        this.room = new Room();
+        this.lobby = new Lobby();
     }
 
     start() : void {
@@ -40,16 +37,16 @@ export class Chat extends vc {
           Server.updateUsername( username, ( user: de.User ) => {
                 if( User.hasRoomname() ) {
                     let roomname : string = User.getRoomname;
-                    if ( roomname == de.lobbyRoomName ) Lobby.show();
-                    else Room.show();
+                    if ( roomname == de.lobbyRoomName ) this.lobby.show();
+                    else this.room.show();
                 }
                 else {
-                    Lobby.show();
+                    this.lobby.show();
                 }
           } );
         }
         else {
-            Entrance.show();
+            this.entrance.show();
         }
     }
 }

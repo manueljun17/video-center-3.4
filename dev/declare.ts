@@ -1,6 +1,8 @@
 export const lobbyRoomName:string = 'Lobby';
-export const socket_server_url:string = 'http://dev.withcenter.com:9001/';
-// export const socket_server_url:string = 'http://localhost:9001';
+declare var _serverUrl;
+declare var _uploadUrl;
+export const uploadUrl = _uploadUrl;
+export const socket_server_url:string = _serverUrl;
 export interface S {
     ( str: string ) : void;
 }

@@ -8,6 +8,7 @@ import { Lobby } from './lobby';
 import * as de from './declare';
 
 export class Whiteboard extends vc {    
+    static doneInitHandler: boolean = false;
     private mouse : de.Mouse = de.mouse; //mouse settings
     private draw_line_count : number; //how much drawing
     private canvas : any; //canvas HTMLCanvasElement
@@ -21,15 +22,9 @@ export class Whiteboard extends vc {
     constructor() {
         super();
         server.onWhiteboard = this;
-        Document.onWhiteboard = this;
         room.onWhiteboard = this;
         console.log("Whiteboard::constructor()");        
-        this.canvas = document.getElementById("whiteboard-canvas");       
-        this.canvas_context = this.canvas.getContext('2d');
-        this.set_draw_mode();
-        this.$canvas = Element.whiteboard.find('canvas');
-        this.draw_line_count = 0;
-        this.initHandlers(); 
+        this.init(); 
     }
 
     //Show the whiteboard
@@ -86,8 +81,26 @@ export class Whiteboard extends vc {
 
     }
 
-    //Initialize the whiteboard
+    // Initialize the whiteboard
+    //
+    /**
+     * There is no harm calling twice on this init() over.
+     */
+    private init() {
+        this.canvas = document.getElementById("whiteboard-canvas");       
+        this.canvas_context = this.canvas.getContext('2d');
+        this.set_draw_mode();
+        this.$canvas = Element.whiteboard.find('canvas');
+        this.draw_line_count = 0;
+    }
+    /**
+     * Event handlers. This must be initialized only once.
+     */
     private initHandlers() : void {
+
+        if ( Whiteboard.doneInitHandler ) return;
+        Whiteboard.doneInitHandler = true;
+
         //events         
         this.custom_select(); 
         e.body.on('click', 'button.eraser', this.set_erase_mode );
@@ -267,8 +280,8 @@ export class Whiteboard extends vc {
              },100);     
         }     
         else if ( data.command == 'clear' ) $this.clear_canvas();        
-    }  
-    image ( url ) {
+    }
+    image ( url: string ) {
         e.book.prop( 'src', url);
     }
 }

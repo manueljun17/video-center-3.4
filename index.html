@@ -13,11 +13,11 @@
     <script src="js/ext/underscore-min.js"></script>
     <script src="js/ext/underscore.string.min.js"></script>
     <script>
-        // var url_server = "http://dev.withcenter.com:9001/";
-        var url_server = "http://localhost:9001/";
+        var _serverUrl = "http://localhost:9001/";
+        var _uploadUrl = "http://work.org/video-center-3.4/document/upload.php";
     </script>
-    <!--<script src="http://dev.withcenter.com:9001/socket.io/socket.io.js"></script>-->
     <script src="http://localhost:9001/socket.io/socket.io.js"></script>
+    <!--<script src="http://dev.withcenter.com:9001/socket.io/socket.io.js"></script>-->
 
     <script>
         // if ( typeof io == 'undefined' ) alert("Socket.IO is not loaded. Please check the socket io server.");
@@ -29,6 +29,7 @@
     <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
     <script src="js/src/function.js"></script>
     <script data-main="js/src/index.js" src="js/ext/require.js"></script>
+    
 </head>
 
 <body>
@@ -104,7 +105,7 @@
             </div>
             
             <!--Document-->
-            <div class="document">
+            <div id="document" class="document">
                 <span class="books">Books</span>
                 <div class="container">
                     <select name="books" class="btn">
@@ -120,15 +121,13 @@
                         <span class="sr-only">One folder up</span>
                     </a>
                     <div class="file-upload">
-                        <form target="_hidden_file_upload_frame" enctype="multipart/form-data" action="<?php echo $url_server?>upload.php" method="POST">
-                        <!--<form target="_hidden_file_upload_frame" enctype="multipart/form-data" method="POST">-->
-                            <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-                            <input name="userfile" type="file" />
+                        <form enctype="multipart/form-data" method="POST" target="file_upload_iframe">
+                            <input name="userfile" type="file" onchange="submit();" />
                         </form>
+                        <iframe name='file_upload_iframe' src="javascript:void(0)" style="width:0; height:0; position: absolute; left:-1024px;" width="0" height="0"></iframe>
                     </div>
                 </div>
                 <div class="document-content"></div>
-
             </div>
 
             <!--Document-->

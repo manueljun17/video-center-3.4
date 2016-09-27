@@ -9,49 +9,28 @@ import { Whiteboard } from './whiteboard';
 import * as de from './declare';
 
 export class Document extends vc {    
-    static onWhiteboard;
+    private whiteboard: Whiteboard;
     constructor() {
         super();
         console.log("Document::constructor()");
-        this.load_book();  
+        this.whiteboard = new Whiteboard();
         this.init_handlers(); 
-    }     
+        e.document.find('form').prop('action', de.uploadUrl);
+    }
     //Initialize the Document
     private init_handlers() : void {
-        var $content = $('.document-content');
-        e.body.on('click', '.file-name', function() {
-            var $this = $(this);
-            var dec = ($this.attr('data-file'));
-            var url = dec;
-            Document.onWhiteboard.image( url );
-            server.roomcast({ 'command' : 'whiteboard-image', 'roomname' : User.getRoomname, 'url': url }, ()=>{
-                console.log("hello");
-            });
-        });
-    }
-    private load_book() : void {        
-        $.ajax({
-            url: "getimage.php",
-            dataType: "json",
-            success: function (data) {
-                let $content = $('.document-content');
-                let m = '<ul class="dirs">';
-                    $.each(data, function(i,filename) {
-                        let removeimg = filename.replace('img\/','');
-                        let newname = removeimg;
-                        if( removeimg.includes("jpg") || removeimg.includes("jpeg")) newname = removeimg.replace('.jpg','');
-                        if( removeimg.includes("png")) newname = removeimg.replace('.png','');
-                         
-                        console.log("Filename: " + newname + " img src: " + filename );
-                        m += '<li class="file-name" data-file="'+filename+'">' + newname + '</li>';                       
-                    });
-                m += '</ul>';    
-                $content.html(m);
+        console.log("Document::init_handlers() - this must be called only once.");
+        window.addEventListener('message', res => {
+            console.log("Document::init_handlers() >> message event >> ");
+            console.log( res );
+            let data = res.data;
+            if ( data.success ) {
+                this.whiteboard.image( data.url );
+            }
+            else {
+                alert( data.error );
             }
         });
-
-        
-        
     }
 }
 

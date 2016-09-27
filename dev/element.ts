@@ -109,6 +109,10 @@ export class Element {
         return $("body");
     }
 
+    static get document() : JQuery {
+        return $('#document');
+    }
+
     // static lobbyDisplayUsername( user : de.User ) : JQuery {
     //     return Element.lobby.find('.username').text( user.name );
     // }

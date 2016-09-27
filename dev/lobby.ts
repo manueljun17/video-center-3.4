@@ -1,20 +1,21 @@
 import { VideoCenter as vc } from './videocenter';
 import { Element as e } from './element';
 import { Server as server } from './server';
-import { Room as room } from './room';
+import { Room } from './room';
 import { Entrance } from './entrance';
 import { User } from './user';
 import * as de from './declare';
 import './jquery-helper';
 
 export class Lobby extends vc {    
+    static doneInit: boolean = false;
     constructor() {
         super();
         console.log("Lobby::constructor()");     
         this.initHandlers();
     }
 
-    static show() : void {
+    show() : void {
         server.joinRoom(de.lobbyRoomName, (re)=>{
             console.log("Lobby::show()=>re",re );
             User.save_roomname( de.lobbyRoomName );  
@@ -34,7 +35,9 @@ export class Lobby extends vc {
     }
 
     private initHandlers() : void {
-        e.lobby.on('click', '.roomname', this.on_join_room );
+        if ( Lobby.doneInit ) return;
+        Lobby.doneInit = true;
+        e.lobby.on('click', '.roomname', event => this.on_join_room(event) );
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -81,7 +84,7 @@ export class Lobby extends vc {
             User.save_roomname( re );
             e.lobbyRoomnameEmpty();
             e.lobby_hide_form_roomname();
-            room.show()
+            this.room.show()
          } );
         }
     }
@@ -103,11 +106,11 @@ export class Lobby extends vc {
             User.delete_username();   
            
             e.lobby_display_empty();
-            Entrance.show();
+            new Entrance().show();
         });    
     }
-    private on_join_room( event ) :void {
-        event.preventDefault();      
+    private on_join_room( event ) : void {
+        event.preventDefault();
         var room_id = $(this).text();      
         console.log(room_id);
         if(room_id=="Lobby") {
@@ -119,6 +122,7 @@ export class Lobby extends vc {
                 console.log("Broadcast that you left the Lobby");
             } );   
             User.save_roomname( room_id );                
+            let room = new Room();
             room.show()           
         }        
     }

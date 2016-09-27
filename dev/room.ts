@@ -3,16 +3,18 @@ import { Element as e } from './element';
 import { Server as server } from './server';
 import { User as user } from './user';
 import { Lobby } from './lobby';
-import { Whiteboard as wb } from './whiteboard';
+import { Whiteboard } from './whiteboard';
 import * as de from './declare';
 export class Room extends vc {    
-    static onWhiteboard;
+    static doneInit: boolean = false;
+    private whiteboard: Whiteboard;
     constructor() {
         super();
         console.log("Room::constructor() ..");
-        this.initHandlers();   
+        this.whiteboard = new Whiteboard();
+        this.initHandlers();
     }
-    static show() : void {
+    show() : void {
         let roomname : any = user.getRoomname;
         server.joinRoom( roomname, ()=>{
             console.log("Room::show() ....");   
@@ -28,6 +30,8 @@ export class Room extends vc {
         });        
     }
     private initHandlers() : void {
+        if ( Room.doneInit ) return;
+        Room.doneInit = true;
         e.room_send_message.submit( this.send_message ); 
         e.room_onclick_leave.click( this.on_leave );        
     }     
@@ -58,7 +62,7 @@ export class Room extends vc {
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    
-            Room.onWhiteboard.clear_canvas();
+            this.whiteboard.clear_canvas();
             e.room.hide();  
             Lobby.show();
         });    
