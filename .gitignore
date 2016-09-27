@@ -5,3 +5,6 @@
 .*
 js/src
 node_modules
+document/data/upload/*.jpg
+document/data/upload/*.gif
+document/data/upload/*.png
