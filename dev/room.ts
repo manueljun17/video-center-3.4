@@ -7,12 +7,10 @@ import { Whiteboard } from './whiteboard';
 import * as de from './declare';
 export class Room extends vc {    
     static doneInit: boolean = false;
-    private whiteboard: Whiteboard;
     
     constructor() {
         super();
-        console.log("Room::constructor() ..");
-        this.whiteboard = new Whiteboard();        
+        console.log("Room::constructor() ..");              
         this.initHandlers();
     }
     show() : void {
