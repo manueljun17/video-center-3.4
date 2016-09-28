@@ -8,10 +8,20 @@ Video Center Version 3.4
 
 * make a book site which has lots of books ready to use and let teacher use books on the site.
 
+* double-check : is it really right to clear the canvas when a user resizes canvas size?
+
 # Coding Guide
 
 js/ext  ---- for external libraries.
 js/src  ---- for interal source codes.
+
+
+
+# whiteboard size
+
+    340 x 400
+    480 x 600
+    600 x 720
 
 
 # Coding Logic or Code flow

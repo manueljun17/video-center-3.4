@@ -8,29 +8,6 @@
     <link href="css/index.css" rel="stylesheet">
     <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-    <script src="js/ext/jquery-3.1.0.min.js"></script>
-
-    <script src="js/ext/underscore-min.js"></script>
-    <script src="js/ext/underscore.string.min.js"></script>
-    <script>
-        var _serverUrl = "http://localhost:9001/";
-        var _uploadUrl = "http://work.org/video-center-3.4/document/upload.php";
-        // var _uploadUrl = "http://localhost:9001/document/upload.php";
-    </script>
-    <script src="http://localhost:9001/socket.io/socket.io.js"></script>
-    <!--<script src="http://dev.withcenter.com:9001/socket.io/socket.io.js"></script>-->
-
-    <script>
-        // if ( typeof io == 'undefined' ) alert("Socket.IO is not loaded. Please check the socket io server.");
-    </script>
-
-
-    <script src="js/ext/lockr.js"></script>
-
-    <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
-    <script src="js/src/function.js"></script>
-    <script data-main="js/src/index.js" src="js/ext/require.js"></script>
-    
 </head>
 
 <body>
@@ -131,41 +108,40 @@
             <!--Document-->
 
             <!--Whiteboard-->
-            <div class="whiteboard">
-                <div class="container">
-                    <img class="book" src="img/white.jpg">
-                    <canvas></canvas>
-
+            <div id="whiteboard" style="display:none;">
                     <nav>
-                        <button class="clear btn btn-primary btn-sm"><i class="fa fa-file-o" aria-hidden="true"></i> <span>Clear Whiteboard</span></button>
+                        <button class="clear btn btn-primary btn-sm"><i class="fa fa-file-o" aria-hidden="true"></i> <span>Clear</span></button>
                         <button class="eraser btn btn-primary btn-sm"><i class="fa fa-eraser" aria-hidden="true"></i> <span>Eraser</span></button>
                         <button class="draw btn btn-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> <span>Draw</span></button>
-                        <div class="line-size selectBox">
-                            <span class='selected'></span>
-                            <div class="options">
-                                <option value="1" class="option">Line size</optoin>
-                                    <option value="2" class="option">Extra Small</option>
-                                    <option value="3" class="option">Small</option>
-                                    <option value="4" class="option">Medium</option>
-                                    <option value="5" class="option">Large</option>
-                                    <option value="8" class="option">Extra Large</option>
-                            </div>
-                        </div>
+                        <select>
+                            <option value="1" class="option">Line size</option>
+                            <option value="2" class="option">Extra Small</option>
+                            <option value="3" class="option">Small</option>
+                            <option value="4" class="option">Medium</option>
+                            <option value="5" class="option">Large</option>
+                            <option value="8" class="option">Extra Large</option>
+                        </select>
 
-                        <div class="colors selectBox">
-                            <span class='selected'></span>
-                            <div class="options">
-                                <option value="Default" class="option">Line Color</optoin>
-                                    <option value="Black" class="option">Black</option>
-                                    <option value="Grey" class="option">Grey</option>
-                                    <option value="White" class="option">White</option>
-                                    <option value="Red" class="option">Red</option>
-                                    <option value="Green" class="option">Green</option>
-                                    <option value="Blue" class="option">Blue</option>
-                            </div>
-                        </div>
+                        <select>
+                            <option value="Default" class="option">Color</option>
+                            <option value="Black" class="option">Black</option>
+                            <option value="Grey" class="option">Grey</option>
+                            <option value="White" class="option">White</option>
+                            <option value="Red" class="option">Red</option>
+                            <option value="Green" class="option">Green</option>
+                            <option value="Blue" class="option">Blue</option>
+                        </select>
+                        <select class="canvas-size">
+                            <option value="small">340x400</option>
+                            <option value="medium">480x600</option>
+                            <option value="large">600x720</option>
+                        </select>
                     </nav>
-                    
+                <div class="container">
+                    <div class="book">
+                        <img book" src="img/white.jpg">
+                    </div>
+                    <canvas width="340" height="400"></canvas>
                 </div>
                 <!--/.container-->
             </div>
@@ -184,6 +160,23 @@ window.addEventListener('load', function() {
 });
 </script>
 
+    <script src="js/ext/jquery-3.1.0.min.js"></script>
+    <script src="js/ext/underscore-min.js"></script>
+    <script src="js/ext/underscore.string.min.js"></script>
+    <script>
+        var _serverUrl = "http://localhost:9001/";
+        var _uploadUrl = "http://work.org/video-center-3.4/document/upload.php";
+        // var _uploadUrl = "http://localhost:9001/document/upload.php";
+    </script>
+    <script src="http://localhost:9001/socket.io/socket.io.js"></script>
+    <!--<script src="http://dev.withcenter.com:9001/socket.io/socket.io.js"></script>-->
+    <script>
+        // if ( typeof io == 'undefined' ) alert("Socket.IO is not loaded. Please check the socket io server.");
+    </script>
+    <script src="js/ext/lockr.js"></script>
+    <script src="RTCMultiConnection/dist/rmc3.min.js"></script>
+    <script src="js/src/function.js"></script>
+    <script data-main="js/src/index.js" src="js/ext/require.js"></script>
 </body>
 
 </html>

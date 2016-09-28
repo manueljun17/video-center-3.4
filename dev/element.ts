@@ -142,6 +142,9 @@ export class Element {
     static get room_onclick_leave() : JQuery {
         return Element.room.find('.room-leave');
     }
+    static get room_whiteboard_button() : JQuery {
+        return Element.room.find('button.whiteboard');
+    }
     static get room_display() : JQuery {
         return Element.room.find('.display');
     }  
@@ -154,7 +157,7 @@ export class Element {
 
     /*------Whiteboard-----*/
     static get whiteboard() : JQuery {
-        return $('#room .whiteboard');
+        return $('#whiteboard');
     }
     static get selectbox_color() : JQuery {
         return Element.whiteboard.find('.colors.selectBox');        

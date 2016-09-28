@@ -7,10 +7,11 @@ import { Whiteboard } from './whiteboard';
 import * as de from './declare';
 export class Room extends vc {    
     static doneInit: boolean = false;
-    
+    private whiteboard: Whiteboard;
     constructor() {
         super();
         console.log("Room::constructor() ..");              
+        this.whiteboard = new Whiteboard();
         this.initHandlers();
     }
     show() : void {
@@ -26,13 +27,14 @@ export class Room extends vc {
             let data :any = { room_name : roomname };
             data.command = "history";
             server.whiteboard( data, Room.whiteboard_get_draw_line_history );
-        });        
+        });
     }
     private initHandlers() : void {
         if ( Room.doneInit ) return;
         Room.doneInit = true;
         e.room_send_message.submit( this.send_message ); 
         e.room_onclick_leave.click( this.on_leave );        
+        e.room_whiteboard_button.click( () => this.on_click_whiteboard() );
     }     
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
@@ -61,10 +63,26 @@ export class Room extends vc {
         server.leaveRoom( () => {          
             e.room_display.empty();
             user.save_roomname( "Lobby" );    
-            new Whiteboard().clear_canvas();
+            //this.whiteboard.clear_canvas();//error
             e.room.hide();  
             new Lobby().show();
         });    
+    }
+
+    private on_click_whiteboard() {
+        console.log('on_click_whiteboard()');
+        let command;
+        if ( this.whiteboard.isOpen() ) {
+            this.whiteboard.hide();
+            command = 'hide-whiteboard';
+        }
+        else {
+            this.whiteboard.show();
+            command = 'show-whiteboard';
+        }
+        server.whiteboard( { 'command': command }, x => {
+            console.log('server.whiteboar() -> callback()');
+         } );
     }
     
 

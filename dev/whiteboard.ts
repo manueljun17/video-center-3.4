@@ -11,8 +11,6 @@ export class Whiteboard extends vc {
     static doneInitHandler: boolean = false;
     private mouse : de.Mouse = de.mouse; //mouse settings
     private draw_line_count : number; //how much drawing
-    private canvas : any; //canvas HTMLCanvasElement
-    private $canvas:any; //canvas Object
     private canvas_context : CanvasRenderingContext2D; //to enable the drawing of canvas
     /*
     *Sir the reason i use static in draw mode because when calling the set_draw_mode or set_erase_mode
@@ -20,64 +18,20 @@ export class Whiteboard extends vc {
     */
     static draw_mode: string;// l-line e-erase
     constructor() {
-        super();       
+        super();
         console.log("Whiteboard::constructor()");
         this.init(); 
         this.initHandlers();
     }
-
-    //Show the whiteboard
-    show() : void {
-        console.log("Whiteboard::show()");          
+    
+    get canvas() {
+        return document.getElementsByTagName("canvas")[0];
     }
-   
-    private custom_select() {     
-        
-        $('div.selectBox').each(function(){
-            let $selectBox = $(this);         
-            let $options = $(this).find( '.options' );
-            let $firstOption = $(this).find( '.options option:first' );            
-            //select the first option
-            $firstOption.attr("selected", "selected");
-            let $selected = $selectBox.find( '.selected' );
-            //Change the selected option
-            $selected
-                .html( $firstOption.html() )
-                .attr( 'value', $firstOption.attr('value') );
-            $selected.click(function(){
-                if( $options.css( 'display' ) == 'none' ) {
-                    $options.css( 'display','block' );
-                }
-                else
-                {
-                    $options.css('display','none');
-                }
-            });
-               
-            $selectBox.on('click',".option", function() {    
-                let $option = $(this);
-                remove_selected();
-                $option.attr("selected", "selected");
-                display_selected();
-            });
-            function remove_selected(){
-                $selectBox.find( '[selected = selected]' ).each(function(){
-                    $(this).removeAttr('selected');
-                });
-            }
-            function display_selected(){
-                if( $options.css( 'display' ) == 'none' ) {
-                    $options.css( 'display','block' );
-                }
-                else
-                {
-                    $options.css('display','none');
-                }
-            }
-        });
-
-
-
+    get container() : JQuery {
+        return $('#whiteboard .container');
+    }
+    get canvas_size() : JQuery {
+        return $('#whiteboard .canvas-size');
     }
 
     // Initialize the whiteboard
@@ -86,13 +40,19 @@ export class Whiteboard extends vc {
      * There is no harm calling twice on this init() over.
      */
     private init() {
-        this.canvas = document.getElementsByTagName("canvas")[0];
+
         this.canvas_context = this.canvas.getContext('2d');
         this.set_draw_mode();
-        this.$canvas = Element.whiteboard.find('canvas');
         this.draw_line_count = 0;
+        this.clear_my_canvas();
+        e.whiteboard.hide();
+        this.test();
+    }
+    private test() {
+        this.show();
     }
     /**
+     * 
      * Event handlers. This must be initialized only once.
      */
     private initHandlers() : void {
@@ -101,13 +61,76 @@ export class Whiteboard extends vc {
         Whiteboard.doneInitHandler = true;
 
         //events         
-        this.custom_select(); 
         e.body.on('click', 'button.eraser', this.set_erase_mode );
         e.body.on('click', 'button.clear', this.clear );       
         e.body.on('click', 'button.draw', this.set_draw_mode );
+        e.body.on('change', '.canvas-size', () => this.on_change_canvas_size() );
        
         //This event will run if mouse is down        
-        this.canvas.onmousedown = ( e ) => { 
+        //this.canvas.onmousedown = e => this.on_canvas_mousedown( e );
+        $('body').on('mousedown', 'canvas', e => this.on_canvas_mouse_down(e) );
+        $('body').on('mousemove', 'canvas', e => this.on_canvas_mouse_move(e) );
+        $('body').on('mouseup', 'canvas', e => this.on_canvas_mouse_up(e) );
+        $('body').on('mouseleave', 'canvas', e => this.on_canvas_mouse_leave(e) );
+        
+       //This event will run if mouse is up      
+       /*this.canvas.onmouseup = ( e ) => {            
+            this.mouse.click = false;
+            this.mouse.pos_prev = {x: -12345, y: -12345};
+       }
+       */
+       /*
+       
+       this.canvas.onmousemove = e => {          
+           if ( ! this.mouse.click ) return;
+               let obj = this.canvas;
+               this.draw( e, obj );
+       }        
+       */
+
+       //This event will run if mouse leave the canvas area
+/*        this.canvas.onmouseleave = e => {
+            this.mouse.click = false;
+            this.mouse.pos_prev = {x: -12345, y: -12345}
+        };
+        */
+       
+    } 
+    on_canvas_mouse_leave( e ) {
+            this.mouse.click = false;
+            this.mouse.pos_prev = {x: -12345, y: -12345}
+    }
+    on_canvas_mouse_up( e ) {
+            this.mouse.click = false;
+            this.mouse.pos_prev = {x: -12345, y: -12345};
+    }
+       on_canvas_mouse_move( e ) {          
+           console.log('on_canvas_mouse_move()');
+           if ( ! this.mouse.click ) return;
+               let obj = this.canvas;
+               this.draw( e, obj );
+       }        
+    on_change_canvas_size() {
+        let size = this.canvas_size.val();
+        let w, h;
+        if ( size == 'small' ) {
+            w = '340';
+            h = '400';
+        }
+        else if ( size == 'medium' ) {
+            w = '480';
+            h = '600';
+        }
+        else if ( size == 'large' ) {
+            w = '600';
+            h = '720';
+        }
+        let newCanvas = `<canvas width="${w}" height="${h}"></canvas>`;
+        $( this.canvas ).replaceWith( newCanvas );       
+        this.canvas_context = this.canvas.getContext('2d');
+        this.container.addClass(size);
+    }
+        on_canvas_mouse_down( e ) { 
             this.mouse.click = true;
             this.mouse.pos_prev = {x: -12345, y: -12345};
             if ( this.draw_line_count > 3500 ) {
@@ -116,24 +139,6 @@ export class Whiteboard extends vc {
             }            
             this.draw( e, this.canvas );
        }
-       //This event will run if mouse is up      
-       this.canvas.onmouseup = ( e ) => {            
-            this.mouse.click = false;
-            this.mouse.pos_prev = {x: -12345, y: -12345};
-       }
-       //This event will run while the mouse is moving
-       this.canvas.onmousemove = ( e ) => {          
-           if ( ! this.mouse.click ) return;
-               let obj = this.canvas;
-               this.draw( e, obj );
-       }        
-       //This event will run if mouse leave the canvas area
-        this.$canvas.mouseleave( () => {           
-            this.mouse.click = false;
-            this.mouse.pos_prev = {x: -12345, y: -12345}
-        });
-       
-    } 
 
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
@@ -243,7 +248,12 @@ export class Whiteboard extends vc {
         this.draw_line_count ++;
         // console.log('whiteboard::draw_line_count: ' + this.draw_line_count);
     }
-    clear_canvas() {
+
+    /**
+     * clears my canvas only. does not broadcast.
+     * @usage use it when you enter a new room ( pecifically on a new instantiation. )
+     */
+    clear_my_canvas() {
         //get the canvas context
         let ctx = this.canvas_context; 
         let canvas = this.canvas; 
@@ -258,7 +268,9 @@ export class Whiteboard extends vc {
         this.draw_line_count = 0;
     }
 
-    //Clear Whiteboard
+    /**
+     * Clear whiteboard and broadcast to all room users.
+     */
     clear() {
         let data :any = { room_name : User.getRoomname };
         data.command = "clear";
@@ -266,19 +278,34 @@ export class Whiteboard extends vc {
                 console.log('clear whiteboard');
             });
     }
+
+    isOpen() : boolean {
+        return e.whiteboard.css('display') != 'none';
+    }
+    show() {
+        e.whiteboard.show();
+    }
+    hide() {
+        e.whiteboard.hide();
+    }
     socket_on_from_server (data) {
-        let $this = this;
         if ( data.command == 'draw' ) {
-            setTimeout(function(){
-                 $this.draw_on_canvas(data);
-             },100);
+                 this.draw_on_canvas(data);
         }
         else if ( data.command == 'history' ) { 
-            setTimeout(function(){
-                 $this.draw_on_canvas(data);
-             },100);     
+                 this.draw_on_canvas(data);
         }     
-        else if ( data.command == 'clear' ) $this.clear_canvas();        
+        else if ( data.command == 'clear' ) {
+            this.clear_my_canvas();        
+        }
+        else if ( data.command == 'show-whiteboard' ) {
+            console.log('socket_on_from_server() : command = ' + data.command );
+            this.show();
+        }
+        else if ( data.command == 'hide-whiteboard' ) {
+            console.log('socket_on_from_server() : command = ' + data.command );
+            this.hide();
+        }
     }
     image ( url: string ) {
         e.book.prop( 'src', url);
