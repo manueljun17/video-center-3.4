@@ -135,10 +135,7 @@ strong {
       overflow: hidden; }
       #room .users.tile.hide .user img {
         display: block;
-        width: 100%; }
-  #room .users.tile.show .user {
-    width: 120px;
-    height: 130px; } }
+        width: 100%; } }
 
 #room .users.list.show {
   display: inline-block;

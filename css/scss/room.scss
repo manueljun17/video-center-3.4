@@ -62,25 +62,16 @@ $background: #f4f4f4;
         left:$break_point_left;
         max-width:520px;
         max-height: 520px; 
-         .user {
-            float: left;
-            width: 50%;
-            overflow: hidden;
-            img {
-              display: block;
-              width: 100%;
-            }    
-          }
-        
-        
-      }
-      &.show {     
-        
         .user {
-          width: ($break_point_left / 2)-10px;
-          height: $break_point_left / 2;
+           float: left;
+           width: 50%;
+           overflow: hidden;
+           img {
+             display: block;
+             width: 100%;
+           }    
         }
-      }      
+      }        
   }
 }
 }
