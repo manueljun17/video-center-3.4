@@ -6,9 +6,29 @@ Video Center Version 3.4
 
 # TODO
 
+* Make 'observer' function.
+    secretly enter/leave lobby and room
+    send message to any one secretly ( which means the message will only delever to only one user. )
+        any one can send message to any one in any room.
+
 * make a book site which has lots of books ready to use and let teacher use books on the site.
 
 * double-check : is it really right to clear the canvas when a user resizes canvas size?
+
+* Video arrangment.
+
+video layout mode: tile
+if there is only 1 user, biggest video.
+if there are 2 users, 50% of each video in one row.
+if there are 3 users, first row 50%/50%, second row 50% and so on.
+
+video layout overlap:
+one big video and all other videos are upon the big video.
+
+video layout list:
+one video at one line.
+
+
 
 # Coding Guide
 

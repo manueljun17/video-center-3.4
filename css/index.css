@@ -6,6 +6,18 @@ body {
 strong {
   color: #19b5fe; }
 
+@media all and (min-width: 580px) {
+  #room .content {
+    position: relative; }
+    #room .content .side {
+      float: left;
+      width: 260px;
+      overflow: hidden; }
+    #room .content #whiteboard {
+      position: absolute;
+      top: 0;
+      left: 260px; } }
+
 .footer {
   background-color: #19b5fe;
   position: fixed;
@@ -112,6 +124,10 @@ strong {
   #room .users .user img {
     display: block;
     width: 100%; }
+  @media all and (min-width: 580px) {
+    #room .users .user {
+      width: 130px;
+      height: 86.66667px; } }
 
 #room .chat input {
   box-sizing: border-box;
@@ -130,6 +146,12 @@ strong {
     text-decoration: underline; }
   #room .chat .display span {
     padding-left: 1em; }
+
+#whiteboard.show {
+  display: block !important; }
+
+#whiteboard.hide {
+  display: none !important; }
 
 #whiteboard .container {
   position: relative;

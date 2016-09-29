@@ -47,6 +47,10 @@ $background: #f4f4f4;
       display: block;
       width: 100%;
     }
+    @media all and ( min-width: $break_point ) {
+      width: $break_point_left / 2;
+      height: $break_point_left / 3;
+    }
   }
 }
 

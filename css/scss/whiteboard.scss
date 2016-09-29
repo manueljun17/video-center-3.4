@@ -1,4 +1,10 @@
 #whiteboard {
+    &.show {
+        display: block!important;
+    }
+    &.hide {
+        display: none!important;
+    }
     .container {
         position: relative;
         width: 340px;

@@ -1,0 +1,17 @@
+@media all and ( min-width: $break_point ) {
+    #room .content {
+        position: relative;
+        .side {
+            float: left;
+            width: $break_point_left;
+            overflow: hidden;
+        }
+        #whiteboard {
+            position: absolute;
+            top: 0;
+            left: $break_point_left;
+        }
+    }
+}
+
+
