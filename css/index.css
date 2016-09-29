@@ -107,14 +107,14 @@ strong {
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   max-height: 260px; }
 #room .users.tile.hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   max-height: 260px; }
 #room .users.tile .user {
   float: left;
@@ -139,6 +139,43 @@ strong {
   #room .users.tile.show .user {
     width: 120px;
     height: 130px; } }
+
+#room .users.list.show {
+  display: inline-block;
+  min-width: 260px;
+  background-color: #708090;
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 520px; }
+#room .users.list.hide {
+  display: inline-block;
+  min-width: 260px;
+  background-color: #708090;
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 520px; }
+#room .users.list .user {
+  float: left;
+  width: 100%;
+  overflow: hidden; }
+  #room .users.list .user img {
+    display: block;
+    width: 100%; }
+@media all and (min-width: 580px) {
+  #room .users.list.hide {
+    position: absolute;
+    left: 260px;
+    max-width: 520px;
+    max-height: 520px; }
+    #room .users.list.hide .user {
+      float: left;
+      width: 100%;
+      overflow: hidden; }
+      #room .users.list.hide .user img {
+        display: block;
+        width: 100%; }
+  #room .users.list.show {
+    max-height: 260px; } }
 
 #room .chat input {
   box-sizing: border-box;

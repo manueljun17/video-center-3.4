@@ -35,7 +35,7 @@ $background: #f4f4f4;
     min-width:260px;
     background-color: $color_gray;   
     overflow: hidden;
-    overflow-y:auto;
+    overflow-y:scroll;
     max-height: 260px;  
   }
   &.hide {  
@@ -43,7 +43,7 @@ $background: #f4f4f4;
     min-width:260px;   
     background-color: $color_gray;  
     overflow: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     
     max-height: 260px;    
   }  
@@ -56,7 +56,7 @@ $background: #f4f4f4;
       width: 100%;
     }    
   }
-  @media all and ( min-width: $break_point_medium ) {
+  @media all and ( min-width: $break_point ) {
       &.hide {
         position:absolute;
         left:$break_point_left;
@@ -80,6 +80,59 @@ $background: #f4f4f4;
           width: ($break_point_left / 2)-10px;
           height: $break_point_left / 2;
         }
+      }      
+  }
+}
+}
+#room .users {
+  &.list {
+
+  
+  &.show {  
+    display: inline-block;
+    min-width:260px;
+    background-color: $color_gray;   
+    overflow: hidden;
+    overflow-y:auto;
+    max-height: 520px;   
+  }
+  &.hide {  
+    display: inline-block;
+    min-width:260px;   
+    background-color: $color_gray;  
+    overflow: hidden;
+    overflow-y: auto;    
+    max-height: 520px;    
+  }  
+  .user {
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+    }    
+  }
+  @media all and ( min-width: $break_point ) {
+      &.hide {
+        position:absolute;
+        left:$break_point_left;
+        max-width:520px;
+        max-height: 520px; 
+         .user {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            img {
+              display: block;
+              width: 100%;
+            }    
+          }
+        
+        
+      }
+      &.show {     
+        max-height: 260px;       
       }      
   }
 }
