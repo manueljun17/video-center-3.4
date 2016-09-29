@@ -33,6 +33,12 @@ export class Whiteboard extends vc {
     get canvas_size() : JQuery {
         return $('#whiteboard .canvas-size');
     }
+    get draw_size() : JQuery {
+        return $('#whiteboard .draw-size');
+    }
+    get draw_color() : JQuery {
+        return $('#whiteboard .draw-color');
+    }
 
     // Initialize the whiteboard
     //
@@ -95,6 +101,15 @@ export class Whiteboard extends vc {
         };
         */
        
+    }
+    on_canvas_mouse_down( e ) { 
+        this.mouse.click = true;
+        this.mouse.pos_prev = {x: -12345, y: -12345};
+        if ( this.draw_line_count > 3500 ) {
+            alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
+            this.mouse.click = false;
+        }            
+        this.draw( e, this.canvas );
     } 
     on_canvas_mouse_leave( e ) {
             this.mouse.click = false;
@@ -104,12 +119,11 @@ export class Whiteboard extends vc {
             this.mouse.click = false;
             this.mouse.pos_prev = {x: -12345, y: -12345};
     }
-       on_canvas_mouse_move( e ) {          
-           console.log('on_canvas_mouse_move()');
-           if ( ! this.mouse.click ) return;
-               let obj = this.canvas;
-               this.draw( e, obj );
-       }        
+    on_canvas_mouse_move( e ) {
+        if ( ! this.mouse.click ) return;
+            let obj = this.canvas;
+            this.draw( e, obj );
+    }        
     on_change_canvas_size() {
         let size = this.canvas_size.val();
         let w, h;
@@ -130,15 +144,8 @@ export class Whiteboard extends vc {
         this.canvas_context = this.canvas.getContext('2d');
         this.container.addClass(size);
     }
-        on_canvas_mouse_down( e ) { 
-            this.mouse.click = true;
-            this.mouse.pos_prev = {x: -12345, y: -12345};
-            if ( this.draw_line_count > 3500 ) {
-                alert('Too much draw on whiteboard. Please clear whiteboard before you draw more.');
-                this.mouse.click = false;
-            }            
-            this.draw( e, this.canvas );
-       }
+   
+    
 
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
@@ -155,11 +162,12 @@ export class Whiteboard extends vc {
     
     //Get linesize or radius of drawing
     private getLineSize () {
-        return Element.selectbox_linesize_selected.attr('value'); //code#782016 custom select
+        return this.draw_size.val(); //code#782016 custom select
     }
     //get color of drawing
     private getColor () {
-        return Element.selectbox_color_selected.attr('value'); //code#782016 custom select
+        // return Element.selectbox_color_selected.attr('value');
+        return this.draw_color.val(); //code#782016 custom select
     }
     //Set Drawing data
     private draw( e, obj) : void {
