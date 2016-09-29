@@ -292,9 +292,11 @@ export class Whiteboard extends vc {
     }
     show() {
         e.whiteboard.removeClass('hide').addClass('show');
+        e.users.removeClass('hide').addClass('show');
     }
     hide() {
         e.whiteboard.removeClass('show').addClass('hide');
+        e.users.removeClass('show').addClass('hide');
     }
     socket_on_from_server (data) {
         if ( data.command == 'draw' ) {

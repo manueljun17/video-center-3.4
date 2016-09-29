@@ -174,6 +174,9 @@ export class Element {
     static get book() : JQuery {        
         return $(".book");
     }
+    static get users() : JQuery {        
+        return Element.room.find('.users');
+    }
     
 
     /*------Dom Handlers------*/

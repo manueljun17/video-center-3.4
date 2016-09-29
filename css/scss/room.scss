@@ -38,6 +38,44 @@ $background: #f4f4f4;
 
 
 #room .users {
+  @media all and ( min-width: $break_point_medium ) {
+      &.hide {
+        position:absolute;
+        left:$break_point_left;
+        float:left;
+        width: $break_point_left;
+        .user {
+          width: $break_point_left / 2;
+          height: $break_point_left / 2;
+        }
+      }
+      &.show {     
+        
+        .user {
+          width: $break_point_left / 2;
+          height: $break_point_left / 2;
+        }
+      }      
+  }
+  @media all and ( min-width: $break_point_large ) {
+      &.hide {
+        position:absolute;
+        left:$break_point_left;
+        float:left;
+        width: $break_point_left * 2;
+        .user {
+          width: $break_point_left;
+          height: $break_point_left ;
+        }
+      }
+      &.show {     
+        
+        .user {
+          width: $break_point_left / 2;
+          height: $break_point_left / 2;
+        }
+      }      
+  }
   .user {
     float: left;
     width: 50%;
@@ -47,10 +85,7 @@ $background: #f4f4f4;
       display: block;
       width: 100%;
     }
-    @media all and ( min-width: $break_point ) {
-      width: $break_point_left / 2;
-      height: $break_point_left / 3;
-    }
+    
   }
 }
 

@@ -17,7 +17,6 @@ strong {
       position: absolute;
       top: 0;
       left: 260px; } }
-
 .footer {
   background-color: #19b5fe;
   position: fixed;
@@ -40,7 +39,6 @@ strong {
       margin: 10px 0; }
     #room .document .container input[name='userfile'] {
       width: 100%; }
-
 #room .books {
   color: #fff;
   background-color: #69a3dc; }
@@ -116,6 +114,30 @@ strong {
   #room .roomname {
     color: white; }
 
+@media all and (min-width: 580px) {
+  #room .users.hide {
+    position: absolute;
+    left: 260px;
+    float: left;
+    width: 260px; }
+    #room .users.hide .user {
+      width: 130px;
+      height: 130px; }
+  #room .users.show .user {
+    width: 130px;
+    height: 130px; } }
+@media all and (min-width: 780px) {
+  #room .users.hide {
+    position: absolute;
+    left: 260px;
+    float: left;
+    width: 520px; }
+    #room .users.hide .user {
+      width: 260px;
+      height: 260px; }
+  #room .users.show .user {
+    width: 130px;
+    height: 130px; } }
 #room .users .user {
   float: left;
   width: 50%;
@@ -124,16 +146,11 @@ strong {
   #room .users .user img {
     display: block;
     width: 100%; }
-  @media all and (min-width: 580px) {
-    #room .users .user {
-      width: 130px;
-      height: 86.66667px; } }
 
 #room .chat input {
   box-sizing: border-box;
   padding: .4em;
   width: 100%; }
-
 #room .chat .display {
   padding: .6rem;
   overflow: hidden;
@@ -149,10 +166,8 @@ strong {
 
 #whiteboard.show {
   display: block !important; }
-
 #whiteboard.hide {
   display: none !important; }
-
 #whiteboard .container {
   position: relative;
   width: 340px;
@@ -165,13 +180,13 @@ strong {
   #whiteboard .container.large {
     width: 600px;
     height: 720px; }
-
 #whiteboard .book {
   text-align: center; }
-
 #whiteboard canvas {
   position: absolute;
   z-index: 100;
   top: 0;
   left: 0;
   border: 2px solid black; }
+
+/*# sourceMappingURL=index.css.map */
