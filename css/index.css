@@ -87,19 +87,7 @@ strong {
 
 #room {
   background-color: #708090;
-  display: none;
-  /*
-  .user-list {
-    background-color: $color_darkblue;
-   .name {
-      display: block;
-      padding: .4em .8em .4em .8em;
-      cursor: pointer;
-      font-size: 1.2em;
-      color:white; 
-    }
-  }
-  */ }
+  display: none; }
   #room header {
     background-color: #19b5fe;
     padding: .6em;
@@ -114,41 +102,41 @@ strong {
   #room .roomname {
     color: white; }
 
-#room .users.show {
+#room .users.tile.show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 260px; }
-#room .users.hide {
+#room .users.tile.hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 260px; }
-#room .users .user {
+#room .users.tile .user {
   float: left;
   width: 50%;
   overflow: hidden; }
-  #room .users .user img {
+  #room .users.tile .user img {
     display: block;
     width: 100%; }
 @media all and (min-width: 580px) {
-  #room .users.hide {
+  #room .users.tile.hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 520px; }
-    #room .users.hide .user {
+    #room .users.tile.hide .user {
       float: left;
       width: 50%;
       overflow: hidden; }
-      #room .users.hide .user img {
+      #room .users.tile.hide .user img {
         display: block;
         width: 100%; }
-  #room .users.show .user {
+  #room .users.tile.show .user {
     width: 120px;
     height: 130px; } }
 

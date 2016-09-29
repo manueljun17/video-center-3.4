@@ -145,6 +145,15 @@ export class Element {
     static get room_whiteboard_button() : JQuery {
         return Element.room.find('button.whiteboard');
     }
+    static get room_tile_layout() : JQuery {
+        return Element.room.find('button.tile-layout');
+    }
+    static get room_list_layout() : JQuery {
+        return Element.room.find('button.list-layout');
+    }
+    static get room_overlap_layout() : JQuery {
+        return Element.room.find('button.overlap-layout');
+    }
     static get room_display() : JQuery {
         return Element.room.find('.display');
     }  

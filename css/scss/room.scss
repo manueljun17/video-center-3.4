@@ -22,22 +22,14 @@ $background: #f4f4f4;
   .roomname{
     color: white;
   }
-  /*
-  .user-list {
-    background-color: $color_darkblue;
-   .name {
-      display: block;
-      padding: .4em .8em .4em .8em;
-      cursor: pointer;
-      font-size: 1.2em;
-      color:white; 
-    }
-  }
-  */
+
 }
 
 
 #room .users {
+  &.tile {
+
+  
   &.show {  
     display: inline-block;
     min-width:260px;
@@ -51,7 +43,7 @@ $background: #f4f4f4;
     min-width:260px;   
     background-color: $color_gray;  
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     
     max-height: 260px;    
   }  
@@ -90,6 +82,7 @@ $background: #f4f4f4;
         }
       }      
   }
+}
 }
 
 #room .chat {
