@@ -114,38 +114,43 @@ strong {
   #room .roomname {
     color: white; }
 
-@media all and (min-width: 580px) {
-  #room .users.hide {
-    position: absolute;
-    left: 260px;
-    float: left;
-    width: 260px; }
-    #room .users.hide .user {
-      width: 130px;
-      height: 130px; }
-  #room .users.show .user {
-    width: 130px;
-    height: 130px; } }
-@media all and (min-width: 780px) {
-  #room .users.hide {
-    position: absolute;
-    left: 260px;
-    float: left;
-    width: 520px; }
-    #room .users.hide .user {
-      width: 260px;
-      height: 260px; }
-  #room .users.show .user {
-    width: 130px;
-    height: 130px; } }
+#room .users.show {
+  display: inline-block;
+  min-width: 260px;
+  background-color: #708090;
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: 260px; }
+#room .users.hide {
+  display: inline-block;
+  min-width: 260px;
+  background-color: #708090;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 260px; }
 #room .users .user {
   float: left;
   width: 50%;
-  height: 50vw;
   overflow: hidden; }
   #room .users .user img {
     display: block;
     width: 100%; }
+@media all and (min-width: 580px) {
+  #room .users.hide {
+    position: absolute;
+    left: 260px;
+    max-width: 520px;
+    max-height: 520px; }
+    #room .users.hide .user {
+      float: left;
+      width: 50%;
+      overflow: hidden; }
+      #room .users.hide .user img {
+        display: block;
+        width: 100%; }
+  #room .users.show .user {
+    width: 120px;
+    height: 130px; } }
 
 #room .chat input {
   box-sizing: border-box;
