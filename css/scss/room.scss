@@ -129,6 +129,84 @@ $background: #f4f4f4;
 }
 }
 
+#room .users {
+  &.overlap {
+
+  
+  &.show {  
+    display: inline-block;
+    min-width:260px;
+    background-color: $color_gray;   
+    overflow: hidden;
+    overflow-y:auto;
+    max-height: 520px;   
+    
+  }
+  &.hide {  
+    display: inline-block;
+    min-width:260px;   
+    background-color: $color_gray;  
+    overflow: hidden;
+    overflow-y: auto;    
+    max-height: 520px;    
+  }  
+  .user {
+    float: left;
+    width: 25%;
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+    }   
+    &.main {
+      float: left;
+      width: 100%;
+      overflow: hidden;
+      img {
+        display: block;
+        width: 100%;
+      }    
+    } 
+  }
+  @media all and ( min-width: $break_point ) {
+      &.hide {
+        position:absolute;
+        left:$break_point_left;
+        max-width:520px;
+        max-height: 620px; 
+         .user {
+            &.main {
+              float: left;
+              width: 100%;
+              overflow: hidden;
+              img {
+                display: block;
+                width: 100%;
+              }    
+            }   
+          }
+        
+        
+      }
+      &.show {     
+        max-height: 520px;       
+        .user {
+          &.main {
+            float: left;
+            width: 100%;
+            overflow: hidden;
+            img {
+              display: block;
+              width: 100%;
+            }    
+          }
+        }
+
+      }      
+  }
+}
+}
+
 #room .chat {
   input {
     box-sizing: border-box;

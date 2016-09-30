@@ -186,6 +186,12 @@ export class Element {
     static get users() : JQuery {        
         return Element.room.find('.users');
     }
+    static get users_overlap() : JQuery {        
+        return Element.room.find('.users.overlap');
+    }
+    static get user() : JQuery {        
+        return Element.room.find('.user');
+    }
     
 
     /*------Dom Handlers------*/

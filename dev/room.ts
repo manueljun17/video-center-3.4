@@ -38,6 +38,7 @@ export class Room extends vc {
         e.room_tile_layout.click( () => this.on_click_tile() );
         e.room_list_layout.click( () => this.on_click_list() );
         e.room_overlap_layout.click( () => this.on_click_overlap() );
+        $('.overlap').on('click','.user', (user) => this.on_click_user(user) );
     }     
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
@@ -96,6 +97,17 @@ export class Room extends vc {
     private on_click_overlap() {
         e.users.removeClass('list').removeClass('tile').addClass('overlap');
     }
+    private on_click_user( user ) {
+        // alert("User click: "+user);
+       
+        let users = user.delegateTarget;
+        if(!$(users).hasClass("overlap"))return;
+        e.user.removeClass('main');
+        user.currentTarget.remove();
+        e.users.append("<div class='user main'>"+ user.currentTarget.innerHTML +"</div>");
+    
+    }
+    
     
 
 
