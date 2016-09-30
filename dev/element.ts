@@ -12,6 +12,9 @@ export class Element {
     static get entranceUsername () : JQuery {
         return Element.entrance.find('[name="username"]');
     }
+    static get entrance_loginadmin() : JQuery {
+        return Element.entrance.find('.login-admin');
+    }
     
     /*------Lobby-----*/
     static get lobby() : JQuery {

@@ -38,7 +38,7 @@ export class Room extends vc {
         e.room_tile_layout.click( () => this.on_click_tile() );
         e.room_list_layout.click( () => this.on_click_list() );
         e.room_overlap_layout.click( () => this.on_click_overlap() );
-        $('.overlap').on('click','.user', (user) => this.on_click_user(user) );
+        e.users_overlap.on('click','.user', (user) => this.on_click_user(user) );
     }     
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );

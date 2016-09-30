@@ -1,4 +1,6 @@
 export const lobbyRoomName:string = 'Lobby';
+export const user_type:string = 'User';
+export const admin_type:string = 'Admin';
 declare var _serverUrl;
 declare var _uploadUrl;
 export const uploadUrl = _uploadUrl;
@@ -14,7 +16,8 @@ export interface ChatMessage {
 export interface User {
     name: string;
     room: string;
-    socket: string; // socket id
+    socket: string
+    type: string;
 }
 export interface Mouse {
     click: boolean;

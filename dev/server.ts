@@ -27,7 +27,7 @@ export class Server extends vc {
         });      
         Server.socket.on('update-username', Lobby.on_event_update_username);
         Server.socket.on('join-room', (user: de.User) => {
-            
+            if(user.type == de.admin_type)return;
             if ( User.getRoomname == de.lobbyRoomName ) Lobby.on_event_join_room( user );
             else room.on_event_join_room( user );
 
@@ -104,6 +104,12 @@ export class Server extends vc {
      */
     static updateUsername( username: string, callback: (user:de.User) => void ) {
         Server.emit( 'update-username', username, (user: de.User) => {
+            callback( user );
+        } );
+    }
+
+    static sign_as_admin( username: string, callback: (user:de.User) => void ) {
+        Server.emit( 'sign-as-admin', username, (user: de.User) => {
             callback( user );
         } );
     }

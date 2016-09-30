@@ -17,15 +17,15 @@ Video Center Version 3.4
 
 * Video arrangment.
 
-#video layout mode: tile
+* ***video layout mode: tile
 if there is only 1 user, biggest video.
 if there are 2 users, 50% of each video in one row.
 if there are 3 users, first row 50%/50%, second row 50% and so on.
 
-video layout overlap:
+* ***video layout overlap:
 one big video and all other videos are upon the big video.
 
-#video layout list:
+* ***video layout list:
 one video at one line.
 
 

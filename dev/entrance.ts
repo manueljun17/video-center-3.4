@@ -17,9 +17,25 @@ export class Entrance extends vc {
     private initHandlers() : void {
         if ( Entrance.doneInit ) return;
         else Entrance.doneInit = true;
-        e.entrance.submit( this.submit );        
+        e.entrance.submit( this.submit );    
+        e.entrance_loginadmin.click( (event) => this.on_click_loginadmin(event) ); 
     } 
-
+    private on_click_loginadmin(event) {
+        event.preventDefault();
+        let username = e.entranceUsername.val();
+        if ( username == "" ) {
+        alert('Username is empty.');
+        }
+        else {
+        server.sign_as_admin( username , ( u: de.User ) => {
+            console.log("entrance.signAdmin => callback => re: ", u);
+            user.save_username( u );    
+            e.entranceUsername.val("");
+            e.entrance.hide();        
+            new Lobby().show();            
+        });
+        }
+    }
     public show() : void {
         console.log("Entrance::show()");          
         e.lobby.hide();
