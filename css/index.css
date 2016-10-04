@@ -83,7 +83,8 @@ strong {
       font-size: 1.4em; }
     #lobby .room-list .users .name {
       display: inline-block;
-      padding: .4em .8em .4em 0; }
+      padding: .4em .8em .4em 0;
+      cursor: pointer; }
 
 #room {
   background-color: #708090;
@@ -266,5 +267,91 @@ strong {
   top: 0;
   left: 0;
   border: 2px solid black; }
+
+#lobby .private-chat {
+  color: #9a9a9a;
+  font: 100%/1.5em "Droid Sans", sans-serif;
+  margin: 0;
+  bottom: 0;
+  font-size: 12px;
+  float: right;
+  right: 0;
+  position: absolute;
+  width: 300px; }
+  #lobby .private-chat .chat {
+    background: #fff; }
+    #lobby .private-chat .chat form {
+      padding: 24px; }
+  #lobby .private-chat .chat-history {
+    height: 252px;
+    padding: 8px 24px;
+    overflow-y: scroll; }
+  #lobby .private-chat .chat-message {
+    margin: 16px 0; }
+  #lobby .private-chat .chat-message img {
+    border-radius: 50%;
+    float: left;
+    display: block;
+    height: auto;
+    max-width: 100%; }
+  #lobby .private-chat .chat-message-content {
+    margin-left: 56px; }
+  #lobby .private-chat .chat-time {
+    float: right;
+    font-size: 10px; }
+  #lobby .private-chat hr {
+    background: #e9e9e9;
+    border: 0;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 1px;
+    margin: 0;
+    min-height: 1px; }
+  #lobby .private-chat h4:before {
+    background: #1af136;
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    margin: 0 8px 0 0;
+    width: 8px; }
+  #lobby .private-chat h4 {
+    font-size: 12px;
+    line-height: 1.5em;
+    margin: 0; }
+  #lobby .private-chat h5 {
+    font-size: 10px;
+    line-height: 1.5em;
+    margin: 0; }
+  #lobby .private-chat input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px;
+    outline: none;
+    width: 234px; }
+  #lobby .private-chat fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0; }
+  #lobby .private-chat header {
+    background-color: #0a9ce0;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    cursor: pointer;
+    padding: 16px 24px; }
+    #lobby .private-chat header .chat-close {
+      background: #105592;
+      border-radius: 50%;
+      color: #fff;
+      display: block;
+      float: right;
+      font-size: 10px;
+      height: 16px;
+      line-height: 16px;
+      margin: 2px 0 0 0;
+      text-align: center;
+      width: 16px; }
+    #lobby .private-chat header a {
+      text-decoration: none; }
 
 /*# sourceMappingURL=index.css.map */

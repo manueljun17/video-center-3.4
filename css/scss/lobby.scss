@@ -2,6 +2,7 @@
   
   display:none;
   font-size: 11pt;
+  
   header {
   background-color: $header_background_color;
   padding: 1em;
@@ -27,6 +28,7 @@
     .name {
       display: inline-block;
       padding: .4em .8em .4em 0;
+      cursor: pointer;
     }
   }
 }

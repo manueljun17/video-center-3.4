@@ -31,3 +31,6 @@ export let mouse: Mouse = {
         pos: { x:0, y: 0},
         pos_prev: { x: 0, y: 0 }
 }
+export function get_rand_int(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

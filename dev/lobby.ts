@@ -38,6 +38,7 @@ export class Lobby extends vc {
         if ( Lobby.doneInit ) return;
         Lobby.doneInit = true;
         e.lobby.on('click', '.roomname',this.on_join_room );
+        e.lobby.on('click', '.name',this.on_private_message );
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -109,6 +110,62 @@ export class Lobby extends vc {
             new Entrance().show();
         });    
     }
+    
+    private on_private_message( event ) : void {        
+        console.log(this);
+        let username = $(this).html();
+        let currentuser = User.getUsername;     
+        if( username == currentuser ) return;  
+        e.lobby.append(
+            '<div class="private-chat">'
+            +'<header class="private-chat-header">'			
+			+'<a href="#" class="chat-close">x</a>'
+			+'<h4>'+username+'</h4>'
+            +'</header>'
+            +'<div class="chat">'
+            +'<div class="chat-history">'//chat history
+            +'<div class="chat-message clearfix">'
+			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
+			+'<div class="chat-message-content clearfix">'
+			+'<span class="chat-time">13:37</span>'
+			+'<h5>'+username+'</h5>'
+			+'<p>Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>'
+			+'</div> <!-- end chat-message-content -->'
+			+'</div> <!-- end chat-message -->'
+			+'<hr>'
+            //
+             +'<div class="chat-message clearfix">'
+			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
+			+'<div class="chat-message-content clearfix">'
+			+'<span class="chat-time">13:39</span>'
+			+'<h5>'+username+'</h5>'
+			+'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>'
+			+'</div> <!-- end chat-message-content -->'
+			+'</div> <!-- end chat-message -->'
+			+'<hr>'
+            //
+             +'<div class="chat-message clearfix">'
+			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
+			+'<div class="chat-message-content clearfix">'
+			+'<span class="chat-time">13:45</span>'
+			+'<h5>'+username+'</h5>'
+			+'<p>Magni vel debitis numquam qui tempora rem voluptatem delectus!</p>'
+			+'</div> <!-- end chat-message-content -->'
+			+'</div> <!-- end chat-message -->'
+			+'<hr>'
+            //
+            +'</div>'//chat-history	
+            +'<form action="#" method="post">'
+			+'<fieldset>'					
+			+'<input type="text" placeholder="Type your message…" autofocus>'
+			+'<input type="hidden">'
+			+'</fieldset>'            
+			+'</form>'
+            +'</div>'//chat	
+            +"</div>"//private-chat
+            
+        );
+    }
     private on_join_room( event ) : void {
         event.preventDefault();
         var room_id = $(this).text();      
@@ -151,8 +208,6 @@ export class Lobby extends vc {
      */
     static add_user( user : de.User ) : void {
         let room_id = MD5( user.room );
-        console.log("add_user: room_id : " + room_id);
-        // let $room = e.lobby_room( room_id );
         if ( $lobby.room( room_id ).length == 0 ) e.appendRoom( user.room, room_id ); // create room if it does not exist.
         e.lobby_remove_user(user); // remove the user.
         e.appendUser( room_id, user ); // append the user into the room.
@@ -163,8 +218,6 @@ export class Lobby extends vc {
             let user: de.User = users[i];   
             if(user.type != de.admin_type){      
                 let room_id = MD5(user.room);
-                console.log(user);
-                console.log("room id:" + room_id);
                 let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
                 if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
                 Lobby.add_user(user);
