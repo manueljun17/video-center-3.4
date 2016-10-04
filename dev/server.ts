@@ -27,10 +27,10 @@ export class Server extends vc {
         });      
         Server.socket.on('update-username', Lobby.on_event_update_username);
         Server.socket.on('join-room', (user: de.User) => {
-            if(user.type == de.admin_type)return;
-            if ( User.getRoomname == de.lobbyRoomName ) Lobby.on_event_join_room( user );
-            else room.on_event_join_room( user );
-
+            if(user.type != de.admin_type) {
+                if ( User.getRoomname == de.lobbyRoomName ) Lobby.on_event_join_room( user );
+                else room.on_event_join_room( user );
+            }
         });
         Server.socket.on('remove-user', ( user )=>{           
            room.remove_room_list( user );
@@ -44,16 +44,18 @@ export class Server extends vc {
         });
         
         Server.socket.on('disconnect', ( user )=>{
-            console.log("socket ?? : " + user)
-            if ( user.name == User.getUsername ) return;
+            console.log("socket ?? : ");
+            if ( user.name == User.getUsername ) return;            
             if ( typeof user.socket == 'undefined' ) return; // @todo tricky. Do not add message on my chat display box IF i am the one who leave the room.
-            if ( User.getRoomname == de.lobbyRoomName ) {
-                if(user.room != "")Lobby.on_event_disconnect_room( user );//send only if the user.room is not empty
-                Lobby.remove_user( user );
-            }
-            else {
-                room.on_event_disconnect_room( user );
-            }
+            if ( user.type != de.admin_type ) {
+                if ( User.getRoomname == de.lobbyRoomName ) {
+                    if(user.room != "")Lobby.on_event_disconnect_room( user );//send only if the user.room is not empty
+                    Lobby.remove_user( user );
+                }
+                else {
+                    if(user.room != "")room.on_event_disconnect_room( user );
+                }
+            }    
         });      
 
         Server.socket.on('whiteboard', ( data ) => {

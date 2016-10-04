@@ -129,8 +129,10 @@ export class Room extends vc {
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;
             let user: de.User = users[i]; 
-            console.log( "show_user_list() "+user.name );                          
-            Room.add_user(user);
+            if(user.type != de.admin_type){
+                console.log( "show_user_list() "+user.name );                          
+                Room.add_user(user);
+            }
         }         
     } 
     static add_user( user : de.User ) : void {        

@@ -160,12 +160,15 @@ export class Lobby extends vc {
     static show_room_list( users: Array<de.User> ) :void {
         for( let i in users ) {
             if ( ! users.hasOwnProperty(i) ) continue;
-            let user: de.User = users[i];      
-            let room_id = MD5(user.room);
-            console.log("room id:" + room_id);
-            let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
-            if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
-            Lobby.add_user(user);
+            let user: de.User = users[i];   
+            if(user.type != de.admin_type){      
+                let room_id = MD5(user.room);
+                console.log(user);
+                console.log("room id:" + room_id);
+                let $room = e.lobby_room_list.find('[id="'+room_id+'"]');
+                if ( $room.length == 0 ) e.appendRoom( user.room, room_id );            
+                Lobby.add_user(user);
+            }  
         }         
     }        
     static remove_room_list( room ) :void {
