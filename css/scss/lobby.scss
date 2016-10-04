@@ -2,7 +2,16 @@
   
   display:none;
   font-size: 11pt;
-  
+   .display {
+      padding: .6rem;
+      overflow: hidden;
+      overflow-y: scroll;
+      min-height: 4em;
+      max-height: 10em;
+      background-color: #efefef;        
+      font-size: .9em;
+    
+  }
   header {
   background-color: $header_background_color;
   padding: 1em;

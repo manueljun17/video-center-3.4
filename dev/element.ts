@@ -20,6 +20,9 @@ export class Element {
     static get lobby() : JQuery {
         return $('#lobby');
     }
+     static get lobby_chat_history() : JQuery {
+        return $('.chat-history')
+    }
     static lobby_show() : void {
             Element.lobby.show();  
             Element.entrance.hide();            
@@ -29,6 +32,8 @@ export class Element {
     static lobby_show_message( data ) {
          Element.lobby_display.append( Element.markup_chat_message( data ) );
          Element.lobby_display.animate( { scrollTop: Element.lobby_display.prop('scrollHeight') } );
+         Element.lobby_chat_history.append( Element.markup_private_chat_message( data ) );
+         Element.lobby_chat_history.animate( { scrollTop: Element.lobby_chat_history.prop('scrollHeight') } );
     }
     static lobby_show_form_roomname() : void {
          Element.lobby_form_roomname.show();
@@ -225,6 +230,24 @@ export class Element {
         return this.room.find('[socket="'+user.socket+'"]');
     }
     /*------Markup------*/
+    static lobby_add_private_chat( username ){
+            return '<div class="private-chat">'
+            +'<header class="private-chat-header">'			
+			+'<a href="#" class="chat-close">x</a>'
+			+'<h4>'+username+'</h4>'
+            +'</header>'
+            +'<div class="chat">'
+            +'<div class="chat-history">'//chat history         
+            +'</div>'//chat-history	
+            +'<form action="#" method="post">'
+			+'<fieldset>'					
+			+'<input type="text" placeholder="Type your message…" autofocus>'
+			+'<input type="hidden">'
+			+'</fieldset>'            
+			+'</form>'
+            +'</div>'//chat	
+            +"</div>"//private-chat   
+    }
     static markup_username(  username:string, socket:string ) : any {
       return '<span class="name" socket="'+socket+'">'+ username + '</span>';       
     }
@@ -236,8 +259,22 @@ export class Element {
         '</div>';      
     }
     
+    
     static markup_chat_message( data : de.ChatMessage ) : string {
         return '<div><i>'+data.name+' </i><span>'+data.message+'<span></div>';
+    }
+    static markup_private_chat_message( data : de.ChatMessage ) : string {      
+        var hour = de.get_hours();
+        var min = de.get_minutes();        
+        return '<div class="chat-message clearfix">'
+			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
+			+'<div class="chat-message-content clearfix">'
+			+'<span class="chat-time">'+ hour + ':' + min +'</span>'
+			+'<h5>'+data.name+'</h5>'
+			+'<p>'+data.message+'</p>'
+		    +'</div> <!-- end chat-message-content -->'
+			+'</div> <!-- end chat-message -->'
+			+'<hr>'
     }
 
     static updateMyName( name: string ) {

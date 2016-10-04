@@ -34,3 +34,13 @@ export let mouse: Mouse = {
 export function get_rand_int(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+export function get_hours() {
+    let date = new Date();  
+    let hour = date.getHours();   
+    return hour;
+}
+export function get_minutes() {
+    let date = new Date();     
+    let min = date.getMinutes();
+    return min;
+}

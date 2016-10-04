@@ -64,6 +64,14 @@ strong {
 #lobby {
   display: none;
   font-size: 11pt; }
+  #lobby .display {
+    padding: .6rem;
+    overflow: hidden;
+    overflow-y: scroll;
+    min-height: 4em;
+    max-height: 10em;
+    background-color: #efefef;
+    font-size: .9em; }
   #lobby header {
     background-color: #19b5fe;
     padding: 1em;
@@ -238,10 +246,6 @@ strong {
   max-height: 10em;
   background-color: #efefef;
   font-size: .9em; }
-  #room .chat .display i {
-    text-decoration: underline; }
-  #room .chat .display span {
-    padding-left: 1em; }
 
 #whiteboard.show {
   display: block !important; }

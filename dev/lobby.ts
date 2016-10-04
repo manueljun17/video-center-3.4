@@ -116,54 +116,7 @@ export class Lobby extends vc {
         let username = $(this).html();
         let currentuser = User.getUsername;     
         if( username == currentuser ) return;  
-        e.lobby.append(
-            '<div class="private-chat">'
-            +'<header class="private-chat-header">'			
-			+'<a href="#" class="chat-close">x</a>'
-			+'<h4>'+username+'</h4>'
-            +'</header>'
-            +'<div class="chat">'
-            +'<div class="chat-history">'//chat history
-            +'<div class="chat-message clearfix">'
-			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
-			+'<div class="chat-message-content clearfix">'
-			+'<span class="chat-time">13:37</span>'
-			+'<h5>'+username+'</h5>'
-			+'<p>Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>'
-			+'</div> <!-- end chat-message-content -->'
-			+'</div> <!-- end chat-message -->'
-			+'<hr>'
-            //
-             +'<div class="chat-message clearfix">'
-			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
-			+'<div class="chat-message-content clearfix">'
-			+'<span class="chat-time">13:39</span>'
-			+'<h5>'+username+'</h5>'
-			+'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>'
-			+'</div> <!-- end chat-message-content -->'
-			+'</div> <!-- end chat-message -->'
-			+'<hr>'
-            //
-             +'<div class="chat-message clearfix">'
-			+'<img src="tmp/'+de.get_rand_int(1,8)+'.png" alt="" width="32" height="32">'
-			+'<div class="chat-message-content clearfix">'
-			+'<span class="chat-time">13:45</span>'
-			+'<h5>'+username+'</h5>'
-			+'<p>Magni vel debitis numquam qui tempora rem voluptatem delectus!</p>'
-			+'</div> <!-- end chat-message-content -->'
-			+'</div> <!-- end chat-message -->'
-			+'<hr>'
-            //
-            +'</div>'//chat-history	
-            +'<form action="#" method="post">'
-			+'<fieldset>'					
-			+'<input type="text" placeholder="Type your message…" autofocus>'
-			+'<input type="hidden">'
-			+'</fieldset>'            
-			+'</form>'
-            +'</div>'//chat	
-            +"</div>"//private-chat
-            
+        e.lobby.append(e.lobby_add_private_chat(username)                   
         );
     }
     private on_join_room( event ) : void {
