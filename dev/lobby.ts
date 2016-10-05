@@ -23,9 +23,15 @@ export class Lobby extends vc {
             e.updateMyName( User.getUsername );
             server.userList( '', Lobby.show_room_list );
         });
-    }
+    }    
     static addMessage( data: de.ChatMessage ) {
         e.lobby_show_message( data );
+    }
+    static add_private_message( data ) {
+        console.log(data);      
+        console.log(data);
+        if ( e.lobby.private_chat( data.pmsocket ).length == 0 ) e.lobby_append_private_chat(data);
+        e.add_private_chat( data );
     }
     static addMessageJoin( user: de.User ) {
         this.addMessage( { name: user.name, message: ' joins into ' + user.room });
@@ -93,10 +99,10 @@ export class Lobby extends vc {
    
     private send_private_message( event ) :void {
         event.preventDefault();
-        console.log(this);
-        let data = {message:e.lobby_private_message_value}
-        server.chat_private_message(e.lobby_private_message_value , (re)=> { 
-            console.log("server.chat_private_message => message => re: ", re);           
+        // console.log(this);
+        let data = { message:e.lobby_private_message_value, pmsocket : $(this).attr('pmsocket'), name : User.getUsername }
+        server.chat_private_message( data , (re)=> { 
+            // console.log("server.chat_private_message => message => re: ", re);           
             e.lobby_private_message_empty();      
          } );
     }    
@@ -124,11 +130,10 @@ export class Lobby extends vc {
     
     private on_private_message( event ) : void {        
         console.log(this);
-        let data = { username : $(this).html(), socket : $(this).attr('socket') };
+        let data = { name : $(this).html(), pmsocket : $(this).attr('socket') };
         let currentuser = User.getUsername;     
-        if( data.username == currentuser ) return;  
-        e.lobby.append(e.lobby_add_private_chat( data )                   
-        );
+        if( data.name == currentuser ) return;  
+        e.lobby_append_private_chat( data );
     }
     private on_join_room( event ) : void {
         event.preventDefault();

@@ -31,9 +31,7 @@ export class Element {
     }
     static lobby_show_message( data ) {
          Element.lobby_display.append( Element.markup_chat_message( data ) );
-         Element.lobby_display.animate( { scrollTop: Element.lobby_display.prop('scrollHeight') } );
-         Element.lobby_chat_history.append( Element.markup_private_chat_message( data ) );
-         Element.lobby_chat_history.animate( { scrollTop: Element.lobby_chat_history.prop('scrollHeight') } );
+         Element.lobby_display.animate( { scrollTop: Element.lobby_display.prop('scrollHeight') } );        
     }
     static lobby_show_form_roomname() : void {
          Element.lobby_form_roomname.show();
@@ -221,7 +219,7 @@ export class Element {
   
         this.room_user_list.append( Element.markup_username( user.name, user.socket));
     }
-    
+      
     static updateUser( room_id: string, user: de.User ) : void {       
         this.lobby_user( user ).text( user.name );
     }
@@ -235,12 +233,24 @@ export class Element {
     static room_user( user: de.User ) {
         return this.room.find('[socket="'+user.socket+'"]');
     }
+    static lobby_append_private_chat( data ) : void { 
+        Element.lobby.append( Element.lobby_add_private_chat( data )); 
+    }
+    static add_private_chat( data ) : void {       
+        let $private_chat = this.lobby_private_chat( data.pmsocket );
+        $private_chat.find('.chat-history').append( Element.markup_private_chat_message( data ));
+        $private_chat.find('.chat-history').animate( { scrollTop: $private_chat.find('.chat-history').prop('scrollHeight') } );
+    }
+    static lobby_private_chat( pmsocket ) : JQuery {
+        return Element.lobby.find('[pmsocket="'+ pmsocket +'"]');
+    }
     /*------Markup------*/
+    
     static lobby_add_private_chat( data ){
-            return '<div class="private-chat" socket="'+ data.socket +'">'
+            return '<div class="private-chat" pmsocket="'+ data.pmsocket +'">'
             +'<header class="private-chat-header">'			
 			+'<a href="#" class="chat-close">x</a>'
-			+'<h4>'+data.username+'</h4>'
+			+'<h4>'+data.name+'</h4>'
             +'</header>'
             +'<div class="chat">'
             +'<div class="chat-history">'//chat history         

@@ -24,6 +24,16 @@ export class Server extends vc {
                 console.log("Go to Room chat.");
                 room.addMessage( data );
             }
+        });     
+        Server.socket.on('chat-private-message', ( data )=>{     
+           if ( User.getRoomname == "Lobby"){
+                console.log("Go to Lobby chat.");
+                Lobby.add_private_message( data );
+            }
+            else {
+                console.log("Go to Room chat.");
+                room.addMessage( data );
+            }
         });      
         Server.socket.on('update-username', Lobby.on_event_update_username);
         Server.socket.on('join-room', (user: de.User) => {
@@ -126,8 +136,8 @@ export class Server extends vc {
     static chat_message( message: string, callback: any ) : void {
         Server.emit( 'chat-message', message, callback );
     }
-    static chat_private_message( message: string, callback: any ) : void {
-        Server.emit( 'chat-private-message', message, callback );
+    static chat_private_message( data, callback: any ) : void {
+        Server.emit( 'chat-private-message', data, callback );
     }   
     static leaveRoom(callback : any ) : void {
         Server.emit('leave-room', callback );

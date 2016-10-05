@@ -280,7 +280,7 @@ strong {
   font-size: 12px;
   float: right;
   right: 0;
-  position: absolute;
+  position: relative;
   width: 300px; }
   #lobby .private-chat .chat {
     background: #fff; }
