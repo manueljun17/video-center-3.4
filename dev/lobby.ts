@@ -46,6 +46,16 @@ export class Lobby extends vc {
         e.lobby.on('click', '.roomname',this.on_join_room );
         e.lobby.on('click', '.name',this.on_private_message );      
         e.lobby.on('submit', '.private-chat', this.send_private_message );
+        e.lobby.on('click', '.private-chat-header', (pm)=>{
+            let chat = pm.currentTarget.nextElementSibling;
+            $(chat).slideToggle(300, 'swing');
+        } );
+        e.lobby.on('click', '.chat-close', (pm)=>{
+            pm.preventDefault();
+            let chat = pm.currentTarget.parentElement.parentElement;
+            console.log(chat);
+            $(chat).fadeOut(300);         
+        } );      
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
