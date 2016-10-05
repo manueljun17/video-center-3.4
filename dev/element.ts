@@ -227,8 +227,11 @@ export class Element {
     static room_user( user: de.User ) {
         return this.room.find('[socket="'+user.socket+'"]');
     }
+    static get lobby_private_chat_container() : JQuery {
+        return $('.private-chat-container');
+    }
     static lobby_append_private_chat( data ) : void { 
-        Element.lobby.append( Element.lobby_add_private_chat( data )); 
+        Element.lobby_private_chat_container.append( Element.lobby_add_private_chat( data )); 
     }
     static add_private_chat( data ) : void {       
         let $private_chat = this.lobby_private_chat( data.pmsocket );
@@ -241,7 +244,8 @@ export class Element {
     /*------Markup------*/
     
     static lobby_add_private_chat( data ){
-            return '<div class="private-chat" pmsocket="'+ data.pmsocket +'">'
+            return '<div class="private-chat-divide">'	
+            +'<div class="private-chat" pmsocket="'+ data.pmsocket +'">'
             +'<header class="private-chat-header">'			
 			+'<a href="#" class="chat-close">x</a>'
 			+'<h4>'+data.name+'</h4>'
@@ -256,7 +260,8 @@ export class Element {
 			+'</fieldset>'            
 			+'</form>'
             +'</div>'//chat	
-            +"</div>"//private-chat   
+            +'</div>'//private-chat   
+            +'</div>'//private-chat-container
     }
     static markup_username(  username:string, socket:string ) : any {
       return '<span class="name" socket="'+socket+'">'+ username + '</span>';       

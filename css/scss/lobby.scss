@@ -25,23 +25,22 @@
     color: $strong_color;
   }
   .room-list {
-  padding: 1rem;
-  background-color: $background_color;
-  .roomname {
-    display: block;
-    color: $color_blue;
-    cursor: pointer;
-    font-size: 1.4em;
-  }
-  .users {
-    .name {
-      display: inline-block;
-      padding: .4em .8em .4em 0;
+    padding: 1rem;
+    background-color: $background_color;
+    .roomname {
+      display: block;
+      color: $color_blue;
       cursor: pointer;
+      font-size: 1.4em;
+    }
+    .users {
+      .name {
+        display: inline-block;
+        padding: .4em .8em .4em 0;
+        cursor: pointer;
+      }
     }
   }
-}
-  
 }
 
 
