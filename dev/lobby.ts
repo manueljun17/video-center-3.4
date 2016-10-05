@@ -99,11 +99,11 @@ export class Lobby extends vc {
    
     private send_private_message( event ) :void {
         event.preventDefault();
-        // console.log(this);
-        let data = { message:e.lobby_private_message_value, pmsocket : $(this).attr('pmsocket'), name : User.getUsername }
+        console.log($(this).find('[name="private-message"]'));
+        let data = { message: $(this).find('[name="private-message"]').val(), pmsocket : $(this).attr('pmsocket'), name : User.getUsername }
         server.chat_private_message( data , (re)=> { 
             // console.log("server.chat_private_message => message => re: ", re);           
-            e.lobby_private_message_empty();      
+            $(this).find('[name="private-message"]').val("");     
          } );
     }    
     private send_message( event ) :void {

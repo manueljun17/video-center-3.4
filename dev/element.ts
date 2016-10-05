@@ -71,13 +71,7 @@ export class Element {
     }    
     static lobby_message_empty () : void {
         Element.lobby.find('[name="message"]').val("");
-    }
-    static get  lobby_private_message_value () : string {
-        return Element.lobby.find('[name="private-message"]').val();
-    }
-    static lobby_private_message_empty () : void {
-        Element.lobby.find('[name="private-message"]').val("");
-    } 
+    }  
     static lobby_display_empty() : void {
          Element.lobby_display.empty();
     }   
