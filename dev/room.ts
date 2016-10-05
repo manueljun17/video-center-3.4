@@ -35,9 +35,12 @@ export class Room extends vc {
         e.room_send_message.submit( this.send_message ); 
         e.room_onclick_leave.click( this.on_leave );        
         e.room_whiteboard_button.click( () => this.on_click_whiteboard() );
+        /*
         e.room_tile_layout.click( () => this.on_click_tile() );
         e.room_list_layout.click( () => this.on_click_list() );
         e.room_overlap_layout.click( () => this.on_click_overlap() );
+        */
+        e.room.find('[layout]').click( ( t ) => this.on_click_user_layout( t ) );
         e.users_overlap.on('click','.user', (user) => this.on_click_user(user) );
     }     
     static addMessage( data: de.ChatMessage ) {
@@ -88,15 +91,18 @@ export class Room extends vc {
             console.log('server.whiteboar() -> callback()');
          } );
     }
-    private on_click_tile() {
-        e.users.removeClass('list').removeClass('overlap').addClass('tile');
+    private on_click_user_layout(style) {
+        e.users.attr('layout', style);
+        //e.users.removeClass('list').removeClass('overlap').addClass('tile');
     }
+    /*
     private on_click_list() {
-        e.users.removeClass('tile').removeClass('overlap').addClass('list');
+        //e.users.removeClass('tile').removeClass('overlap').addClass('list');
     }
     private on_click_overlap() {
-        e.users.removeClass('list').removeClass('tile').addClass('overlap');
+        //e.users.removeClass('list').removeClass('tile').addClass('overlap');
     }
+    */
     private on_click_user( user ) {
         // alert("User click: "+user);
        
