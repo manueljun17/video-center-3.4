@@ -70,9 +70,15 @@ export class Element {
     }
     static get  lobby_message_value () : string {
         return Element.lobby.find('[name="message"]').val();
-    } 
+    }    
     static lobby_message_empty () : void {
         Element.lobby.find('[name="message"]').val("");
+    }
+    static get  lobby_private_message_value () : string {
+        return Element.lobby.find('[name="private-message"]').val();
+    }
+    static lobby_private_message_empty () : void {
+        Element.lobby.find('[name="private-message"]').val("");
     } 
     static lobby_display_empty() : void {
          Element.lobby_display.empty();
@@ -230,18 +236,18 @@ export class Element {
         return this.room.find('[socket="'+user.socket+'"]');
     }
     /*------Markup------*/
-    static lobby_add_private_chat( username ){
-            return '<div class="private-chat">'
+    static lobby_add_private_chat( data ){
+            return '<div class="private-chat" socket="'+ data.socket +'">'
             +'<header class="private-chat-header">'			
 			+'<a href="#" class="chat-close">x</a>'
-			+'<h4>'+username+'</h4>'
+			+'<h4>'+data.username+'</h4>'
             +'</header>'
             +'<div class="chat">'
             +'<div class="chat-history">'//chat history         
             +'</div>'//chat-history	
             +'<form action="#" method="post">'
 			+'<fieldset>'					
-			+'<input type="text" placeholder="Type your message…" autofocus>'
+			+'<input name="private-message" type="text" placeholder="Type your message…" autofocus>'
 			+'<input type="hidden">'
 			+'</fieldset>'            
 			+'</form>'

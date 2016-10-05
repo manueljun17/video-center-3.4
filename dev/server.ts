@@ -123,8 +123,11 @@ export class Server extends vc {
     static createRoom( roomname: string, callback: de.S ) : void {
         Server.emit( 'create-room', roomname, callback );
     }
-    static chatMessage( message: string, callback: any ) : void {
+    static chat_message( message: string, callback: any ) : void {
         Server.emit( 'chat-message', message, callback );
+    }
+    static chat_private_message( message: string, callback: any ) : void {
+        Server.emit( 'chat-private-message', message, callback );
     }   
     static leaveRoom(callback : any ) : void {
         Server.emit('leave-room', callback );

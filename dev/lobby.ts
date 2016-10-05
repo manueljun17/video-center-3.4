@@ -38,7 +38,8 @@ export class Lobby extends vc {
         if ( Lobby.doneInit ) return;
         Lobby.doneInit = true;
         e.lobby.on('click', '.roomname',this.on_join_room );
-        e.lobby.on('click', '.name',this.on_private_message );
+        e.lobby.on('click', '.name',this.on_private_message );      
+        e.lobby.on('submit', '.private-chat', this.send_private_message );
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -89,9 +90,19 @@ export class Lobby extends vc {
          } );
         }
     }
+   
+    private send_private_message( event ) :void {
+        event.preventDefault();
+        console.log(this);
+        let data = {message:e.lobby_private_message_value}
+        server.chat_private_message(e.lobby_private_message_value , (re)=> { 
+            console.log("server.chat_private_message => message => re: ", re);           
+            e.lobby_private_message_empty();      
+         } );
+    }    
     private send_message( event ) :void {
         event.preventDefault();       
-        server.chatMessage( e.lobby_message_value, (re)=> { 
+        server.chat_message( e.lobby_message_value, (re)=> { 
             console.log("server.sendMessage => message => re: ", re);           
             e.lobby_message_empty();      
          } );
@@ -113,10 +124,10 @@ export class Lobby extends vc {
     
     private on_private_message( event ) : void {        
         console.log(this);
-        let username = $(this).html();
+        let data = { username : $(this).html(), socket : $(this).attr('socket') };
         let currentuser = User.getUsername;     
-        if( username == currentuser ) return;  
-        e.lobby.append(e.lobby_add_private_chat(username)                   
+        if( data.username == currentuser ) return;  
+        e.lobby.append(e.lobby_add_private_chat( data )                   
         );
     }
     private on_join_room( event ) : void {
