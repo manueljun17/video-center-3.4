@@ -197,7 +197,7 @@ export class Element {
         return Element.room.find('.users');
     }
     static get users_overlap() : JQuery {        
-        return  $('.users[layout="Overlap"]');
+        return  $('.users[layout="overlap"]');
     }
     static get user() : JQuery {        
         return Element.room.find('.user');

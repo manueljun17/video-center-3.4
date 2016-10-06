@@ -88,7 +88,7 @@ export class Room extends vc {
          } );
     }
     private on_click_user_layout(event) {
-        
+        console.log(e.obj(event).attr('layout'));
         e.users.attr('layout', e.obj(event).attr('layout'));
         //e.users.attr('layout', style.currentTarget.innerHTML);
         //e.users.removeClass('list').removeClass('overlap').addClass('tile');
@@ -96,7 +96,9 @@ export class Room extends vc {
 
     private on_click_user( user ) {       
         let users = user.delegateTarget;
-        if( $(users).attr("layout") != "Overlap" )return;
+        console.log(user);
+        console.log(users);
+        if( $(users).attr("layout") != "overlap" )return;
         e.user.removeClass('main');
         user.currentTarget.remove();
         e.users.append("<div class='user main'>"+ user.currentTarget.innerHTML +"</div>");
