@@ -161,7 +161,8 @@ export class Whiteboard extends vc {
     //Set the mode to line or draw mode
     private set_draw_mode() : void {
         Whiteboard.draw_mode = 'l';
-        Element.whiteboard.css( 'cursor', 'pointer' );         
+        // Element.whiteboard.css( 'cursor', 'url(1.png),url("http://cursors4.totallyfreecursors.com/thumbnails/pencil2.gif"), auto' );         
+        Element.whiteboard.css( 'cursor', 'url(img/pencil.gif), auto' );         
     }
 
     //Set the mode to erase mode
@@ -169,6 +170,7 @@ export class Whiteboard extends vc {
         Whiteboard.draw_mode = 'e';
         Element.whiteboard.css('cursor', 'pointer'); // apply first
         Element.whiteboard.css('cursor', '-webkit-grab'); // apply web browser can.
+        Element.whiteboard.css( 'cursor', 'url(img/eraser.png), auto' ); 
     }  
     
     //Get linesize or radius of drawing
@@ -239,7 +241,7 @@ export class Whiteboard extends vc {
         ctx.lineJoin = data.lineJoin;
         if ( data.draw_mode == 'e' ) {       
         ctx.globalCompositeOperation = 'destination-out';
-            data.lineWidth = 12;
+            data.lineWidth = 15;
         }
         else if ( data.draw_mode == 'l' ) {
             ctx.globalCompositeOperation = 'source-over';
