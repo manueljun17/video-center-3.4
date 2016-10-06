@@ -26,7 +26,7 @@ $background: #f4f4f4;
 }
 
 
-#room .users[layout="Tile"] {
+#room .users[layout="tile"] {
 
   
   &.show {  
@@ -74,7 +74,7 @@ $background: #f4f4f4;
   }
 }
 
-#room .users[layout="List"] {
+#room .users[layout="list"] {
    
   &.show {  
     display: inline-block;
@@ -125,7 +125,7 @@ $background: #f4f4f4;
   }
 }
 
-#room .users[layout="Overlap"] {
+#room .users[layout="overlap"] {
    
   &.show {  
     display: inline-block;

@@ -5,6 +5,10 @@ import * as de from './declare';
 export class Element {
     constructor() {
     }
+    
+    static obj( event ) : JQuery {
+        return $( event.target );
+    }
     /*------Entrance-----*/
     static get entrance() : JQuery {
         return $('#entrance');

@@ -36,7 +36,7 @@ export class Room extends vc {
         e.room_onclick_leave.click( this.on_leave );        
         e.room_whiteboard_button.click( () => this.on_click_whiteboard() );      
         e.users_overlap.on('click','.user', (user) => this.on_click_user(user) );
-        e.room.find('button[layout]').click( ( t ) => this.on_click_user_layout( t ) );
+        e.room.find('[layout]').click( ( t ) => this.on_click_user_layout( t ) );
        
     }     
     static addMessage( data: de.ChatMessage ) {
@@ -87,8 +87,10 @@ export class Room extends vc {
             console.log('server.whiteboar() -> callback()');
          } );
     }
-    private on_click_user_layout(style) {
-        e.users.attr('layout', style.currentTarget.innerHTML);
+    private on_click_user_layout(event) {
+        
+        e.users.attr('layout', e.obj(event).attr('layout'));
+        //e.users.attr('layout', style.currentTarget.innerHTML);
         //e.users.removeClass('list').removeClass('overlap').addClass('tile');
     }
 

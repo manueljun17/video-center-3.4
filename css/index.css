@@ -17,6 +17,7 @@ strong {
       position: absolute;
       top: 0;
       left: 260px; } }
+
 .footer {
   background-color: #19b5fe;
   position: fixed;
@@ -39,6 +40,7 @@ strong {
       margin: 10px 0; }
     #room .document .container input[name='userfile'] {
       width: 100%; }
+
 #room .books {
   color: #fff;
   background-color: #69a3dc; }
@@ -111,126 +113,135 @@ strong {
   #room .roomname {
     color: white; }
 
-#room .users[layout="Tile"].show {
+#room .users[layout="tile"].show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 260px; }
-#room .users[layout="Tile"].hide {
+
+#room .users[layout="tile"].hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 260px; }
-#room .users[layout="Tile"] .user {
+
+#room .users[layout="tile"] .user {
   float: left;
   width: 50%;
   overflow: hidden; }
-  #room .users[layout="Tile"] .user img {
+  #room .users[layout="tile"] .user img {
     display: block;
     width: 100%; }
+
 @media all and (min-width: 580px) {
-  #room .users[layout="Tile"].hide {
+  #room .users[layout="tile"].hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 520px; }
-    #room .users[layout="Tile"].hide .user {
+    #room .users[layout="tile"].hide .user {
       float: left;
       width: 50%;
       overflow: hidden; }
-      #room .users[layout="Tile"].hide .user img {
+      #room .users[layout="tile"].hide .user img {
         display: block;
         width: 100%; } }
 
-#room .users[layout="List"].show {
+#room .users[layout="list"].show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users[layout="List"].hide {
+
+#room .users[layout="list"].hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users[layout="List"] .user {
+
+#room .users[layout="list"] .user {
   float: left;
   width: 100%;
   overflow: hidden; }
-  #room .users[layout="List"] .user img {
+  #room .users[layout="list"] .user img {
     display: block;
     width: 100%; }
+
 @media all and (min-width: 580px) {
-  #room .users[layout="List"].hide {
+  #room .users[layout="list"].hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 520px; }
-    #room .users[layout="List"].hide .user {
+    #room .users[layout="list"].hide .user {
       float: left;
       width: 100%;
       overflow: hidden; }
-      #room .users[layout="List"].hide .user img {
+      #room .users[layout="list"].hide .user img {
         display: block;
         width: 100%; }
-  #room .users[layout="List"].show {
+  #room .users[layout="list"].show {
     max-height: 260px; } }
 
-#room .users[layout="Overlap"].show {
+#room .users[layout="overlap"].show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users[layout="Overlap"].hide {
+
+#room .users[layout="overlap"].hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users[layout="Overlap"] .user {
+
+#room .users[layout="overlap"] .user {
   float: left;
   width: 25%;
   overflow: hidden; }
-  #room .users[layout="Overlap"] .user img {
+  #room .users[layout="overlap"] .user img {
     display: block;
     width: 100%; }
-  #room .users[layout="Overlap"] .user.main {
+  #room .users[layout="overlap"] .user.main {
     float: left;
     width: 100%;
     overflow: hidden; }
-    #room .users[layout="Overlap"] .user.main img {
+    #room .users[layout="overlap"] .user.main img {
       display: block;
       width: 100%; }
+
 @media all and (min-width: 580px) {
-  #room .users[layout="Overlap"].hide {
+  #room .users[layout="overlap"].hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 620px; }
-    #room .users[layout="Overlap"].hide .user.main {
+    #room .users[layout="overlap"].hide .user.main {
       float: left;
       width: 100%;
       overflow: hidden; }
-      #room .users[layout="Overlap"].hide .user.main img {
+      #room .users[layout="overlap"].hide .user.main img {
         display: block;
         width: 100%; }
-  #room .users[layout="Overlap"].show {
+  #room .users[layout="overlap"].show {
     max-height: 520px; }
-    #room .users[layout="Overlap"].show .user.main {
+    #room .users[layout="overlap"].show .user.main {
       float: left;
       width: 100%;
       overflow: hidden; }
-      #room .users[layout="Overlap"].show .user.main img {
+      #room .users[layout="overlap"].show .user.main img {
         display: block;
         width: 100%; } }
 
@@ -238,6 +249,7 @@ strong {
   box-sizing: border-box;
   padding: .4em;
   width: 100%; }
+
 #room .chat .display {
   padding: .6rem;
   overflow: hidden;
@@ -249,8 +261,10 @@ strong {
 
 #whiteboard.show {
   display: block !important; }
+
 #whiteboard.hide {
   display: none !important; }
+
 #whiteboard .container {
   position: relative;
   width: 340px;
@@ -263,8 +277,10 @@ strong {
   #whiteboard .container.large {
     width: 600px;
     height: 720px; }
+
 #whiteboard .book {
   text-align: center; }
+
 #whiteboard canvas {
   position: absolute;
   z-index: 100;
@@ -364,5 +380,3 @@ strong {
           width: 16px; }
         #lobby .private-chat-container .private-chat-divide .private-chat header a {
           text-decoration: none; }
-
-/*# sourceMappingURL=index.css.map */
