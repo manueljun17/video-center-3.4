@@ -34,14 +34,10 @@ export class Room extends vc {
         Room.doneInit = true;
         e.room_send_message.submit( this.send_message ); 
         e.room_onclick_leave.click( this.on_leave );        
-        e.room_whiteboard_button.click( () => this.on_click_whiteboard() );
-        /*
-        e.room_tile_layout.click( () => this.on_click_tile() );
-        e.room_list_layout.click( () => this.on_click_list() );
-        e.room_overlap_layout.click( () => this.on_click_overlap() );
-        */
-        e.room.find('[layout]').click( ( t ) => this.on_click_user_layout( t ) );
+        e.room_whiteboard_button.click( () => this.on_click_whiteboard() );      
         e.users_overlap.on('click','.user', (user) => this.on_click_user(user) );
+        e.room.find('button[layout]').click( ( t ) => this.on_click_user_layout( t ) );
+       
     }     
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
@@ -95,19 +91,10 @@ export class Room extends vc {
         e.users.attr('layout', style.currentTarget.innerHTML);
         //e.users.removeClass('list').removeClass('overlap').addClass('tile');
     }
-    /*
-    private on_click_list() {
-        //e.users.removeClass('tile').removeClass('overlap').addClass('list');
-    }
-    private on_click_overlap() {
-        //e.users.removeClass('list').removeClass('tile').addClass('overlap');
-    }
-    */
-    private on_click_user( user ) {
-        // alert("User click: "+user);
-       
+
+    private on_click_user( user ) {       
         let users = user.delegateTarget;
-        if(!$(users).hasClass("overlap"))return;
+        if( $(users).attr("layout") != "Overlap" )return;
         e.user.removeClass('main');
         user.currentTarget.remove();
         e.users.append("<div class='user main'>"+ user.currentTarget.innerHTML +"</div>");
