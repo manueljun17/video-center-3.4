@@ -9,13 +9,13 @@
         position: relative;
         width: 340px;
         height: 400px;
-        background-color: green;
+        background-color: #6B93EF;
         overflow: hidden;
-        &.medium {
+        &[size="medium"] {
             width: 480px;
             height: 600px;
         }
-        &.large {
+        &[size="large"] {
             width: 600px;
             height: 720px;
         }
@@ -29,6 +29,5 @@
         z-index: 100;
         top: 0;
         left: 0;
-        border: 2px solid black;
     }
 }

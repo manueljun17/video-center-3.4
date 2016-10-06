@@ -17,7 +17,6 @@ strong {
       position: absolute;
       top: 0;
       left: 260px; } }
-
 .footer {
   background-color: #19b5fe;
   position: fixed;
@@ -40,7 +39,6 @@ strong {
       margin: 10px 0; }
     #room .document .container input[name='userfile'] {
       width: 100%; }
-
 #room .books {
   color: #fff;
   background-color: #69a3dc; }
@@ -120,7 +118,6 @@ strong {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 260px; }
-
 #room .users[layout="tile"].hide {
   display: inline-block;
   min-width: 260px;
@@ -128,7 +125,6 @@ strong {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 260px; }
-
 #room .users[layout="tile"] .user {
   float: left;
   width: 50%;
@@ -136,7 +132,6 @@ strong {
   #room .users[layout="tile"] .user img {
     display: block;
     width: 100%; }
-
 @media all and (min-width: 580px) {
   #room .users[layout="tile"].hide {
     position: absolute;
@@ -158,7 +153,6 @@ strong {
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-
 #room .users[layout="list"].hide {
   display: inline-block;
   min-width: 260px;
@@ -166,7 +160,6 @@ strong {
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-
 #room .users[layout="list"] .user {
   float: left;
   width: 100%;
@@ -174,7 +167,6 @@ strong {
   #room .users[layout="list"] .user img {
     display: block;
     width: 100%; }
-
 @media all and (min-width: 580px) {
   #room .users[layout="list"].hide {
     position: absolute;
@@ -198,7 +190,6 @@ strong {
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-
 #room .users[layout="overlap"].hide {
   display: inline-block;
   min-width: 260px;
@@ -206,7 +197,6 @@ strong {
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-
 #room .users[layout="overlap"] .user {
   float: left;
   width: 25%;
@@ -221,7 +211,6 @@ strong {
     #room .users[layout="overlap"] .user.main img {
       display: block;
       width: 100%; }
-
 @media all and (min-width: 580px) {
   #room .users[layout="overlap"].hide {
     position: absolute;
@@ -249,7 +238,6 @@ strong {
   box-sizing: border-box;
   padding: .4em;
   width: 100%; }
-
 #room .chat .display {
   padding: .6rem;
   overflow: hidden;
@@ -261,32 +249,27 @@ strong {
 
 #whiteboard.show {
   display: block !important; }
-
 #whiteboard.hide {
   display: none !important; }
-
 #whiteboard .container {
   position: relative;
   width: 340px;
   height: 400px;
-  background-color: green;
+  background-color: #6B93EF;
   overflow: hidden; }
-  #whiteboard .container.medium {
+  #whiteboard .container[size="medium"] {
     width: 480px;
     height: 600px; }
-  #whiteboard .container.large {
+  #whiteboard .container[size="large"] {
     width: 600px;
     height: 720px; }
-
 #whiteboard .book {
   text-align: center; }
-
 #whiteboard canvas {
   position: absolute;
   z-index: 100;
   top: 0;
-  left: 0;
-  border: 2px solid black; }
+  left: 0; }
 
 #lobby .private-chat-container {
   position: absolute;
@@ -380,3 +363,5 @@ strong {
           width: 16px; }
         #lobby .private-chat-container .private-chat-divide .private-chat header a {
           text-decoration: none; }
+
+/*# sourceMappingURL=index.css.map */

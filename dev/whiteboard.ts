@@ -126,6 +126,15 @@ export class Whiteboard extends vc {
     }        
     on_change_canvas_size() {
         let size = this.canvas_size.val();
+        this.change_canvas_size( size );         
+        let data :any = { room_name : User.getRoomname };
+        data.command = "canvas-size";
+        data.size = size;
+        server.whiteboard( data, ()=>{
+            console.log('change canvas size');
+        });     
+    }
+    change_canvas_size( size ) {
         let w, h;
         if ( size == 'small' ) {
             w = '340';
@@ -142,7 +151,9 @@ export class Whiteboard extends vc {
         let newCanvas = `<canvas width="${w}" height="${h}"></canvas>`;
         $( this.canvas ).replaceWith( newCanvas );       
         this.canvas_context = this.canvas.getContext('2d');
-        this.container.addClass(size);
+        // this.container.removeClass('small').removeClass('medium').removeClass('large').addClass(size);
+        this.container.attr('size', size);
+        this.get_history();//I add this to get history after refreshing the whiteboard
     }
    
     
@@ -316,6 +327,16 @@ export class Whiteboard extends vc {
             console.log('socket_on_from_server() : command = ' + data.command );
             this.hide();
         }
+        else if ( data.command == 'canvas-size' ) { 
+            console.log('socket_on_from_server() : command = ' + data.command );
+            this.change_canvas_size( data.size );
+        }  
+    }
+    get_history() {
+        let roomname : any = User.getRoomname;
+        let data :any = { room_name : roomname };
+            data.command = "history";
+            server.whiteboard( data, room.whiteboard_get_draw_line_history );
     }
     image ( url: string ) {
         e.book.prop( 'src', url);
