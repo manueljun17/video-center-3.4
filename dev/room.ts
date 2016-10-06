@@ -55,7 +55,7 @@ export class Room extends vc {
     }
     private send_message( event ) :void {
         event.preventDefault();       
-        server.chatMessage( e.room_message.val(), (re)=> { 
+        server.chat_message( e.room_message.val(), (re)=> { 
             console.log("server.sendMessage => message => re: ", re);              
             e.room_message.val("");       
          } );
@@ -92,7 +92,7 @@ export class Room extends vc {
          } );
     }
     private on_click_user_layout(style) {
-        e.users.attr('layout', style);
+        e.users.attr('layout', style.currentTarget.innerHTML);
         //e.users.removeClass('list').removeClass('overlap').addClass('tile');
     }
     /*

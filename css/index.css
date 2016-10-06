@@ -111,126 +111,126 @@ strong {
   #room .roomname {
     color: white; }
 
-#room .users.tile.show {
+#room .users[layout="Tile"].show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 260px; }
-#room .users.tile.hide {
+#room .users[layout="Tile"].hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: scroll;
   max-height: 260px; }
-#room .users.tile .user {
+#room .users[layout="Tile"] .user {
   float: left;
   width: 50%;
   overflow: hidden; }
-  #room .users.tile .user img {
+  #room .users[layout="Tile"] .user img {
     display: block;
     width: 100%; }
 @media all and (min-width: 580px) {
-  #room .users.tile.hide {
+  #room .users[layout="Tile"].hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 520px; }
-    #room .users.tile.hide .user {
+    #room .users[layout="Tile"].hide .user {
       float: left;
       width: 50%;
       overflow: hidden; }
-      #room .users.tile.hide .user img {
+      #room .users[layout="Tile"].hide .user img {
         display: block;
         width: 100%; } }
 
-#room .users.list.show {
+#room .users[layout="List"].show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users.list.hide {
+#room .users[layout="List"].hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users.list .user {
+#room .users[layout="List"] .user {
   float: left;
   width: 100%;
   overflow: hidden; }
-  #room .users.list .user img {
+  #room .users[layout="List"] .user img {
     display: block;
     width: 100%; }
 @media all and (min-width: 580px) {
-  #room .users.list.hide {
+  #room .users[layout="List"].hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 520px; }
-    #room .users.list.hide .user {
+    #room .users[layout="List"].hide .user {
       float: left;
       width: 100%;
       overflow: hidden; }
-      #room .users.list.hide .user img {
+      #room .users[layout="List"].hide .user img {
         display: block;
         width: 100%; }
-  #room .users.list.show {
+  #room .users[layout="List"].show {
     max-height: 260px; } }
 
-#room .users.overlap.show {
+#room .users[layout="Overlap"].show {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users.overlap.hide {
+#room .users[layout="Overlap"].hide {
   display: inline-block;
   min-width: 260px;
   background-color: #708090;
   overflow: hidden;
   overflow-y: auto;
   max-height: 520px; }
-#room .users.overlap .user {
+#room .users[layout="Overlap"] .user {
   float: left;
   width: 25%;
   overflow: hidden; }
-  #room .users.overlap .user img {
+  #room .users[layout="Overlap"] .user img {
     display: block;
     width: 100%; }
-  #room .users.overlap .user.main {
+  #room .users[layout="Overlap"] .user.main {
     float: left;
     width: 100%;
     overflow: hidden; }
-    #room .users.overlap .user.main img {
+    #room .users[layout="Overlap"] .user.main img {
       display: block;
       width: 100%; }
 @media all and (min-width: 580px) {
-  #room .users.overlap.hide {
+  #room .users[layout="Overlap"].hide {
     position: absolute;
     left: 260px;
     max-width: 520px;
     max-height: 620px; }
-    #room .users.overlap.hide .user.main {
+    #room .users[layout="Overlap"].hide .user.main {
       float: left;
       width: 100%;
       overflow: hidden; }
-      #room .users.overlap.hide .user.main img {
+      #room .users[layout="Overlap"].hide .user.main img {
         display: block;
         width: 100%; }
-  #room .users.overlap.show {
+  #room .users[layout="Overlap"].show {
     max-height: 520px; }
-    #room .users.overlap.show .user.main {
+    #room .users[layout="Overlap"].show .user.main {
       float: left;
       width: 100%;
       overflow: hidden; }
-      #room .users.overlap.show .user.main img {
+      #room .users[layout="Overlap"].show .user.main img {
         display: block;
         width: 100%; } }
 
@@ -277,7 +277,6 @@ strong {
   bottom: 0;
   right: 0; }
   #lobby .private-chat-container .private-chat-divide {
-    border: 1px solid #fff;
     position: relative;
     bottom: -89%;
     right: 0;

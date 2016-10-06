@@ -26,7 +26,7 @@ $background: #f4f4f4;
 }
 
 
-#room .users.tile {
+#room .users[layout="Tile"] {
 
   
   &.show {  
@@ -74,10 +74,8 @@ $background: #f4f4f4;
   }
 }
 
-#room .users {
-  &.list {
-
-  
+#room .users[layout="List"] {
+   
   &.show {  
     display: inline-block;
     min-width:260px;
@@ -126,12 +124,9 @@ $background: #f4f4f4;
       }      
   }
 }
-}
 
-#room .users {
-  &.overlap {
-
-  
+#room .users[layout="Overlap"] {
+   
   &.show {  
     display: inline-block;
     min-width:260px;
@@ -204,7 +199,7 @@ $background: #f4f4f4;
       }      
   }
 }
-}
+
 
 #room .chat {
   input {
