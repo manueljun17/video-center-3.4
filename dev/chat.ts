@@ -5,6 +5,7 @@ import { Room } from './room';
 import { Server } from './server';
 import { Document } from './document';
 import { VideoCenter as vc } from './videocenter';
+import { Element } from './element';
 import * as de from './declare';
 export class Chat extends vc {
     private user: User;
@@ -14,6 +15,7 @@ export class Chat extends vc {
     private server: Server;
     private document: Document;
     private vc: vc;
+    private element: Element;
     
     constructor( url: string ) {
         super();
@@ -25,6 +27,7 @@ export class Chat extends vc {
         this.document = new Document();
         this.room = new Room();
         this.lobby = new Lobby();
+        this.element = new Element();
     }
 
     start() : void {

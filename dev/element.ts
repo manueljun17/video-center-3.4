@@ -4,8 +4,11 @@ import './jquery-helper';
 import * as de from './declare';
 export class Element {
     constructor() {
+        Element.disable_input_suggestion();
     }
-    
+    static disable_input_suggestion(  )  {
+        $('input').attr('autocomplete',"off");
+    }
     static obj( event ) : JQuery {
         return $( event.target );
     }
