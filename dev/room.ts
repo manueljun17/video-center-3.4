@@ -37,10 +37,19 @@ export class Room extends vc {
         e.room_whiteboard_button.click( () => this.on_click_whiteboard() );      
         e.users_overlap.on('click','.user', (user) => this.on_click_user(user) );
         e.room.find('button[layout]').click( ( t ) => this.on_click_user_layout( t ) );
+        e.room.on('submit', '.private-chat', this.send_private_message );
         e.room_private_chat_container.on('click', '.chat-close', ( event ) => this.private_chat_close( event ) );
         e.room_private_chat_container.on('click', '.private-chat-header', ( event ) => this.private_chat_slide( event )); 
        
-    }     
+    }
+    private send_private_message( event ) :void {
+        event.preventDefault();
+        console.log($(this).find('[name="private-message"]'));
+        let data = { message: $(this).find('[name="private-message"]').val(), pmsocket : $(this).attr('pmsocket'), name : user.getUsername }
+        server.chat_private_message( data , (re)=> {          
+            $(this).find('[name="private-message"]').val("");     
+         } );
+    }        
     private private_chat_slide( event ){
         let chat = event.currentTarget.nextElementSibling.parentElement;            
         let socket = $(chat).attr('pmsocket')
