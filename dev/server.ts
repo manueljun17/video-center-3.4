@@ -32,7 +32,7 @@ export class Server extends vc {
             }
             else {
                 console.log("Go to Room chat.");
-                room.addMessage( data );
+                room.add_private_message( data );
             }
         });      
         Server.socket.on('update-username', Lobby.on_event_update_username);
@@ -57,7 +57,7 @@ export class Server extends vc {
             console.log("socket ?? : ");
             if ( user.name == User.getUsername ) return;            
             if ( typeof user.socket == 'undefined' ) return; // @todo tricky. Do not add message on my chat display box IF i am the one who leave the room.
-            if ( user.type != de.admin_type ) {
+            if ( user.type != de.admin_type ) {                
                 if ( User.getRoomname == de.lobbyRoomName ) {
                     if(user.room != "")Lobby.on_event_disconnect_room( user );//send only if the user.room is not empty
                     Lobby.remove_user( user );
@@ -66,7 +66,11 @@ export class Server extends vc {
                     if(user.room != "")room.on_event_disconnect_room( user );
                 }
             }    
-        });      
+        });
+        Server.socket.on('disconnect-private-message', ( user ) => {
+            Lobby.add_private_message_disconnect( user );
+            room.add_private_message_disconnect( user );
+        });     
 
         Server.socket.on('whiteboard', ( data ) => {
                 this.whiteboard.socket_on_from_server( data );

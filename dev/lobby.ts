@@ -29,7 +29,7 @@ export class Lobby extends vc {
     }
     static add_private_message( data ) {    
         if ( e.lobby.private_chat( data.pmsocket ).length == 0 ) e.lobby_append_private_chat(data);
-        e.add_private_chat( data );
+        e.lobby_add_private_chat( data );
     }
     static addMessageJoin( user: de.User ) {
         this.addMessage( { name: user.name, message: ' joins into ' + user.room });
@@ -37,6 +37,11 @@ export class Lobby extends vc {
     static addMessageDisconnect( user: de.User ) {
         this.addMessage( { name: user.name, message: ' disconnect into ' + user.room });
     }
+    static add_private_message_disconnect( user: de.User ) {
+        let data = {name:user.name, pmsocket:user.socket,  message: ' disconnect into ' + user.room}
+        e.lobby_add_private_chat( data );
+    }
+    
 
     private initHandlers() : void {
         if ( Lobby.doneInit ) return;
@@ -233,6 +238,7 @@ export class Lobby extends vc {
     }
     static on_event_disconnect_room( user: de.User ) {      
         Lobby.addMessageDisconnect( user );
+        
     }
 
        

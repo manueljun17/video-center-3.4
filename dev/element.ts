@@ -232,22 +232,37 @@ export class Element {
         return this.room.find('[socket="'+user.socket+'"]');
     }
     static get lobby_private_chat_container() : JQuery {
-        return $('.private-chat-container');
+        return $('#lobby .private-chat-container');
+    }
+    static get room_private_chat_container() : JQuery {
+        return $('#room .private-chat-container');
     }
     static lobby_append_private_chat( data ) : void { 
-        Element.lobby_private_chat_container.append( Element.lobby_add_private_chat( data )); 
+        Element.lobby_private_chat_container.append( Element.markup_private_chat( data )); 
     }
-    static add_private_chat( data ) : void {       
+    static room_append_private_chat( data ) : void { 
+        Element.room_private_chat_container.append( Element.markup_private_chat( data )); 
+    }    
+   
+    static lobby_add_private_chat( data ) : void {       
         let $private_chat = this.lobby_private_chat( data.pmsocket );
         $private_chat.find('.chat-history').append( Element.markup_private_chat_message( data ));
         $private_chat.find('.chat-history').animate( { scrollTop: $private_chat.find('.chat-history').prop('scrollHeight') } );
+    }
+    static room_add_private_chat( data ) : void {       
+        let $private_chat = this.room_private_chat( data.pmsocket );
+        $private_chat.find('.chat-history').append( Element.markup_private_chat_message( data ));
+        $private_chat.find('.chat-history').animate( { scrollTop: $private_chat.find('.chat-history').prop('scrollHeight') } );
+    }
+    static room_private_chat( pmsocket ) : JQuery {
+        return Element.room.find('[pmsocket="'+ pmsocket +'"]');
     }
     static lobby_private_chat( pmsocket ) : JQuery {
         return Element.lobby.find('[pmsocket="'+ pmsocket +'"]');
     }
     /*------Markup------*/
     
-    static lobby_add_private_chat( data ){
+    static markup_private_chat( data ){
             return '<div class="private-chat-divide">'
             +'<div class="private-chat" pmsocket="'+ data.pmsocket +'">'
             +'<header class="private-chat-header">'			

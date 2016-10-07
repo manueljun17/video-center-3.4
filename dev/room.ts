@@ -42,12 +42,20 @@ export class Room extends vc {
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
     }
+    static add_private_message( data ) {    
+        if ( e.room.private_chat( data.pmsocket ).length == 0 ) e.room_append_private_chat(data);
+        e.room_add_private_chat( data );
+    }
     static addMessageJoin( u: de.User ) {
         let roomname : any = user.getRoomname;
         this.addMessage( { name: u.name, message: ' joins into room: ' + u.room });
     }
-   static addMessageDisconnect( user: de.User ) {
+    static addMessageDisconnect( user: de.User ) {
         this.addMessage( { name: user.name, message: ' disconnect into ' + user.room });
+    }
+    static add_private_message_disconnect( user: de.User ) {
+        let data = {name:user.name, pmsocket:user.socket,  message: ' disconnect into ' + user.room}
+        e.room_add_private_chat( data );
     }
     private send_message( event ) :void {
         event.preventDefault();       

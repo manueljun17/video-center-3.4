@@ -271,48 +271,48 @@ strong {
   top: 0;
   left: 0; }
 
-#lobby .private-chat-container {
+#lobby .private-chat-container, #room .private-chat-container {
   position: absolute;
   bottom: 0;
   right: 0; }
-  #lobby .private-chat-container .private-chat-divide {
+  #lobby .private-chat-container .private-chat-divide, #room .private-chat-container .private-chat-divide {
     position: relative;
     min-height: 100px;
     min-width: 300px;
     float: right;
     bottom: 0;
     margin-left: 1px; }
-    #lobby .private-chat-container .private-chat-divide .private-chat {
+    #lobby .private-chat-container .private-chat-divide .private-chat, #room .private-chat-container .private-chat-divide .private-chat {
       color: #9a9a9a;
       font: 100%/1.5em "Droid Sans", sans-serif;
       font-size: 12px;
-      z-index: 1;
+      z-index: 1000;
       width: 300px;
       position: absolute;
       right: 0;
       bottom: 0; }
-      #lobby .private-chat-container .private-chat-divide .private-chat .chat {
+      #lobby .private-chat-container .private-chat-divide .private-chat .chat, #room .private-chat-container .private-chat-divide .private-chat .chat {
         background: #fff; }
-        #lobby .private-chat-container .private-chat-divide .private-chat .chat form {
+        #lobby .private-chat-container .private-chat-divide .private-chat .chat form, #room .private-chat-container .private-chat-divide .private-chat .chat form {
           padding: 24px; }
-      #lobby .private-chat-container .private-chat-divide .private-chat .chat-history {
+      #lobby .private-chat-container .private-chat-divide .private-chat .chat-history, #room .private-chat-container .private-chat-divide .private-chat .chat-history {
         height: 252px;
         padding: 8px 24px;
         overflow-y: scroll; }
-      #lobby .private-chat-container .private-chat-divide .private-chat .chat-message {
+      #lobby .private-chat-container .private-chat-divide .private-chat .chat-message, #room .private-chat-container .private-chat-divide .private-chat .chat-message {
         margin: 16px 0; }
-      #lobby .private-chat-container .private-chat-divide .private-chat .chat-message img {
+      #lobby .private-chat-container .private-chat-divide .private-chat .chat-message img, #room .private-chat-container .private-chat-divide .private-chat .chat-message img {
         border-radius: 50%;
         float: left;
         display: block;
         height: auto;
         max-width: 100%; }
-      #lobby .private-chat-container .private-chat-divide .private-chat .chat-message-content {
+      #lobby .private-chat-container .private-chat-divide .private-chat .chat-message-content, #room .private-chat-container .private-chat-divide .private-chat .chat-message-content {
         margin-left: 56px; }
-      #lobby .private-chat-container .private-chat-divide .private-chat .chat-time {
+      #lobby .private-chat-container .private-chat-divide .private-chat .chat-time, #room .private-chat-container .private-chat-divide .private-chat .chat-time {
         float: right;
         font-size: 10px; }
-      #lobby .private-chat-container .private-chat-divide .private-chat hr {
+      #lobby .private-chat-container .private-chat-divide .private-chat hr, #room .private-chat-container .private-chat-divide .private-chat hr {
         background: #e9e9e9;
         border: 0;
         -moz-box-sizing: content-box;
@@ -320,7 +320,7 @@ strong {
         height: 1px;
         margin: 0;
         min-height: 1px; }
-      #lobby .private-chat-container .private-chat-divide .private-chat h4:before {
+      #lobby .private-chat-container .private-chat-divide .private-chat h4:before, #room .private-chat-container .private-chat-divide .private-chat h4:before {
         background: #1af136;
         border-radius: 50%;
         content: "";
@@ -328,31 +328,31 @@ strong {
         height: 8px;
         margin: 0 8px 0 0;
         width: 8px; }
-      #lobby .private-chat-container .private-chat-divide .private-chat h4 {
+      #lobby .private-chat-container .private-chat-divide .private-chat h4, #room .private-chat-container .private-chat-divide .private-chat h4 {
         font-size: 12px;
         line-height: 1.5em;
         margin: 0; }
-      #lobby .private-chat-container .private-chat-divide .private-chat h5 {
+      #lobby .private-chat-container .private-chat-divide .private-chat h5, #room .private-chat-container .private-chat-divide .private-chat h5 {
         font-size: 10px;
         line-height: 1.5em;
         margin: 0; }
-      #lobby .private-chat-container .private-chat-divide .private-chat input[type="text"] {
+      #lobby .private-chat-container .private-chat-divide .private-chat input[type="text"], #room .private-chat-container .private-chat-divide .private-chat input[type="text"] {
         border: 1px solid #ccc;
         border-radius: 3px;
         padding: 8px;
         outline: none;
         width: 234px; }
-      #lobby .private-chat-container .private-chat-divide .private-chat fieldset {
+      #lobby .private-chat-container .private-chat-divide .private-chat fieldset, #room .private-chat-container .private-chat-divide .private-chat fieldset {
         border: 0;
         margin: 0;
         padding: 0; }
-      #lobby .private-chat-container .private-chat-divide .private-chat header {
+      #lobby .private-chat-container .private-chat-divide .private-chat header, #room .private-chat-container .private-chat-divide .private-chat header {
         background-color: #0a9ce0;
         border-radius: 5px 5px 0 0;
         color: #fff;
         cursor: pointer;
         padding: 16px 24px; }
-        #lobby .private-chat-container .private-chat-divide .private-chat header .chat-close {
+        #lobby .private-chat-container .private-chat-divide .private-chat header .chat-close, #room .private-chat-container .private-chat-divide .private-chat header .chat-close {
           background: #105592;
           border-radius: 50%;
           color: #fff;
@@ -364,7 +364,7 @@ strong {
           margin: 2px 0 0 0;
           text-align: center;
           width: 16px; }
-        #lobby .private-chat-container .private-chat-divide .private-chat header a {
+        #lobby .private-chat-container .private-chat-divide .private-chat header a, #room .private-chat-container .private-chat-divide .private-chat header a {
           text-decoration: none; }
 
 /*# sourceMappingURL=index.css.map */
