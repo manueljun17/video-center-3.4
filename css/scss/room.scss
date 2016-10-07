@@ -5,20 +5,45 @@
   .tab-opener {
     background-color: #19b5fe;
     position: fixed;
-    top:3vw;
+    top:4vw;
     right:0;
     width:50px;
     height:50px;
     border-radius: 50%;
-    z-index: 1000;
+    z-index: 1001;
     border:8px solid slategrey;
     color:white;
     text-align: center;
     font-size: 70%;
     cursor:pointer;
     &:hover{
-      background-color: #80d6ff;
+      background-color: #80d6ff;      
     }
+
+  }
+  .user-list-slide {
+     
+      background-color: #f4f4f4;
+      width: 300px;
+      height: 100%;
+      position: fixed;
+      right: -300px;
+      z-index: 1000;
+     
+      header {
+        background-color: #3496dc;
+        color: white;
+        font-family: monospace;
+      }
+    &[mode="show"] {
+       transform: translate(-300px);
+       transition: all 1s;
+    }
+    &[mode="hide"] {
+       transform: translate(+300px);
+       transition: all 1s;
+    }
+    
   }
   header {
     background-color: $header_background_color;
