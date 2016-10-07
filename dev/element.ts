@@ -277,7 +277,7 @@ export class Element {
             +'</div>'//chat-history	
             +'<form action="#" method="post">'
 			+'<fieldset>'					
-			+'<input name="private-message" type="text" placeholder="Type your message…" autofocus>'
+			+'<input autocomplete="off" name="private-message" type="text" placeholder="Type your message…" autofocus>'
 			+'<input type="hidden">'
 			+'</fieldset>'            
 			+'</form>'
