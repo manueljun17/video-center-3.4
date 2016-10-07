@@ -27,9 +27,7 @@ export class Lobby extends vc {
     static addMessage( data: de.ChatMessage ) {
         e.lobby_show_message( data );
     }
-    static add_private_message( data ) {
-        console.log(data);      
-        console.log(data);
+    static add_private_message( data ) {    
         if ( e.lobby.private_chat( data.pmsocket ).length == 0 ) e.lobby_append_private_chat(data);
         e.add_private_chat( data );
     }
@@ -46,18 +44,8 @@ export class Lobby extends vc {
         e.lobby.on('click', '.roomname',this.on_join_room );
         e.lobby.on('click', '.name',this.on_private_message );      
         e.lobby.on('submit', '.private-chat', this.send_private_message );
-        e.lobby_private_chat_container.on('click', '.private-chat-header', (pm)=>{
-            console.log(pm.currentTarget.nextElementSibling.parentElement);
-            let chat = pm.currentTarget.nextElementSibling.parentElement;
-            let socket = $(chat).attr('pmsocket')
-            e.lobby.private_chat( socket ).find(".chat").slideToggle(300, 'swing');
-        } );
-        e.lobby_private_chat_container.on('click', '.chat-close', (pm)=>{
-            pm.preventDefault();
-            let chat = pm.currentTarget.parentElement.parentElement.parentElement;
-            console.log(chat);
-            $(chat).fadeOut(300);         
-        } );      
+        e.lobby_private_chat_container.on('click', '.private-chat-header', ( event ) => this.private_chat_slide( event ));       
+        e.lobby_private_chat_container.on('click', '.chat-close', ( event ) => this.private_chat_close( event ) );          
         e.lobby_form_username.submit( this.update_username ); 
         e.lobby_form_roomname.submit( this.create_join_room );   
         e.lobby_send_message.submit( this.send_message );      
@@ -71,6 +59,20 @@ export class Lobby extends vc {
         } );
         e.lobby_onclick_logout.click( this.on_logout );
     }
+    private private_chat_slide( event ){
+        let chat = event.currentTarget.nextElementSibling.parentElement;            
+        let socket = $(chat).attr('pmsocket')
+        e.lobby.private_chat( socket ).find(".chat").slideToggle(300, 'swing');
+    }   
+    private private_chat_close( event ){
+        event.preventDefault();           
+        let chatdivider = $(event.target).parent().parent().parent();          
+        // chatdivider.remove();   
+        chatdivider.fadeOut(300,() => {
+            chatdivider.remove();
+        })
+    }    
+    
     private update_username( event ) :void {
         event.preventDefault();
         let username = e.lobbyUsernameValue;
@@ -143,9 +145,11 @@ export class Lobby extends vc {
     private on_private_message( event ) : void {        
         console.log(this);
         let data = { name : $(this).html(), pmsocket : $(this).attr('socket') };
-        let currentuser = User.getUsername;     
-        if( data.name == currentuser ) return;  
-        e.lobby_append_private_chat( data );
+        if ( e.lobby.private_chat( data.pmsocket ).length == 0 ) {
+            let currentuser = User.getUsername;     
+            if( data.name == currentuser ) return;  
+            e.lobby_append_private_chat( data );
+        }    
     }
     private on_join_room( event ) : void {
         event.preventDefault();

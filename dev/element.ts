@@ -248,7 +248,7 @@ export class Element {
     /*------Markup------*/
     
     static lobby_add_private_chat( data ){
-            return '<div class="private-chat-divide">'	
+            return '<div class="private-chat-divide">'
             +'<div class="private-chat" pmsocket="'+ data.pmsocket +'">'
             +'<header class="private-chat-header">'			
 			+'<a href="#" class="chat-close">x</a>'
@@ -264,8 +264,8 @@ export class Element {
 			+'</fieldset>'            
 			+'</form>'
             +'</div>'//chat	
-            +'</div>'//private-chat   
-            +'</div>'//private-chat-container
+            +'</div>'//private-chat
+            +'</div>'//private-chat-divide
     }
     static markup_username(  username:string, socket:string ) : any {
       return '<span class="name" socket="'+socket+'">'+ username + '</span>';       
