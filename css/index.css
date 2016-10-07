@@ -97,6 +97,22 @@ strong {
 #room {
   background-color: #708090;
   display: none; }
+  #room .tab-opener {
+    background-color: #19b5fe;
+    position: fixed;
+    top: 3vw;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 1000;
+    border: 8px solid slategrey;
+    color: white;
+    text-align: center;
+    font-size: 70%;
+    cursor: pointer; }
+    #room .tab-opener:hover {
+      background-color: #80d6ff; }
   #room header {
     background-color: #19b5fe;
     padding: .6em;
