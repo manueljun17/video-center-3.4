@@ -37,8 +37,22 @@ export class Room extends vc {
         e.room_whiteboard_button.click( () => this.on_click_whiteboard() );      
         e.users_overlap.on('click','.user', (user) => this.on_click_user(user) );
         e.room.find('button[layout]').click( ( t ) => this.on_click_user_layout( t ) );
+        e.room_private_chat_container.on('click', '.chat-close', ( event ) => this.private_chat_close( event ) );
+        e.room_private_chat_container.on('click', '.private-chat-header', ( event ) => this.private_chat_slide( event )); 
        
     }     
+    private private_chat_slide( event ){
+        let chat = event.currentTarget.nextElementSibling.parentElement;            
+        let socket = $(chat).attr('pmsocket')
+        e.room.private_chat( socket ).find(".chat").slideToggle(300, 'swing');
+    }
+    private private_chat_close( event ){
+        event.preventDefault();           
+        let chatdivider = $(event.target).parent().parent().parent();
+        chatdivider.fadeOut(300,() => {
+            chatdivider.remove();
+        })
+    }    
     static addMessage( data: de.ChatMessage ) {
         e.room_show_message( data );
     }
